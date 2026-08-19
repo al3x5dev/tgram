@@ -158,7 +158,9 @@ abstract class Entity implements \JsonSerializable
      * @param string $name Nombre del método llamado
      * @param array $arguments Argumentos (no usados)
      * @return mixed Valor de la propiedad o null
+     * @deprecated
      */
+    #[\Deprecated]
     public function __call(string $name, array $arguments): mixed
     {
         // Solo manejar métodos que empiezan con "get"
@@ -190,7 +192,9 @@ abstract class Entity implements \JsonSerializable
      * 
      * @param string $input String en camelCase
      * @return string String en snake_case
+     * @deprecated
      */
+    #[\Deprecated]
     private function camelToSnake(string $input): string
     {
         return strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $input));
