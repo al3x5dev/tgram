@@ -1,0 +1,35 @@
+<?php
+
+namespace Mk4U\TGram\Core\Entities;
+
+use Mk4U\TGram\Core\Entity;
+
+/**
+ * InlineQueryResultPhoto Entity
+ * @property string $type
+ * @property string $id
+ * @property string $photo_url
+ * @property string $thumbnail_url
+ * @property int $photo_width
+ * @property int $photo_height
+ * @property string $title
+ * @property string $description
+ * @property string $caption
+ * @property string $parse_mode
+ * @property MessageEntity[] $caption_entities
+ * @property bool $show_caption_above_media
+ * @property InlineKeyboardMarkup $reply_markup
+ * @property InputMessageContent $input_message_content
+ */
+class InlineQueryResultPhoto extends InlineQueryResult
+{
+    
+    protected function setEntities(): array
+    {
+        return [
+            'caption_entities' => [MessageEntity::class],
+            'reply_markup' => InlineKeyboardMarkup::class,
+            'input_message_content' => InputMessageContent::class,
+        ];
+    }
+}

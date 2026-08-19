@@ -1,0 +1,30 @@
+<?php
+
+namespace Mk4U\TGram\Core\Entities;
+
+use Mk4U\TGram\Core\Entity;
+
+/**
+ * GiftInfo Entity
+ * @property Gift $gift
+ * @property string $owned_gift_id
+ * @property int $convert_star_count
+ * @property int $prepaid_upgrade_star_count
+ * @property bool $is_upgrade_separate
+ * @property bool $can_be_upgraded
+ * @property string $text
+ * @property MessageEntity[] $entities
+ * @property bool $is_private
+ * @property int $unique_gift_number
+ */
+class GiftInfo extends Entity
+{
+    
+    protected function setEntities(): array
+    {
+        return [
+            'gift' => Gift::class,
+            'entities' => [MessageEntity::class],
+        ];
+    }
+}

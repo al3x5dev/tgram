@@ -1,0 +1,27 @@
+<?php
+
+namespace Mk4U\TGram\Core\Entities;
+
+use Mk4U\TGram\Core\Entity;
+
+/**
+ * InputMediaLivePhoto Entity
+ * @property string $type
+ * @property string $media
+ * @property string $photo
+ * @property string $caption
+ * @property string $parse_mode
+ * @property MessageEntity[] $caption_entities
+ * @property bool $show_caption_above_media
+ * @property bool $has_spoiler
+ */
+class InputMediaLivePhoto extends InputMedia
+{
+    
+    protected function setEntities(): array
+    {
+        return [
+            'caption_entities' => [MessageEntity::class],
+        ];
+    }
+}

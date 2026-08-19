@@ -1,0 +1,132 @@
+<?php
+
+use Mk4U\TGram\Attributes\Callback;
+use Mk4U\TGram\Attributes\Command;
+use Mk4U\TGram\Core\Actions\Callbacks;
+use Mk4U\TGram\Core\Actions\Commands;
+use Mk4U\TGram\Config;
+
+if (!function_exists('writeContentToFile')) {
+    /**
+     * Gestiona posibles errores de de file_put_contents
+     */
+    function writeContentToFile(string $filePath, mixed $content, int $flags = 0): void
+    {
+        $dir = dirname($filePath);
+        if (!is_writable($dir)) {
+            throw new \ErrorException("Error: You do not have write permissions in the directory '$dir'.");
+        }
+
+        if (file_put_contents($filePath, $content, $flags) === false) {
+            throw new \ErrorException("Error: Could not write to the file '$filePath'.");
+        }
+    }
+}
+
+if (!function_exists('register')) {
+    /**
+     * Registra los comandos disponibles en un directorio y los guarda en un archivo JSON.
+     */
+    function register(string $path, string $name): void
+    {
+        $data = [];
+
+        $dir = new RecursiveIteratorIterator(
+            new RecursiveDirectoryIterator(
+                $path,
+                FilesystemIterator::SKIP_DOTS
+                    | FilesystemIterator::UNIX_PATHS
+            ),
+            RecursiveIteratorIterator::SELF_FIRST
+        );
+
+        foreach ($dir as $file) {
+            if ($file->isFile() && $file->getExtension() === 'php') {
+                // Usar getPathname() que devuelve la ruta completa del archivo
+                $fullPath = $file->getPathname();
+                
+                // Extraer la parte relativa después de 'bot/'
+                $relativePath = str_replace('bot/', '', $fullPath);
+                // Quitar extensión .php
+                $relativePath = str_replace('.php', '', $relativePath);
+
+                // Convertir a namespace
+                // Ejemplo: Commands/Start → Bot\Commands\Start
+                //         Commands/Foo/Baz → Bot\Commands\Foo\Baz
+                $class = 'Bot\\' . str_replace('/', '\\', $relativePath);
+
+                // Verifica si la clase existe
+                if (class_exists($class)) {
+                    $reflection = new ReflectionClass($class);
+
+                    //Instancia de Commands
+                    if (is_subclass_of($class, Commands::class)) {
+                        $attributes = $reflection->getAttributes(Command::class);
+                    }
+
+                    //Instancia de Callbacks
+                    if (is_subclass_of($class, Callbacks::class)) {
+                        $attributes = $reflection->getAttributes(Callback::class);
+                    }
+
+                    //Obtiene Atributos
+                    if (!empty($attributes)) {
+                        $c_Attribute = $attributes[0]->newInstance();
+                        $c_Name = $c_Attribute->getName();
+                        $data[$c_Name] = $class;
+                    }
+                }
+            }
+        }
+
+        // Guarda los comandos en un archivo JSON
+        writeContentToFile(base("storage/$name.json"), json_encode($data, JSON_PRETTY_PRINT));
+    }
+}
+
+if (!function_exists('base')) {
+    /**
+     * Establece directorio base del proyecto
+     */
+    function base(?string $path = null): string
+    {
+        return empty($path) ? Config::get('abs_path') : Config::get('abs_path') . DIRECTORY_SEPARATOR . $path;
+    }
+}
+
+if (!function_exists('xConfig')) {
+    /**
+     * Carga la configuracion del bot
+     */
+    function xConfig(): array
+    {
+        $filename = function (int $level = 1): string {
+            return dirname(__DIR__, $level) . '/config.php';
+        };
+
+        return require file_exists($filename()) ? $filename() : $filename(4);
+    }
+}
+
+if (!function_exists('classValidator')) {
+    /**
+     * Valida que una clase exista y sea del tipo esperado.
+     *
+     * @param string $class Nombre completo de la clase a validar
+     * @param string $baseClass Clase padre o interfaz esperada
+     * @param string|null $context Contexto opcional para el mensaje de error (ej. 'Middleware', 'Conversation')
+     * @throws \RuntimeException Si la clase no existe o no extiende/implementa $baseClass
+     */
+    function classValidator(string $class, string $baseClass, ?string $context = null): void
+    {
+        $ctx = $context ? "[$context] " : '';
+
+        if (!class_exists($class)) {
+            throw new \RuntimeException("{$ctx}$class not found.");
+        }
+
+        if (!is_subclass_of($class, $baseClass)) {
+            throw new \RuntimeException("{$ctx}$class must extend or implement $baseClass.");
+        }
+    }
+}

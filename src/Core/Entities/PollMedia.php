@@ -1,0 +1,38 @@
+<?php
+
+namespace Mk4U\TGram\Core\Entities;
+
+use Mk4U\TGram\Core\Entity;
+
+/**
+ * PollMedia Entity
+ * @property Animation $animation
+ * @property Audio $audio
+ * @property Document $document
+ * @property Link $link
+ * @property LivePhoto $live_photo
+ * @property Location $location
+ * @property PhotoSize[] $photo
+ * @property Sticker $sticker
+ * @property Venue $venue
+ * @property Video $video
+ */
+class PollMedia extends Entity
+{
+    
+    protected function setEntities(): array
+    {
+        return [
+            'animation' => Animation::class,
+            'audio' => Audio::class,
+            'document' => Document::class,
+            'link' => Link::class,
+            'live_photo' => LivePhoto::class,
+            'location' => Location::class,
+            'photo' => [PhotoSize::class],
+            'sticker' => Sticker::class,
+            'venue' => Venue::class,
+            'video' => Video::class,
+        ];
+    }
+}

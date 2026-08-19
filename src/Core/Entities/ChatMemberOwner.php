@@ -1,0 +1,23 @@
+<?php
+
+namespace Mk4U\TGram\Core\Entities;
+
+use Mk4U\TGram\Core\Entity;
+
+/**
+ * ChatMemberOwner Entity
+ * @property string $status
+ * @property User $user
+ * @property bool $is_anonymous
+ * @property string $custom_title
+ */
+class ChatMemberOwner extends ChatMember
+{
+    
+    protected function setEntities(): array
+    {
+        return [
+            'user' => User::class,
+        ];
+    }
+}

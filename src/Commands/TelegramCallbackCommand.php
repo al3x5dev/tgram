@@ -1,0 +1,82 @@
+<?php
+
+namespace Mk4U\TGram\Commands;
+
+use Mk4U\TGram\Commands\Traits\AskForClass;
+use Mk4U\TGram\Commands\Traits\Io;
+use Mk4U\TGram\Commands\Traits\MakeClass;
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
+
+/**
+ * TelegramCallback command class
+ */
+final class TelegramCallbackCommand extends Command
+{
+    use Io, AskForClass, MakeClass;
+    public function configure(): void
+    {
+        $this
+            ->setName('telegram:callback')
+            ->setDescription('Create a new Telegram callback')
+            ->setHelp('This command allows you to create a new Telegram callback for your bot');
+    }
+
+    public function execute(InputInterface $input, OutputInterface $output): int
+    {
+        /*$this->prepare($input, $output);
+
+        $name = $this->style->ask(
+            'What should the Telegram callback be named? [Eg. Option]',
+            null,
+            function (?string $name): string {
+                if (empty($name)) {
+                    throw new \InvalidArgumentException('You must specify a name for the callback');
+                }
+                return $name;
+            }
+        );
+
+        $action = $this->style->ask(
+            'What name for the callback action? [Eg. option]',
+            null,
+            function (?string $action): string {
+                if (empty($action)) {
+                    throw new \InvalidArgumentException('You must specify a name for the action');
+                }
+                return $action;
+            }
+        );
+
+        $filename = $this->makeDir(trim($name), 'bot/Callbacks', $output);
+
+        $this->makeCallback($filename, $action);
+        $output->writeln("<info>Telegram callback created successfully.</info>");
+        return Command::SUCCESS;*/
+
+        $this->prepare($input, $output);
+
+        $name = $this->askForClassName(
+            'Callback class name (supports subdirs: Games/Dice)',
+            null
+        );
+
+        $action = $this->askForClassName(
+            'Callback action name (e.g. play, join, confirm)',
+            null
+        );
+
+        $data = $this->makeDir($name, 'bot/Callbacks', $output);
+
+        if (empty($data)) {
+            $this->style->error('Callback creation failed.');
+            return Command::FAILURE;
+        }
+
+        $this->makeCallback($data, $action);
+        $output->writeln("<info>Telegram callback [{$data['filename']}] created successfully.</info>");
+        return Command::SUCCESS;
+    }
+}

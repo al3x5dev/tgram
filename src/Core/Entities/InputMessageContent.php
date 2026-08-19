@@ -1,0 +1,76 @@
+<?php
+
+namespace Mk4U\TGram\Core\Entities;
+
+use Mk4U\TGram\Core\Entity;
+
+/**
+ * InputMessageContent Entity
+ */
+class InputMessageContent extends Entity
+{
+    
+
+    protected function setEntities(): array
+    {
+        return [];
+    }
+    public function resolve(): Entity
+    {
+        if($this->hasProperty('message_text')){
+            return new InputTextMessageContent($this->properties);
+        }
+        if($this->hasProperty('phone_number')){
+            return new InputContactMessageContent($this->properties);
+        }
+        if($this->hasProperty('payload')){
+            return new InputInvoiceMessageContent($this->properties);
+        }
+        if(
+            $this->hasProperty('latitude') && 
+            $this->hasProperty('longitude') && 
+            $this->hasProperty('title')
+        ){
+            return new InputVenueMessageContent($this->properties);
+        }
+        if (
+            $this->hasProperty('latitude') &&
+            $this->hasProperty('longitude')
+        ) {
+            return new InputLocationMessageContent($this->properties);
+        }
+        if ($this->hasProperty('html') || $this->hasProperty('markdown')) {
+            return new InputRichMessageContent($this->properties);
+        }
+        throw new \InvalidArgumentException('Unknown InputMessageContent');
+    }
+
+    /**
+     * Factory: creates the correct subclass based on data provided
+     *
+     * @param array $data
+     * @return Entity
+     * | Key | Creates |
+     * |-----|----------|
+     * | message_text | InputTextMessageContent |
+     * | phone_number | InputContactMessageContent |
+     * | payload | InputInvoiceMessageContent |
+     * | latitude + longitude + title | InputVenueMessageContent |
+     * | latitude + longitude | InputLocationMessageContent |
+     * | html / markdown | InputRichMessageContent |
+     * @throws \InvalidArgumentException
+     */
+    public static function create(array $data): Entity
+    {
+        return match(true) {
+            isset($data['message_text']) => new InputTextMessageContent($data),
+            isset($data['phone_number']) => new InputContactMessageContent($data),
+            isset($data['payload']) => new InputInvoiceMessageContent($data),
+            isset($data['latitude'], $data['longitude'], $data['title']) => new InputVenueMessageContent($data),
+            isset($data['latitude'], $data['longitude']) => new InputLocationMessageContent($data),
+            isset($data['html']) || isset($data['markdown']) => new InputRichMessageContent($data),
+            default => throw new \InvalidArgumentException('Unknown InputMessageContent: no valid property found'),
+        };
+    }
+
+}

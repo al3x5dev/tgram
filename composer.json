@@ -1,0 +1,40 @@
+{
+    "name": "mk4u/tgram",
+    "description": "Lightweight Telegram Bot API SDK for PHP.",
+    "type": "library",
+    "license": "MIT",
+    "keywords": ["telegram","telegram-bot", "telegram-api","bot","sdk","php"],
+    "homepage": "https://github.com/al3x5dev/tgram",
+    "authors": [
+        {
+            "name": "al3x5dev",
+            "email": "al3x5.dev@gmail.com",
+            "homepage": "https://al3x5.alwaysdata.net"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/al3x5dev/tgram/issues",
+        "source": "https://github.com/al3x5dev/tgram"
+    },
+    "require": {
+        "php": ">=8.5",
+        "mk4u/http": "^2.0",
+        "mk4u/cache": "^0.4.2",
+        "monolog/monolog": "^3.10",
+        "symfony/console": "^8.1"
+    },
+    "require-dev": {
+        "al3x5/xbot-devkit": "^0.5.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Mk4U\\TGram\\": "src/"
+        }
+    },
+    "bin": [
+        "bot"
+    ],
+    "minimum-stability": "stable",
+    "prefer-stable": true
+
+}

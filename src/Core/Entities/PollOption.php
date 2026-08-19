@@ -1,0 +1,30 @@
+<?php
+
+namespace Mk4U\TGram\Core\Entities;
+
+use Mk4U\TGram\Core\Entity;
+
+/**
+ * PollOption Entity
+ * @property string $persistent_id
+ * @property string $text
+ * @property MessageEntity[] $text_entities
+ * @property PollMedia $media
+ * @property int $voter_count
+ * @property User $added_by_user
+ * @property Chat $added_by_chat
+ * @property int $addition_date
+ */
+class PollOption extends Entity
+{
+    
+    protected function setEntities(): array
+    {
+        return [
+            'text_entities' => [MessageEntity::class],
+            'media' => PollMedia::class,
+            'added_by_user' => User::class,
+            'added_by_chat' => Chat::class,
+        ];
+    }
+}

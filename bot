@@ -1,0 +1,62 @@
+#!/usr/bin/env php
+<?php
+
+use Mk4U\TGram\Config;
+
+if (file_exists('vendor/autoload.php')) {
+    require_once 'vendor/autoload.php';
+}
+
+// Config
+if (file_exists('config.php')) {
+    $cfg = require 'config.php';
+}
+
+use Mk4U\TGram\Bot;
+use Mk4U\TGram\Commands\HookAboutCommand;
+use Mk4U\TGram\Commands\HookDeleteCommand;
+use Mk4U\TGram\Commands\HookInfoCommand;
+use Mk4U\TGram\Commands\HookSetCommand;
+use Mk4U\TGram\Commands\InstallCommand;
+use Mk4U\TGram\Commands\MakeCommandCommand;
+use Mk4U\TGram\Commands\RegisterCommand;
+use Mk4U\TGram\Commands\TelegramCallbackCommand;
+use Mk4U\TGram\Commands\TelegramCommandCommand;
+use Mk4U\TGram\Commands\TelegramConversationCommand;
+use Mk4U\TGram\Commands\TelegramHandlerCommand;
+use Mk4U\TGram\Commands\TelegramMiddlewareCommand;
+use Symfony\Component\Console\Application;
+
+if (!empty($cfg)) {
+    Config::init($cfg);
+}
+
+$app = new Application(Bot::NAME, 'v' . Bot::VERSION);
+
+// ... register commands
+$app->addCommand(new InstallCommand());
+$app->addCommand(new RegisterCommand());
+//webhook
+$app->addCommand(new HookSetCommand());
+$app->addCommand(new HookDeleteCommand());
+$app->addCommand(new HookInfoCommand());
+$app->addCommand(new HookAboutCommand());
+//make
+if (!strpos(__DIR__, 'vendor')) {
+    $app->addCommand(new MakeCommandCommand());
+}
+//telegram
+$app->addCommand(new TelegramCommandCommand());
+$app->addCommand(new TelegramCallbackCommand());
+$app->addCommand(new TelegramConversationCommand());
+$app->addCommand(new TelegramHandlerCommand());
+$app->addCommand(new TelegramMiddlewareCommand());
+
+if (
+    !file_exists(InstallCommand::configFile()) &&
+    !file_exists('artisan')
+) {
+    $app->setDefaultCommand('install');
+}
+
+$app->run();
