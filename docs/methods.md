@@ -10,7 +10,7 @@ This library is compatible with telegram bot api [version 10.0](https://core.tel
 
 ## Entity System
 
-xBot uses an entity-based system for Telegram API responses. All API responses are automatically mapped to entity objects.
+tgram uses an entity-based system for Telegram API responses. All API responses are automatically mapped to entity objects.
 
 ### Available Entities
 
@@ -79,13 +79,13 @@ $chatId = $message->chat->getId();
 $username = $message->from->getUsername();
 ```
 
-## xBot Methods
+## tgram Methods
 
 
 ### Reply a Message
 
 `reply` is an abbreviation of `sendMessage` in which the message destination is not specified.
-See `sendMessage` [docs](https://github.com/alexsandrov16/xbot/blob/main/docs/example.md#send-a-message).
+See `sendMessage` [docs](https://github.com/al3x5dev/tgram/blob/main/docs/example.md#send-a-message).
 
 ```php
 $response = $bot->reply('Hello World',[]);

@@ -2,13 +2,13 @@
 
 ## What are Telegram handlers?
 
-Handlers process specific types of Telegram updates beyond standard messages and commands. They are designed to manage specialized events that occur in Telegram interactions. While `message` and `callback_query` updates are handled automatically by xBot's command and callback systems, other update types require dedicated handlers.
+Handlers process specific types of Telegram updates beyond standard messages and commands. They are designed to manage specialized events that occur in Telegram interactions. While `message` and `callback_query` updates are handled automatically by tgram's command and callback systems, other update types require dedicated handlers.
 
 ## Creating handlers
 
 Generate handler scaffolding with:
 ```bash
-php vendor/bin/xbot telegram:handler
+php vendor/bin/bot telegram:handler
 ```
 
 This creates a new handler in `bot/Handlers/`.
@@ -78,7 +78,7 @@ class InlineQuery extends Handlers
 
 ## Handler execution flow
 
-xBot routes updates using this resolution logic:
+tgram routes updates using this resolution logic:
 ```php
 private function resolveHandler(string $type): void
 {

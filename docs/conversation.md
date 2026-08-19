@@ -14,10 +14,10 @@ Conversational flows are the structure and design of how the conversation betwee
 
 ## Creating conversation
 
-**xBot** has an integrated [cli tool](https://github.com/alexsandrov16/xbot/blob/main/docs/cli.md) for managing your bots. Through it, we can create conversation. Just run the following command in your console:
+**tgram** has an integrated [cli tool](https://github.com/al3x5dev/tgram/blob/main/docs/cli.md) for managing your bots. Through it, we can create conversation. Just run the following command in your console:
 
 ```bash
-php vendor/bin/xbot telegram:conversation
+php vendor/bin/bot telegram:conversation
 ```
 
 This will create your new conversation inside the `bot/Conversations` folder in the root directory of your project.
@@ -25,7 +25,7 @@ This will create your new conversation inside the `bot/Conversations` folder in 
 
 ### Basic example
 
-Below is a basic example that shows how a conversational flow is implemented in xBot.
+Below is a basic example that shows how a conversational flow is implemented in tgram.
 
 Every conversation must extend `Mk4U\TGram\Core\Actions\Conversations` and define a `start()` method.
 
@@ -50,7 +50,7 @@ class Foo extends Conversations
 2. The bot sends a message using `ask()`
 3. The current step is saved in cache (chat_id:user_id)
 4. On the next user message:
-    - xBot detects an active conversation
+    - tgram detects an active conversation
     - Loads the conversation class
     - Executes the stored step method
 5. The flow continues until `stopConversation()` is called or the user cancels it
@@ -131,4 +131,4 @@ $cv = new Hello($this->update);
 $cv->start();
 ```
 
-Once started, xBot automatically handles routing future messages to the correct step.
+Once started, tgram automatically handles routing future messages to the correct step.

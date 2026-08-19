@@ -21,7 +21,7 @@ Heading + paragraph + divider:
 
 ```php
 $message = RichMessage::make()
-    ->block(Block::heading(Text::richBold('Welcome to xBot')))
+    ->block(Block::heading(Text::richBold('Welcome to tgram')))
     ->block(Block::paragraph('This is a simple rich message.'))
     ->block(Block::paragraph(Text::richItalic('Enjoy the new features!')))
     ->build();
@@ -354,7 +354,7 @@ $message = RichMessage::make()
     ))
     ->block(Block::blockQuote(
         [Block::paragraph('Thank you for your business!')],
-        Text::richBold('xBot Team')
+        Text::richBold('tgram Team')
     ))
     ->block(Block::divider())
     ->block(Block::footer(

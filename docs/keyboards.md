@@ -299,5 +299,5 @@ This static method creates a new instance of `ForceReply`, which is used to forc
 ```php
 use Mk4U\TGram\Core\Factories\Keyboard;
 
-$keyboard = Keyboard::forceReply(true, 'Hello xBot');
+$keyboard = Keyboard::forceReply(true, 'Hello tgram');
 ```

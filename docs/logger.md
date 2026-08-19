@@ -1,6 +1,6 @@
 # Events Logger
 
-The `Events` class provides robust logging capabilities for your xBot application, utilizing the Monolog library under the hood. This documentation covers its usage and configuration.
+The `Events` class provides robust logging capabilities for your tgram application, utilizing the Monolog library under the hood. This documentation covers its usage and configuration.
 
 ## Core Functionality
 

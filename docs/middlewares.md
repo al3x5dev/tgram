@@ -4,7 +4,7 @@
 
 Middlewares are a mechanism that allows you to intercept and control the execution flow of bot updates before they reach their final handler (commands, messages, callbacks, etc.).
 
-In **xBot**, middlewares act as a pipeline, where each middleware can:
+In **tgram**, middlewares act as a pipeline, where each middleware can:
 
 - Allow execution to continue  
 - Abort the execution  
@@ -23,7 +23,7 @@ Middlewares are executed before the final handler and are especially useful for:
 ## How middlewares work
 
 1. An update is received by the bot  
-2. xBot determines:
+2. tgram determines:
    - The update type (`message`, `command`, `callback_query`, etc.)
    - The command name (if any)
 3. The corresponding middlewares are collected:
@@ -123,7 +123,7 @@ return $this->abort('Access denied');
 Middlewares are configured using a PHP configuration file automatically created during installation:
 
 ```bash
-php xbot install
+php vendor/bin/bot install
 ```
 
 ### Default middleware configuration file

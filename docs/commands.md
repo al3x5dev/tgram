@@ -13,7 +13,7 @@ Commands are instructions that users can send to the bot to perform specific act
 
 
 ### Custom Commands
-In **xBot**, we also consider any pre-specified text or words as commands. For example:
+In **tgram**, we also consider any pre-specified text or words as commands. For example:
 - `📥 download`: Download file.
 - `🎮 game`: Start a game.
 
@@ -22,10 +22,10 @@ This variant is most commonly used for custom keyboard actions, allowing a more 
 
 ## Create commands
 
-xBot has an integrated [cli tool](https://github.com/alexsandrov16/xbot/blob/main/docs/cli.md) for managing your bots. Through it, we can create custom commands. Just run the following command in your console:
+tgram has an integrated [cli tool](https://github.com/al3x5dev/tgram/blob/main/docs/cli.md) for managing your bots. Through it, we can create custom commands. Just run the following command in your console:
 
 ```bash
-php vendor/bin/xbot telegram:command
+php vendor/bin/bot telegram:command
 ```
 
 This will generate a new command class inside the `bot/Commands` folder in the project root.
@@ -56,7 +56,7 @@ class Start extends Commands
 
 ### Working with arguments
 
-Commands in xBot now have built-in argument handling:
+Commands in tgram now have built-in argument handling:
 
 ```php
 $this->setArgs(['arg1', 'arg2']); // Set arguments
@@ -81,9 +81,9 @@ $three = $this->args(3);           // Get first 3 arguments, filling missing wit
 
 ### Register
 
-[To register your commands](https://github.com/alexsandrov16/xbot/blob/main/docs/cli.md#2-register), just type in console:
+[To register your commands](https://github.com/al3x5dev/tgram/blob/main/docs/cli.md#2-register), just type in console:
 
 ```bash
-php vendor/bin/xbot register
+php vendor/bin/bot register
 ```
 This will ensure that all custom commands are available for use in the bot.

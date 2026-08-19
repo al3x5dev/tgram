@@ -3,25 +3,25 @@
 
 ## Installation
 
-To install **xBot**, make sure you have [Composer](https://getcomposer.org/) installed on your system. Composer is a dependency manager for PHP that will allow you to easily install and manage your project's libraries.
+To install **tgram**, make sure you have [Composer](https://getcomposer.org/) installed on your system. Composer is a dependency manager for PHP that will allow you to easily install and manage your project's libraries.
 
-Once you have Composer installed, you can add **xBot** to your project by running the following command in the terminal:
+Once you have Composer installed, you can add **tgram** to your project by running the following command in the terminal:
 
 ```bash
-composer require al3x5/xbot
+composer require mk4u/tgram
 ```
 
 
 ## Configuration
 
-After installing **xBot**, you will need to create a configuration file for your bot. This file will contain the information needed to connect your bot to the Telegram API. You have two options for creating this configuration file:
+After installing **tgram**, you will need to create a configuration file for your bot. This file will contain the information needed to connect your bot to the Telegram API. You have two options for creating this configuration file:
 
 ### 1. Manual Method
 
 You can create the configuration file manually by following these steps:
 
 1. Create a file named `config.php` in the root of your project.
-2. Open the file and add the following basic configuration, see [config.example.php](https://github.com/alexsandrov16/xbot/blob/main/config.example.php):
+2. Open the file and add the following basic configuration, see [config.example.php](https://github.com/al3x5dev/tgram/blob/main/config.example.php):
 
 ```php
 return [
@@ -48,16 +48,16 @@ return [
 
 > [!IMPORTANT]
 > Use this method only to modify or add some necessary configuration parameters.
-> We do not recommend using this method for a clean installation of **xBot**.
+> We do not recommend using this method for a clean installation of **tgram**.
 
 ### 2. Automatic Method (**_Recommended_**)
 
-**xBot** allows you to generate the configuration file automatically through the command line, in addition to generating the necessary directory structure and other configuration files for its first use.
+**tgram** allows you to generate the configuration file automatically through the command line, in addition to generating the necessary directory structure and other configuration files for its first use.
 
 To do this, run the following command in the terminal:
 
 ```bash
-php vendor/bin/xbot
+php vendor/bin/bot
 ```
 
 This command will guide you through the installation and initial configuration process. Be sure to follow the instructions that will appear in the console to complete the configuration.
@@ -77,17 +77,17 @@ Regardless of the method you choose, you will need to get the API Key of your bo
 In order for your bot to receive updates from Telegram, you will need to set up a webhook. This can be done by running the following command in the terminal:
 
 ```bash
-php vendor/bin/xbot hook:set https://your-domain.com/webhook
+php vendor/bin/bot hook:set https://your-domain.com/webhook
 ```
 
 This command will prompt you to enter the URL of your webhook. Make sure that this URL is accessible from the Internet and that it points to your server where the bot is hosted.
 
 > [!IMPORTANT]
-> When you set the webhook, xBot automatically includes your secret token if configured. Telegram will use this token in the `X-Telegram-Bot-Api-Secret-Token` header with every request.
+> When you set the webhook, tgram automatically includes your secret token if configured. Telegram will use this token in the `X-Telegram-Bot-Api-Secret-Token` header with every request.
 
 #### Webhook Security
 
-xBot validates the `X-Telegram-Bot-Api-Secret-Token` header on every incoming request. If you configured a `secret` in your `config.php`, the bot will reject any request that doesn't include the correct token.
+tgram validates the `X-Telegram-Bot-Api-Secret-Token` header on every incoming request. If you configured a `secret` in your `config.php`, the bot will reject any request that doesn't include the correct token.
 
 To disable webhook security, simply remove or set to `null` the `secret` key in your configuration file.
 
@@ -107,7 +107,7 @@ sudo chmod -R 775 /var/www/html/my_bot/storage
 After installation, you can verify your bot is working by running:
 
 ```bash
-php vendor/bin/xbot hook:about
+php vendor/bin/bot hook:about
 ```
 
 This will display information about your bot including the username and whether the webhook is properly configured.
@@ -117,51 +117,23 @@ Once you have configured your config.php file and set up the webhook, you can in
 ```php
 require_once 'vendor/autoload.php';
 
-$xbot = new \Mk4U\TGram\Bot();
-$xbot->run();
+$bot = new \Mk4U\TGram\Bot();
+$bot->run();
 ```
-
-## Running Tests
-
-xBot includes a PHPUnit test suite. To run the tests:
-
-```bash
-# Run all tests
-./vendor/bin/phpunit
-
-# Run specific test file
-./vendor/bin/phpunit tests/EntityTest.php
-
-# Run with coverage
-./vendor/bin/phpunit --coverage-html coverage
-```
-
-### Test Structure
-
-```
-tests/
-├── ApiClientTest.php    # Tests for API client
-├── ConfigTest.php      # Tests for configuration
-├── EntityTest.php      # Tests for entity system
-└── storage/           # Test data files
-```
-
-> [!NOTE]
-> Tests are automatically included via Composer when you install xBot as a dependency.
 
 ## Project Structure
 
-After installation, your xBot project will have the following structure:
+After installation, your tgram project will have the following structure:
 
 ```
-xbot-project/
+tgram-project/
 ├── bot/
 │   ├── Commands/          # Bot commands
 │   ├── Callbacks/        # Inline callback handlers
 │   ├── Conversations/    # Conversation flows
 │   ├── Handlers/         # Update handlers (InlineQuery, ChannelPost, etc.)
 │   └── Middlewares/      # Middleware classes
-├── src/                  # xBot library source
+├── src/                  # tgram library source
 ├── storage/
 │   ├── cache/            # Cache files
 │   ├── commands.json     # Registered commands
