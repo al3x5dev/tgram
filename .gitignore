@@ -1,1 +1,6 @@
 /vendor/
+/storage/
+/bot/
+composer.lock
+/*.php
+/.phpunit.cache
