@@ -11,15 +11,15 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * TelegramCallback command class
+ * Telegram Callbacks command class
  */
-final class TelegramCallbackCommand extends Command
+final class CallbackCommand extends Command
 {
     use Io, AskForClass, MakeClass;
     public function configure(): void
     {
         $this
-            ->setName('telegram:callback')
+            ->setName('callback')
             ->setDescription('Create a new Telegram callback')
             ->setHelp('This command allows you to create a new Telegram callback for your bot');
     }

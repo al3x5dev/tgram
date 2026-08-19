@@ -11,15 +11,15 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * TelegramMiddleware command class
+ * Telegram Middlewares command class
  */
-final class TelegramMiddlewareCommand extends Command
+final class MiddlewareCommand extends Command
 {
     use Io, AskForClass, MakeClass;
     public function configure(): void
     {
         $this
-            ->setName('telegram:middleware')
+            ->setName('middleware')
             ->setDescription('Create a middleware')
             ->setHelp('This command allows you to create a new middleware for your bot')
             ->addArgument(

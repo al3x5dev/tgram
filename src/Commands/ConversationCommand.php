@@ -11,15 +11,15 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * TelegramConversation command class
+ * Telegram Conversations command class
  */
-final class TelegramConversationCommand extends Command
+final class ConversationCommand extends Command
 {
     use Io, AskForClass, MakeClass;
     public function configure(): void
     {
         $this
-            ->setName('telegram:conversation')
+            ->setName('conversation')
             ->setDescription('Create a new conversational flow in your bot')
             ->addArgument('name', InputArgument::OPTIONAL, 'The name of the conversation class');
     }

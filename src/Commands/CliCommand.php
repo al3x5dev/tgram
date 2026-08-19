@@ -10,15 +10,15 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * MakeCommand command class
+ * Cli commands class
  */
-final class MakeCommandCommand extends Command
+final class CliCommand extends Command
 {
     use Io, MakeClass;
     public function configure(): void
     {
         $this
-            ->setName('make:command')
+            ->setName('cli')
             ->setDescription('Create a new console command')
             ->addArgument('name', InputArgument::OPTIONAL, 'The name of the command.');
     }

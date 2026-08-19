@@ -13,18 +13,18 @@ if (file_exists('config.php')) {
 }
 
 use Mk4U\TGram\Bot;
+use Mk4U\TGram\Commands\CallbackCommand;
+use Mk4U\TGram\Commands\CliCommand;
+use Mk4U\TGram\Commands\CmdCommand;
+use Mk4U\TGram\Commands\ConversationCommand;
+use Mk4U\TGram\Commands\HandlerCommand;
 use Mk4U\TGram\Commands\HookAboutCommand;
 use Mk4U\TGram\Commands\HookDeleteCommand;
 use Mk4U\TGram\Commands\HookInfoCommand;
 use Mk4U\TGram\Commands\HookSetCommand;
 use Mk4U\TGram\Commands\InstallCommand;
-use Mk4U\TGram\Commands\MakeCommandCommand;
+use Mk4U\TGram\Commands\MiddlewareCommand;
 use Mk4U\TGram\Commands\RegisterCommand;
-use Mk4U\TGram\Commands\TelegramCallbackCommand;
-use Mk4U\TGram\Commands\TelegramCommandCommand;
-use Mk4U\TGram\Commands\TelegramConversationCommand;
-use Mk4U\TGram\Commands\TelegramHandlerCommand;
-use Mk4U\TGram\Commands\TelegramMiddlewareCommand;
 use Symfony\Component\Console\Application;
 
 if (!empty($cfg)) {
@@ -41,22 +41,22 @@ $app->addCommand(new HookSetCommand());
 $app->addCommand(new HookDeleteCommand());
 $app->addCommand(new HookInfoCommand());
 $app->addCommand(new HookAboutCommand());
-//make
+//dev
 if (!strpos(__DIR__, 'vendor')) {
-    $app->addCommand(new MakeCommandCommand());
+    $app->addCommand(new CliCommand());
 }
 //telegram
-$app->addCommand(new TelegramCommandCommand());
-$app->addCommand(new TelegramCallbackCommand());
-$app->addCommand(new TelegramConversationCommand());
-$app->addCommand(new TelegramHandlerCommand());
-$app->addCommand(new TelegramMiddlewareCommand());
+$app->addCommand(new CmdCommand());
+$app->addCommand(new CallbackCommand());
+$app->addCommand(new ConversationCommand());
+$app->addCommand(new HandlerCommand());
+$app->addCommand(new MiddlewareCommand());
 
-if (
+/*if (
     !file_exists(InstallCommand::configFile()) &&
     !file_exists('artisan')
 ) {
     $app->setDefaultCommand('install');
-}
+}*/
 
 $app->run();

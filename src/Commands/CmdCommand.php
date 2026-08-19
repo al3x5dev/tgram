@@ -11,15 +11,15 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * TelegramCommand command class
+ * Telegram Commands command class
  */
-final class TelegramCommandCommand extends Command
+final class CmdCommand extends Command
 {
     use Io, AskForClass, MakeClass;
     public function configure(): void
     {
         $this
-            ->setName('telegram:command')
+            ->setName('command')
             ->setDescription('Create a new Telegram command')
             ->setHelp('This command allows you to create a new Telegram command for your bot')
             ->addArgument('name', InputArgument::OPTIONAL, 'The name of the command');
