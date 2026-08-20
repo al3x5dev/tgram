@@ -209,9 +209,6 @@ final class InstallCommand extends Command
                 'namespace' => "Bot\\Commands"
             ]);
         }
-        /*$this->makeTelegramCommand('bot/Commands/Start.php', __DIR__);
-        $this->makeTelegramCommand('bot/Commands/Help.php', __DIR__);
-        $this->makeTelegramCommand('bot/Commands/Generic.php', __DIR__);*/
     }
 
     /**
@@ -239,6 +236,9 @@ final class InstallCommand extends Command
 
         // Ejecutar el comando para actualizar el autoload
         shell_exec('composer dump-autoload');
+
+        $loader = require 'vendor/autoload.php';   // devuelve la MISMA instancia ya cargada
+        $loader->addPsr4('Bot\\', getcwd() . '/bot');
     }
 
     /**

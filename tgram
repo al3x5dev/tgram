@@ -24,6 +24,7 @@ use Mk4U\TGram\Commands\HookInfoCommand;
 use Mk4U\TGram\Commands\HookSetCommand;
 use Mk4U\TGram\Commands\InstallCommand;
 use Mk4U\TGram\Commands\MiddlewareCommand;
+use Mk4U\TGram\Commands\PollCommand;
 use Mk4U\TGram\Commands\RegisterCommand;
 use Symfony\Component\Console\Application;
 
@@ -51,6 +52,8 @@ $app->addCommand(new CallbackCommand());
 $app->addCommand(new ConversationCommand());
 $app->addCommand(new HandlerCommand());
 $app->addCommand(new MiddlewareCommand());
+//polling
+$app->addCommand(new PollCommand());
 
 /*if (
     !file_exists(InstallCommand::configFile()) &&

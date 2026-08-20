@@ -28,17 +28,6 @@ final class ConversationCommand extends Command
     {
         $this->prepare($input, $output);
 
-        /*$name =  $this->style->ask(
-            'What will you call the new conversation? [Eg. Chat]',
-            null,
-            function ($name): ?string {
-                if (empty($name)) {
-                    throw new \InvalidArgumentException('You must specify a name for the conversation');
-                }
-                return $name;
-            }
-        );*/
-
         $name = $this->askForClassName(
             'What will you call the new conversation? [Eg. Chat] (supports subdirs: Admin/User/Delete)',
             $input->getArgument('name')

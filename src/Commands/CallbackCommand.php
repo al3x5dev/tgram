@@ -26,35 +26,6 @@ final class CallbackCommand extends Command
 
     public function execute(InputInterface $input, OutputInterface $output): int
     {
-        /*$this->prepare($input, $output);
-
-        $name = $this->style->ask(
-            'What should the Telegram callback be named? [Eg. Option]',
-            null,
-            function (?string $name): string {
-                if (empty($name)) {
-                    throw new \InvalidArgumentException('You must specify a name for the callback');
-                }
-                return $name;
-            }
-        );
-
-        $action = $this->style->ask(
-            'What name for the callback action? [Eg. option]',
-            null,
-            function (?string $action): string {
-                if (empty($action)) {
-                    throw new \InvalidArgumentException('You must specify a name for the action');
-                }
-                return $action;
-            }
-        );
-
-        $filename = $this->makeDir(trim($name), 'bot/Callbacks', $output);
-
-        $this->makeCallback($filename, $action);
-        $output->writeln("<info>Telegram callback created successfully.</info>");
-        return Command::SUCCESS;*/
 
         $this->prepare($input, $output);
 
