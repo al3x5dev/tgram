@@ -4,7 +4,7 @@
 
 Middlewares are a mechanism that allows you to intercept and control the execution flow of bot updates before they reach their final handler (commands, messages, callbacks, etc.).
 
-In **tgram**, middlewares act as a pipeline, where each middleware can:
+In **TGram**, middlewares act as a pipeline, where each middleware can:
 
 - Allow execution to continue  
 - Abort the execution  
@@ -23,7 +23,7 @@ Middlewares are executed before the final handler and are especially useful for:
 ## How middlewares work
 
 1. An update is received by the bot  
-2. tgram determines:
+2. TGram determines:
    - The update type (`message`, `command`, `callback_query`, etc.)
    - The command name (if any)
 3. The corresponding middlewares are collected:
@@ -123,7 +123,7 @@ return $this->abort('Access denied');
 Middlewares are configured using a PHP configuration file automatically created during installation:
 
 ```bash
-php vendor/bin/bot install
+php vendor/bin/tgram install
 ```
 
 ### Default middleware configuration file
@@ -219,7 +219,7 @@ class AdminMiddleware extends Middlewares
     {
         if (!$this->isAdmin()) {
             return $this->abort(
-                '🚫 No eres bienvenido aquí ' .
+                '🚫 You are not welcome here ' .
                 Text::mention(
                     $this->update->message->from->first_name,
                     $this->update->message->from->id
@@ -228,7 +228,7 @@ class AdminMiddleware extends Middlewares
         }
 
         $this->reply(
-            '✅ Bienvenido ' .
+            '✅ Welcome ' .
             Text::mention(
                 $this->update->message->from->first_name,
                 $this->update->message->from->id

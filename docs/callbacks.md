@@ -3,14 +3,14 @@
 
 ## What are callbacks?
 
-Callbacks are responses that the bot sends in response to user actions, especially when [inline buttons](https://github.com/al3x5dev/tgram/blob/main/docs/keyboards.md) are used. When a user clicks on a button, a **callback query** is sent to the bot, which can process that action and respond accordingly.
+Callbacks are responses that the bot sends in response to user actions, especially when [inline buttons](keyboards.md) are used. When a user clicks on a button, a **callback query** is sent to the bot, which can process that action and respond accordingly.
 
 ## Creating callbacks
 
-tgram has an integrated [cli tool](https://github.com/al3x5dev/tgram/blob/main/docs/cli.md) for managing your bots. Through it, we can create callbacks. Just run the following command in your console:
+TGram has an integrated [cli tool](cli.md) for managing your bots. Through it, we can create callbacks. Just run the following command in your console:
 
 ```bash
-php vendor/bin/bot telegram:callback
+php vendor/bin/tgram callback
 ```
 
 This will generate a new callback class inside the `bot/Callbacks` folder in your project root.
@@ -21,7 +21,7 @@ This will generate a new callback class inside the `bot/Callbacks` folder in you
 Here is an example of a simple callback:
 
 ```php
-namespace MyBot\Callbacks;
+namespace Bot\Callbacks;
 
 use Mk4U\TGram\Core\Actions\Callbacks;
 use Mk4U\TGram\Attributes\Callback;
@@ -35,7 +35,7 @@ class Greetings extends Callbacks
 
         // Access the associated message
         $messageEntity = $this->message(); // returns Message|InaccessibleMessage
-        // Example: $chatId = $messageEntity->getChat()->getId();
+        // Example: $chatId = $messageEntity->chat->id;
     }
 }
 ```
@@ -47,16 +47,16 @@ class Greetings extends Callbacks
 
 ### Register
 
-[To register your callbacks](https://github.com/al3x5dev/tgram/blob/main/docs/cli.md#2-register), just type in console:
+[To register your callbacks](cli.md#2-register), just type in console:
 
 ```bash
-php vendor/bin/bot register
+php vendor/bin/tgram register
 ```
 This will ensure that all custom callbacks are available for use in the bot.
 
 ## Using parameters in callbacks
 
-tgram supports **dynamic callback routing** using the `|` (pipe) separator. This allows you to pass parameters directly in the callback data without registering each variation.
+TGram supports **dynamic callback routing** using the `|` (pipe) separator. This allows you to pass parameters directly in the callback data without registering each variation.
 
 ### How it works
 
@@ -69,7 +69,7 @@ When a callback query arrives, the router first tries to match the **exact callb
 **Creating a callback with parameter support:**
 
 ```php
-namespace MyBot\Callbacks;
+namespace Bot\Callbacks;
 
 use Mk4U\TGram\Core\Actions\Callbacks;
 use Mk4U\TGram\Attributes\Callback;

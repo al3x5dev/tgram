@@ -14,10 +14,10 @@ Conversational flows are the structure and design of how the conversation betwee
 
 ## Creating conversation
 
-**tgram** has an integrated [cli tool](https://github.com/al3x5dev/tgram/blob/main/docs/cli.md) for managing your bots. Through it, we can create conversation. Just run the following command in your console:
+**TGram** has an integrated [cli tool](cli.md) for managing your bots. Through it, we can create conversation. Just run the following command in your console:
 
 ```bash
-php vendor/bin/bot telegram:conversation
+php vendor/bin/tgram conversation
 ```
 
 This will create your new conversation inside the `bot/Conversations` folder in the root directory of your project.
@@ -25,12 +25,12 @@ This will create your new conversation inside the `bot/Conversations` folder in 
 
 ### Basic example
 
-Below is a basic example that shows how a conversational flow is implemented in tgram.
+Below is a basic example that shows how a conversational flow is implemented in TGram.
 
 Every conversation must extend `Mk4U\TGram\Core\Actions\Conversations` and define a `start()` method.
 
 ```php
-namespace MyBot\Conversations;
+namespace Bot\Conversations;
 
 use Mk4U\TGram\Core\Actions\Conversations;
 
@@ -50,7 +50,7 @@ class Foo extends Conversations
 2. The bot sends a message using `ask()`
 3. The current step is saved in cache (chat_id:user_id)
 4. On the next user message:
-    - tgram detects an active conversation
+    - TGram detects an active conversation
     - Loads the conversation class
     - Executes the stored step method
 5. The flow continues until `stopConversation()` is called or the user cancels it
@@ -103,7 +103,7 @@ class Hello extends Conversations
 
     public function getName(): void
     {
-        $name = $this->update->getMessage()->getText();
+        $name = $this->update->message->text;
 
         $this->ask(
             "Hello $name, how old are you?",
@@ -113,7 +113,7 @@ class Hello extends Conversations
 
     public function getAge(): void
     {
-        $age = $this->update->getMessage()->getText();
+        $age = $this->update->message->text;
 
         $this->reply("Perfect, you are $age years old");
         $this->stopConversation();
@@ -131,4 +131,4 @@ $cv = new Hello($this->update);
 $cv->start();
 ```
 
-Once started, tgram automatically handles routing future messages to the correct step.
+Once started, TGram automatically handles routing future messages to the correct step.

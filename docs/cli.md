@@ -1,16 +1,33 @@
 # Command line interface
 
-**tgram** provides a command line interface that makes it easy to create and manage Telegram bots. With this tool, you can generate configuration files, create custom commands, handle callbacks and much more, all from the comfort of your terminal.
+**TGram** provides a command line interface that makes it easy to create and manage Telegram bots. With this tool, you can generate configuration files, create custom commands, handle callbacks and much more, all from the comfort of your terminal.
 
 
 ## Prerequisites
 
-Before using the command line, make sure you have installed **tgram**. For more details on installation and configuration, see the [Installation and Configuration](install.md) section.
+Before using the command line, make sure you have installed **TGram**. For more details on installation and configuration, see the [Installation and Configuration](install.md) section.
+
+The CLI is available as `php vendor/bin/tgram` after the package is installed.
 
 
 ## Available Commands
 
-The following describes the commands available in the **tgram** command line:
+The following describes the commands available in the **TGram** command line:
+
+| Command | Description |
+|---------|-------------|
+| [`install`](#1-install) | Generate `config.php` and the project structure |
+| [`register`](#2-register) | Register commands and callbacks |
+| [`hook:about`](#31-hookabout) | Get information about the bot |
+| [`hook:info`](#32-hookinfo) | Get information about the bot webhook |
+| [`hook:set`](#33-hookset) | Set the webhook for the bot |
+| [`hook:delete`](#34-hookdelete) | Delete the webhook for the bot |
+| [`command`](#4-command) | Create a new Telegram command |
+| [`callback`](#5-callback) | Create a new Telegram callback |
+| [`conversation`](#6-conversation) | Create a new conversational flow |
+| [`handler`](#7-handler) | Create a new Telegram handler |
+| [`middleware`](#8-middleware) | Create a new middleware |
+| [`poll`](#9-poll) | Run the bot with long polling instead of a webhook |
 
 
 ### 1. `install`
@@ -18,7 +35,7 @@ The following describes the commands available in the **tgram** command line:
 **Description**: Automatically generates the configuration file `config.php` and all other necessary files and directories.
 
 ```bash
-php vendor/bin/bot install
+php vendor/bin/tgram install
 ```
 
 Run this command to create the configuration file without having to do it manually. Follow the instructions in the console to complete the configuration.
@@ -33,7 +50,7 @@ The installation process will prompt you for:
 4. **Debug Mode** - Whether to enable development mode
 
 > [!NOTE]
-> In case you have a clean installation of **tgram** this command is automatically triggered by entering `php vendor/bin/bot` in the console.
+> If `config.php` does not exist, running any of the `hook:*` commands (`hook:set`, `hook:info`, `hook:about`, `hook:delete`) automatically triggers the `install` command first.
 
 
 ### 2. `register`
@@ -41,7 +58,7 @@ The installation process will prompt you for:
 **Description**: Register all the commands and callbacks created to be available in your bot.
 
 ```bash
-php vendor/bin/bot register
+php vendor/bin/tgram register
 ```
 
 > [!NOTE]
@@ -59,7 +76,7 @@ php vendor/bin/bot register
 **Description**: Gets information about the Telegram bot.
 
 ```bash
-php vendor/bin/bot hook:about
+php vendor/bin/tgram hook:about
 ```
 
 
@@ -68,7 +85,7 @@ php vendor/bin/bot hook:about
 **Description**: Gets information about the Telegram bot webhook.
 
 ```bash
-php vendor/bin/bot hook:info
+php vendor/bin/tgram hook:info
 ```
 
 
@@ -77,20 +94,20 @@ php vendor/bin/bot hook:info
 **Description**: Sets the webhook for the Telegram bot.
 
 ```bash
-php vendor/bin/bot hook:set https://your-domain.com/webhook
+php vendor/bin/tgram hook:set https://your-domain.com/webhook
 ```
 
 Or without arguments to be prompted:
 
 ```bash
-php vendor/bin/bot hook:set
+php vendor/bin/tgram hook:set
 ```
 
 > [!NOTE]
 > The URL of your webhook must be accessible from the Internet and use `HTTPS`.
 
 > [!IMPORTANT]
-> When setting the webhook, tgram automatically includes your `secret` token (if configured in `config.php`) in the `secret_token` parameter. Telegram will then send this token with every request in the `X-Telegram-Bot-Api-Secret-Token` header, and tgram will validate it automatically.
+> When setting the webhook, TGram automatically includes your `secret` token (if configured in `config.php`) in the `secret_token` parameter. Telegram will then send this token with every request in the `X-Telegram-Bot-Api-Secret-Token` header, and TGram will validate it automatically.
 
 
 #### 3.4. `hook:delete`
@@ -98,90 +115,104 @@ php vendor/bin/bot hook:set
 **Description**: Deletes the webhook for the Telegram bot.
 
 ```bash
-php vendor/bin/bot hook:delete
+php vendor/bin/tgram hook:delete
 ```
 
 
-### 4. `telegram`
+### 4. `command`
 
-**Description**: Commands related to creating interactions in Telegram.
-
-
-#### 4.1. `telegram:callback`
-
-**Description**: Creates a new callback to handle user interactions with buttons in messages.
+**Description**: Creates a new custom command for your bot.
 
 ```bash
-php vendor/bin/bot telegram:callback
-```
-
-> [!NOTE]
-> Run this command when you need to handle user interactions via buttons in your messages.
-
-> [!TIP]
-> The **tgram CLI** has the flexibility to organize your callback in subfolders within the `bot/Callbacks` directory.
-> Just specify in the callback name when prompted the name of the directory or directories to create as follows `Users/Admin`, this will create the following structure `bot/Callbacks/Users/Admin.php`.
-
-
-#### 4.2. `telegram:command`
-
-**Description**: Create a new custom command for your bot.
-
-```bash
-php vendor/bin/bot telegram:command
+php vendor/bin/tgram command
 ```
 
 > [!NOTE]
 > Use this command to add a new command that users can invoke in Telegram.
 
 > [!TIP]
-> The **tgram CLI** has the flexibility to organize your commands in subfolders within the `bot/Commands` directory.
+> The **TGram CLI** has the flexibility to organize your commands in subfolders within the `bot/Commands` directory.
 > Just specify in the command name when prompted the name of the directory or directories to create as follows `Users/Admin/Start`, this will create the following structure `bot/Commands/Users/Admin/Start.php`.
 
 
-#### 4.3. `telegram:conversation`
+### 5. `callback`
+
+**Description**: Creates a new callback to handle user interactions with buttons in messages.
+
+```bash
+php vendor/bin/tgram callback
+```
+
+> [!NOTE]
+> Run this command when you need to handle user interactions via buttons in your messages.
+
+> [!TIP]
+> The **TGram CLI** has the flexibility to organize your callback in subfolders within the `bot/Callbacks` directory.
+> Just specify in the callback name when prompted the name of the directory or directories to create as follows `Users/Admin`, this will create the following structure `bot/Callbacks/Users/Admin.php`.
+
+
+### 6. `conversation`
 
 **Description**: Create a new conversational stream for your bot.
 
 ```bash
-php vendor/bin/bot telegram:conversation
+php vendor/bin/tgram conversation
 ```
 
 > [!NOTE]
 > Use this command when you want to implement a more complex conversation flow in your bot, allowing users to interact more dynamically.
 
 > [!TIP]
-> The **tgram CLI** has the flexibility to organize your conversational flows in subfolders within the `bot/Conversations` directory.
+> The **TGram CLI** has the flexibility to organize your conversational flows in subfolders within the `bot/Conversations` directory.
 > Just specify in the conversation name when prompted the name of the directory or directories to create as follows `Users/Admin/Create`, this will create the following structure `bot/Conversations/Users/Admin/Create.php`.
 
 
-#### 4.4. `telegram:handler`
+### 7. `handler`
 
 **Description**: Create a new custom handler for your bot.
 
 ```bash
-php vendor/bin/bot telegram:handler
+php vendor/bin/tgram handler
 ```
 
 > [!NOTE]
 > Use this command when you want to implement custom handlers for different types of Telegram bot updates.
 
 > [!TIP]
-> The **tgram CLI** allows you to organize handlers into subfolders within the `bot/Handlers` directory.
+> The **TGram CLI** allows you to organize handlers into subfolders within the `bot/Handlers` directory.
 > Simply specify the name of the directory or directories to be created in the handler name when prompted, such as `Admin/ChannelPost`. This will create the following structure: `bot/Handlers/Admin/ChannelPost.php`.
 
 
-#### 4.5. `telegram:middleware`
+### 8. `middleware`
 
 **Description**: Create a new middleware for your bot.
 
 ```bash
-php vendor/bin/bot telegram:middleware
+php vendor/bin/tgram middleware
 ```
 
 > [!NOTE]
 > Use this command when you want to add middleware for processing updates before they reach handlers.
 
 > [!TIP]
-> The **tgram CLI** allows you to organize middleware into subfolders within the `bot/Middlewares` directory.
+> The **TGram CLI** allows you to organize middleware into subfolders within the `bot/Middlewares` directory.
 > Simply specify the name of the directory or directories to be created in the middleware name when prompted, such as `User/Auth/AccessMiddleware`. This will create: `bot/Middlewares/User/Auth/AccessMiddleware.php`.
+
+
+### 9. `poll`
+
+**Description**: Starts the bot using long polling instead of a webhook.
+
+```bash
+php vendor/bin/tgram poll
+```
+
+You can optionally pass the polling interval in seconds:
+
+```bash
+php vendor/bin/tgram poll 5
+```
+
+> [!NOTE]
+> The interval defaults to `3` seconds and must be a non-negative integer. The process runs continuously; press `Ctrl+C` to stop it. If a request to Telegram fails, the bot logs a warning and retries without stopping.
+> Remember to `hook:delete` if you had a webhook configured, otherwise Telegram will keep sending updates to it.

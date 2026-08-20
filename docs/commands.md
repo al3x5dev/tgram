@@ -13,7 +13,7 @@ Commands are instructions that users can send to the bot to perform specific act
 
 
 ### Custom Commands
-In **tgram**, we also consider any pre-specified text or words as commands. For example:
+In **TGram**, we also consider any pre-specified text or words as commands. For example:
 - `📥 download`: Download file.
 - `🎮 game`: Start a game.
 
@@ -22,10 +22,10 @@ This variant is most commonly used for custom keyboard actions, allowing a more 
 
 ## Create commands
 
-tgram has an integrated [cli tool](https://github.com/al3x5dev/tgram/blob/main/docs/cli.md) for managing your bots. Through it, we can create custom commands. Just run the following command in your console:
+TGram has an integrated [cli tool](cli.md) for managing your bots. Through it, we can create custom commands. Just run the following command in your console:
 
 ```bash
-php vendor/bin/bot telegram:command
+php vendor/bin/tgram command
 ```
 
 This will generate a new command class inside the `bot/Commands` folder in the project root.
@@ -34,7 +34,7 @@ This will generate a new command class inside the `bot/Commands` folder in the p
 ### Basic example
 
 ```php
-namespace MyBot\Commands;
+namespace Bot\Commands;
 
 use Mk4U\TGram\Core\Actions\Commands;
 use Mk4U\TGram\Attributes\Command;
@@ -56,7 +56,7 @@ class Start extends Commands
 
 ### Working with arguments
 
-Commands in tgram now have built-in argument handling:
+Commands in TGram now have built-in argument handling:
 
 ```php
 $this->setArgs(['arg1', 'arg2']); // Set arguments
@@ -81,9 +81,9 @@ $three = $this->args(3);           // Get first 3 arguments, filling missing wit
 
 ### Register
 
-[To register your commands](https://github.com/al3x5dev/tgram/blob/main/docs/cli.md#2-register), just type in console:
+[To register your commands](cli.md#2-register), just type in console:
 
 ```bash
-php vendor/bin/bot register
+php vendor/bin/tgram register
 ```
 This will ensure that all custom commands are available for use in the bot.

@@ -9,7 +9,7 @@
 **Telegram Bot API SDK for PHP.**
 
 A lightweight PHP SDK for building Telegram bots with a simple, expressive API
-and minimal dependencies. Covers the Telegram Bot API (v10.0) with first-class
+and minimal dependencies. Covers the Telegram Bot API (v10.2) with first-class
 entities and developer-friendly tooling:
 
 - **Entity system** — every API response is mapped to an object with dynamic properties: `$message->from->first_name`.
@@ -17,7 +17,7 @@ entities and developer-friendly tooling:
   `#[Callback('action')]` with argument parsing.
 - **All update types** — commands, callbacks, handlers, conversations and a
   middleware pipeline.
-- **Rich messages** (Bot API 10.0 format) — `Text`, `RichMessage` and `Block`
+- **Rich messages** (Bot API 10.2 format) — `Text`, `RichMessage` and `Block`
   builders for beautiful messages.
 - **Keyboard factory** — fluent inline & reply keyboards
   (`Keyboard::inline()`, `Keyboard::reply()`).
@@ -89,8 +89,8 @@ class Start extends Commands
 4. Register your commands and set the webhook:
 
 ```bash
-php vendor/bin/bot register
-php vendor/bin/bot hook:set https://your-domain.com/index.php
+php vendor/bin/tgram register
+php vendor/bin/tgram hook:set https://your-domain.com/index.php
 ```
 
 ## Documentation

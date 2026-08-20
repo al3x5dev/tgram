@@ -1,6 +1,6 @@
 # Events Logger
 
-The `Events` class provides robust logging capabilities for your tgram application, utilizing the Monolog library under the hood. This documentation covers its usage and configuration.
+The `Events` class provides robust logging capabilities for your TGram application, utilizing the Monolog library under the hood. This documentation covers its usage and configuration.
 
 ## Core Functionality
 
@@ -41,7 +41,7 @@ The class supports these severity levels (in descending order of importance):
 ### Development Mode Formatting
 When development mode is enabled in your configuration:
 ```php
-Config::set('dev', true);
+Config::set('debug', true);
 ```
 Logs with channel names starting with "dev" will be formatted as JSON for easier parsing.
 

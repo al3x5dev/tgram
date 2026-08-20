@@ -1,17 +1,22 @@
 # Keyboards
 
-One of the coolest things about Telegram Bot API are the new custom keyboards. Whenever your bot sends a message, it can pass along a special keyboard with predefined reply options. Telegram apps that receive the message will display your keyboard to the user. Tapping any of the buttons will immediately send the respective command. This way you can drastically simplify user interaction with your bot.
+One of the coolest things about Telegram Bot API are the custom keyboards. Whenever your bot sends a message, it can pass along a special keyboard with predefined reply options. Telegram apps that receive the message will display your keyboard to the user. Tapping any of the buttons will immediately send the respective command. This way you can drastically simplify user interaction with your bot.
 
-Telegram currently support text and emoji for your buttons. Here are some custom keyboard examples:
+Telegram currently supports text and emoji for your buttons. Here are some custom keyboard examples:
 - Keyboard for a poll bot.
 - Keyboard for a calculator bot.
 - Keyboard for a trivia bot.
 
+All keyboard builders live in the `Mk4U\TGram\Core\Factories` namespace:
+
+```php
+use Mk4U\TGram\Core\Factories\Keyboard;
+```
 
 
-## `KeyboarFactory::inline(): InlineKeyboard`
+## `Keyboard::inline(): Inline`
 
-Creates an inline keyboard that appears next to the message.
+Creates an inline keyboard builder that appears next to the message.
 Each button can have actions such as opening a URL, sending callback data, etc.
 
 ```php
@@ -19,36 +24,22 @@ use Mk4U\TGram\Core\Factories\Keyboard;
 use Mk4U\TGram\Core\Factories\Keyboard\InlineButton;
 
 $keyboard = Keyboard::inline()
-    ->row([
-        InlineButton::make('🎮 Games')->callback('game')
-    ])
-    ->row([
-        InlineButton::make('💎 Membership')->callback('gift')
-    ])
-    ->row([
-        InlineButton::make('👥 Community')->callback('groups')
-    ])
+    ->row(InlineButton::make('🎮 Games')->callback('game'))
+    ->row(InlineButton::make('💎 Membership')->callback('gift'))
+    ->row(InlineButton::make('👥 Community')->callback('groups'))
     ->build();
 ```
 
-> [!NOTE]
-> The keyboard classes have been moved from `Keyboards\Builder` to `Factories` namespace.
-> Use `Keyboard::inline()` or `Keyboard::reply()` instead of `KeyboardFactory`.
+### row(ButtonInterface ...$buttons): self
 
+Adds a row of buttons to the inline keyboard. Each button is an instance of `InlineButton`. You can pass one or more buttons per row:
 
-### row(array $buttons): self
-
-Adds a row of buttons to the inline keyboard.
-
-**Parameters:**
-- `$buttons` (array): An array of buttons. Each button can be an instance of `InlineButton` or an associative array.
-
-### addRow(array $buttons): self
-
-Alias for the `row` method.
-
-**Parameters:**
-- `$buttons` (array): An array of buttons.
+```php
+->row(
+    InlineButton::make('Yes')->callback('yes'),
+    InlineButton::make('No')->callback('no')
+)
+```
 
 ### build(): InlineKeyboardMarkup
 
@@ -62,7 +53,7 @@ Static method that creates a new inline button with the provided text.
 - `$text` (string): The button's text.
 
 > [!NOTE]
-> Also puedes usar `new InlineButton('text')` directamente.
+> You can also use `new InlineButton('text')` directly.
 
 #### InlineButton::url(string $url): self
 
@@ -153,78 +144,63 @@ Sets the button style.
 Builds the inline button and returns an instance of `InlineKeyboardButton`.
 
 
-## `KeyboarFactory::reply(): ReplyKeyboard`
+## `Keyboard::reply(): Reply`
 
-This static method creates a new instance of `ReplyKeyboard`, which is used to build responsive keyboards in Telegram.
-
+This static method creates a new `Reply` builder, which is used to build responsive keyboards in Telegram.
 
 ```php
 use Mk4U\TGram\Core\Factories\Keyboard;
 use Mk4U\TGram\Core\Factories\Keyboard\ReplyButton;
 
 $keyboard = Keyboard::reply()
-    ->row([
-        ReplyButton::make('📞 Contact')->requestContact()
-    ])
-    ->row([
-        ReplyButton::make('📍 Location')->requestLocation()
-    ])
+    ->row(ReplyButton::make('📞 Contact')->requestContact(), ReplyButton::make('📍 Location')->requestLocation())
     ->resize()
     ->oneTime()
     ->build();
 ```
+
 ### Methods
 
-#### row(array $buttons): self
+#### row(ButtonInterface ...$buttons): self
 
-Adds a row of buttons to the keyboard.
+Adds a row of buttons to the keyboard. Each button is an instance of `ReplyButton`.
 
-**Parameters:**
-- `$buttons` (array): An array of buttons. Each button can be an instance of `ReplyButton` or a string.
-
-### addRow(array $buttons): self
-
-Alias for the `row` method.
-
-**Parameters:**
-- `$buttons` (array): An array of buttons.
-
-### persistent(bool $value = true): self
+#### persistent(bool $value = true): self
 
 Sets whether the keyboard should be persistent.
 
 **Parameters:**
 - `$value` (bool): If `true`, the keyboard will be persistent. The default is `true`.
 
-### resize(bool $value = true): self
+#### resize(bool $value = true): self
 
 Sets whether the keyboard should be resized.
 
 **Parameters:**
 - `$value` (bool): If `true`, the keyboard will be resized. Default is `true`.
 
-### oneTime(bool $value = true): self
+#### oneTime(bool $value = true): self
 
 Sets whether the keyboard should be hidden after use.
 
 **Parameters:**
 - `$value` (bool): If `true`, the keyboard will be hidden after use. Default is `true`.
 
-### placeholder(string $text): self
+#### placeholder(string $text): self
 
 Sets the placeholder text for the input field.
 
 **Parameters:**
 - `$text` (string): The placeholder text.
 
-### selective(bool $value = true): self
+#### selective(bool $value = true): self
 
 Sets whether the keyboard should be selective.
 
 **Parameters:**
 - `$value` (bool): If `true`, the keyboard will be selective. Default is `true`.
 
-### build(): ReplyKeyboardMarkup
+#### build(): ReplyKeyboardMarkup
 
 Builds the keyboard and returns a ReplyKeyboardMarkup instance.
 
@@ -236,7 +212,7 @@ Static method that creates a new reply button with the provided text.
 - `$text` (string): The button's text.
 
 > [!NOTE]
-> También puedes usar `new ReplyButton('text')` directamente.
+> You can also use `new ReplyButton('text')` directly.
 
 #### ReplyButton::requestUsers(KeyboardButtonRequestUsers $request): self
 
@@ -281,7 +257,7 @@ Sets the web application information for the button.
 - `$webAppInfo` (WebAppInfo): A `WebAppInfo` instance that defines the web application information.
 
 
-## `KeyboarFactory::remove(): ReplyKeyboardRemove`
+## `Keyboard::remove(): ReplyKeyboardRemove`
 
 This static method creates a new instance of `ReplyKeyboardRemove`, which is used to remove the current reply keyboard in Telegram. The method returns a `ReplyKeyboardRemove` instance with the `remove_keyboard` option set to `true`.
 
@@ -293,11 +269,11 @@ $keyboard = Keyboard::remove();
 ## `Keyboard::forceReply(bool $selective = false, string $placeholder = ''): ForceReply`
 
 This static method creates a new instance of `ForceReply`, which is used to force a response from the user in Telegram. It accepts two optional parameters:
-- `$selective`: A Boolean value indicating whether the forced response should be selective. Defaults to `false`.
+- `$selective`: A boolean value indicating whether the forced response should be selective. Defaults to `false`.
 - `$placeholder`: A text string to use as a placeholder in the input field. Defaults to an empty string.
 
 ```php
 use Mk4U\TGram\Core\Factories\Keyboard;
 
-$keyboard = Keyboard::forceReply(true, 'Hello tgram');
+$keyboard = Keyboard::forceReply(true, 'Hello TGram');
 ```

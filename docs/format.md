@@ -265,7 +265,7 @@ Builds the message entity ready for `sendRichMessage`.
 
 ## Rich\Block Factory
 
-Provides static methods to create all 20 rich block types for use with `RichMessage::block()`.
+Provides static methods to create all rich block types for use with `RichMessage::block()`.
 
 ```php
 use Mk4U\TGram\Core\Factories\Rich\Block;

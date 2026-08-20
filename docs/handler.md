@@ -2,13 +2,13 @@
 
 ## What are Telegram handlers?
 
-Handlers process specific types of Telegram updates beyond standard messages and commands. They are designed to manage specialized events that occur in Telegram interactions. While `message` and `callback_query` updates are handled automatically by tgram's command and callback systems, other update types require dedicated handlers.
+Handlers process specific types of Telegram updates beyond standard messages and commands. They are designed to manage specialized events that occur in Telegram interactions. While `message` and `callback_query` updates are handled automatically by TGram's command and callback systems, other update types require dedicated handlers.
 
 ## Creating handlers
 
 Generate handler scaffolding with:
 ```bash
-php vendor/bin/bot telegram:handler
+php vendor/bin/tgram handler
 ```
 
 This creates a new handler in `bot/Handlers/`.
@@ -16,7 +16,7 @@ This creates a new handler in `bot/Handlers/`.
 ## Basic handler structure
 
 ```php
-namespace MyBot\Handlers;
+namespace Bot\Handlers;
 
 use Mk4U\TGram\Core\Actions\Handlers;
 
@@ -24,8 +24,10 @@ class ChannelPost extends Handlers
 {
     public function execute(): void
     {
-        $post = $this->update->getChannelPost();
-        $this->reply("New channel post: " . $post->getText());
+        $post  = $this->update->channel_post;
+        $chatId = $post->chat->id;
+
+        $this->sendMessage($chatId, 'New channel post: ' . $post->text);
     }
 }
 ```
@@ -43,18 +45,14 @@ use Mk4U\TGram\Core\Entities\InlineQueryResultArticle;
 
 class InlineQuery extends Handlers
 {
-    /**
-     * Access Key de Unsplash - REEMPLAZA CON LA TUYA
-     * Obtén una en: https://unsplash.com/developers
-     */
     private const UNSPLASH_ACCESS_KEY = 'ACCESS_KEY';
 
     public function execute(): void
     {
-        $query = $this->update->getInlineQuery();
-        $queryId = $query->getId();
-        $queryText = $query->getQuery() ?? '';
-        $offset = (int) ($query->getOffset() ?? 0);
+        $query = $this->update->inline_query;
+        $queryId = $query->id;
+        $queryText = $query->query ?? '';
+        $offset = (int) ($query->offset ?? 0);
 
         $results = $this->searchUnsplash($queryText, $offset);
         $nextOffset = count($results) >= 10 ? (string) ($offset + 10) : '';
@@ -78,7 +76,7 @@ class InlineQuery extends Handlers
 
 ## Handler execution flow
 
-tgram routes updates using this resolution logic:
+TGram routes updates using this resolution logic:
 ```php
 private function resolveHandler(string $type): void
 {
@@ -86,12 +84,18 @@ private function resolveHandler(string $type): void
     $handler = preg_replace_callback('/_([a-z])/', function ($match) {
         return strtoupper($match[1]);
     }, $type);
-    
+
     // Build handler class
-    $class = botNamespace() . '\\Handlers\\' . ucfirst($handler);
+
+    $class = 'Bot\\Handlers\\' . ucfirst($handler);
+    classValidator($class, Handlers::class, 'Handler');
+
     (new $class($this->update))->execute();
 }
 ```
+
+That is, the update type `channel_post` maps to the class `Bot\Handlers\ChannelPost`,
+`my_chat_member` to `Bot\Handlers\MyChatMember`, and so on.
 
 ## Supported Handler Types
 
@@ -113,6 +117,11 @@ private function resolveHandler(string $type): void
 > [!NOTE]
 > Regular `message` updates are handled by the Command system, and `callback_query` updates are handled by the Callback system.
 
+> [!TIP]
+> Any update type listed in the [Update](https://core.telegram.org/bots/api#update) object is supported.
+> Add a class in `bot/Handlers/` whose name matches the PascalCase version of the update field
+> (e.g. `business_message` → `BusinessMessage`) and access its data through `$this->update-><field>`.
+
 ## Key Features
 
 1. **Automatic Registration**:
@@ -121,16 +130,20 @@ private function resolveHandler(string $type): void
 
 2. **Update Access**:
    ```php
-   $this->update->getChannelPost();    // Channel posts
-   $this->update->getMyChatMember();   // Membership changes
-   $this->update->getPoll();           // Active polls
+   $this->update->channel_post;      // Channel posts
+   $this->update->my_chat_member;    // Membership changes
+   $this->update->poll;              // Active polls
    ```
 
 3. **Response Methods**:
    ```php
    $this->reply("Basic response");
-   $this->replyWithDocument('file.pdf');
-   $this->answerShippingQuery(true);  // Accept shipping query
+
+   $shippingQuery = $this->update->shipping_query;
+   $this->answerShippingQuery($shippingQuery->id, true);
+
+   $post = $this->update->channel_post;
+   $this->sendDocument($post->chat->id, 'file.pdf');
    ```
 
 ## Best Practices
@@ -148,5 +161,3 @@ private function resolveHandler(string $type): void
 - Tracking poll responses
 - Managing group join requests
 - Handling inline search results
-
-
