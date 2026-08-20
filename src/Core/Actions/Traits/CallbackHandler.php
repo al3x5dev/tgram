@@ -22,7 +22,7 @@ trait CallbackHandler
 
     public function handleCallback(): void
     {
-        $action = $this->getCallbackQuery()->getData();
+        $action = $this->getCallbackQuery()->data;
         $parts = [];
 
         if (!$this->hasCallback($action)) {
@@ -58,6 +58,6 @@ trait CallbackHandler
 
     public function getCallbackQuery(): CallbackQuery
     {
-        return $this->update->getCallbackQuery();
+        return $this->update->callback_query;
     }
 }

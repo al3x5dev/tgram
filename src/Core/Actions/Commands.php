@@ -14,7 +14,7 @@ abstract class Commands
 
     public function __construct(protected Update $update)
     {
-        $this->message = $update->getMessage();
+        $this->message = $update->message;
     }
 
     protected function getCommandsList(): array

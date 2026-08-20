@@ -20,8 +20,8 @@ abstract class Callbacks
 
     public function __construct(protected Update $update)
     {
-        $this->callback = $update->getCallbackQuery();
-        $this->message = $this->callback->getMessage();
+        $this->callback = $update->callback_query;
+        $this->message = $this->callback->message;
     }
 
     abstract public function execute(): void;

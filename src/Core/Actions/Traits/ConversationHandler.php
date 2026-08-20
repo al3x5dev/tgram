@@ -19,10 +19,10 @@ trait ConversationHandler
         }
 
         $entity = match ($type) {
-            'callback_query' => $this->update->__get($type)->getMessage(),
+            'callback_query' => $this->update->__get($type)->message,
             'message' => $this->update->__get($type),
         };
-        return "{$entity->getChat()->getId()}:{$entity->getFrom()->getId()}";
+        return "{$entity->chat->id}:{$entity->from->id}";
     }
 
     private function isTalking(): bool
@@ -49,7 +49,7 @@ trait ConversationHandler
 
     private function getConversation(): void
     {
-        $text = $this->update->getMessage()->getText();
+        $text = $this->update->message->text;
 
         if (is_null($this->getData())) return;
 
@@ -59,8 +59,8 @@ trait ConversationHandler
         ) {
             $this->stopConversation();
 
-            if ($this->update->getMessage()->isCommand()) {
-                $this->executeCommand($this->update->getMessage()->getText());
+            if ($this->update->message->isCommand()) {
+                $this->executeCommand($this->update->message->text);
             }
 
             return;

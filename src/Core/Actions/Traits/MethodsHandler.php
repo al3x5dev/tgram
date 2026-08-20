@@ -20,13 +20,13 @@ trait MethodsHandler
         }
 
         $chat = match (true) {
-            $active instanceof Message => $active->getChat(),
-            $active instanceof CallbackQuery => $active->getMessage()->resolve()->getChat(),
-            default => $active->getChat()
+            $active instanceof Message => $active->chat,
+            $active instanceof CallbackQuery => $active->message->resolve()->chat,
+            default => $active->chat
         };
 
         return $this->sender('sendMessage', array_merge([
-            'chat_id' => $chat->getId(),
+            'chat_id' => $chat->id,
             'text' => $message,
         ], $params));
     }
@@ -34,7 +34,7 @@ trait MethodsHandler
     public function isAdmin(): bool
     {
         return in_array(
-            $this->getActiveEntity()->getFrom()->getId() ?? null,
+            $this->getActiveEntity()->from->id ?? null,
             Config::get('admins'),
             true
         );

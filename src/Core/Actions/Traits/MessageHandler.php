@@ -47,7 +47,7 @@ trait MessageHandler
 
     private function handleCommand(): void
     {
-        $parts = explode(' ', $this->getMessage()->getText());
+        $parts = explode(' ', $this->getMessage()->text);
 
         $command = preg_replace(
             '/@[a-zA-Z0-9_-]+/',
@@ -65,7 +65,7 @@ trait MessageHandler
     {
         $this->handle(
             $this->getCommand(
-                trim($this->getMessage()->getText(), '\\') ?? '',
+                trim($this->getMessage()->text, '\\') ?? '',
                 '/generic'
             )
         );
@@ -82,6 +82,6 @@ trait MessageHandler
 
     public function getMessage(): Message
     {
-        return $this->update->getMessage();
+        return $this->update->message;
     }
 }
