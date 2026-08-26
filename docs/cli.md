@@ -201,18 +201,42 @@ php vendor/bin/tgram middleware
 
 ### 9. `poll`
 
-**Description**: Starts the bot using long polling instead of a webhook.
+**Description**: Runs the bot by continuously polling instead of using a webhook. The process
+remains active, fetching updates from Telegram and sending them through the same
+channel of commands/callbacks/handlers/conversations/middleware used by the webhook mode.
 
-```bash
+``bash
 php vendor/bin/tgram poll
 ```
 
-You can optionally pass the polling interval in seconds:
+Optionally, you can specify the polling interval in seconds:
 
 ```bash
 php vendor/bin/tgram poll 5
 ```
 
-> [!NOTE]
-> The interval defaults to `3` seconds and must be a non-negative integer. The process runs continuously; press `Ctrl+C` to stop it. If a request to Telegram fails, the bot logs a warning and retries without stopping.
-> Remember to `hook:delete` if you had a webhook configured, otherwise Telegram will keep sending updates to it.
+| Argument | Required | Default | Description |
+
+|-----------|----------|---------|-------------|
+
+| `interval`| No | `3` | Seconds between polling requests. Must be a non-negative integer. Keep it at or below `30`. |
+
+[!IMPORTANT]
+> Upon startup, `poll` automatically calls `hook:delete`, so there's no need to manually delete
+> the webhook. This avoids the `409 Conflict` error you would get from
+> Telegram when calling `getUpdates` while a webhook is still active.
+
+**Behavior**
+
+- **Long-running process.** Runs in an infinite loop fetching updates. Press `Ctrl+C` to stop it.
+
+- **Rate limiting (429).** If Telegram responds with `429 Too Many Requests`,
+the bot reads the `retry_after` value from the response and waits exactly that many seconds before trying again (instead of overloading the API). Any other API error logs a warning and retries the operation after the configured interval.
+
+- **Update confirmation.** Each update is confirmed (its offset advances) only after it has been successfully processed. If a handler throws an exception, the error is logged, the update is not committed, and it will be retried in the next cycle.
+
+- **Interval 0.** With an interval of 0, Telegram returns control almost immediately; to prevent an infinite loop, the bot waits 1 second when there are no pending updates.
+
+> [!TIP]
+> For production, run `poll` under a process supervisor (systemd, supervisord)
+> so that it automatically restarts if it terminates.
