@@ -235,6 +235,12 @@ final class InstallCommand extends Command
         writeContentToFile($composerJsonPath, json_encode($composerJson, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . PHP_EOL);
 
         // Ejecutar el comando para actualizar el autoload
+        if (!function_exists('shell_exec')) {
+            throw new \RuntimeException(
+                'shell_exec() is disabled in this PHP installation. '
+                    . 'Run "composer dump-autoload" manually.'
+            );
+        }
         shell_exec('composer dump-autoload');
 
         $loader = require 'vendor/autoload.php';   // devuelve la MISMA instancia ya cargada
