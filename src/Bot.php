@@ -85,9 +85,13 @@ class Bot
     /**
      * Obtiene el objeto Update de Telegram y procesa los mensajes
      */
-    public function run(): void
+    public function run(?Update $update = null): void
     {
-        $this->getUpdate();
+        if ($update === null) {
+            $this->getUpdate();       // modo webhook (actual)
+        } else {
+            $this->update = $update;  // modo polling
+        }
         $type = $this->update->type();
 
         if ($type === null) {
@@ -96,10 +100,10 @@ class Bot
 
         // Determinar si es un comando y extraer el nombre del comando
         $command = null;
-        if ($type === 'message' && $this->update->getMessage()->isCommand()) {
+        if ($type === 'message' && $this->update->message->isCommand()) {
             preg_match(
                 '/^\/([a-zA-Z0-9_]+)/',
-                $this->update->getMessage()->getText(),
+                $this->update->message->text,
                 $matches
             );
             //$command = substr($matches[1],0,1) ?? null;
@@ -126,7 +130,7 @@ class Bot
             return;
         }
 
-        if ($this->update->getMessage()->isCommand()) {
+        if ($this->update->message->isCommand()) {
             $this->handleCommand();
             return;
         }

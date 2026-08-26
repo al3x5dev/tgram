@@ -7,5 +7,5 @@ namespace Mk4U\TGram\Exceptions;
  */
 class BotException extends \ErrorException
 {
-    
+    public ?int $retryAfter = null;
 }

@@ -96,7 +96,13 @@ class ApiClient
                 ],
                 'error'
             );
-            throw new BotException("API request failed: " . $e->getMessage(), $e->getCode());
+            $exception = new BotException("API request failed: " . $e->getMessage(), $e->getCode());
+
+            if ($e instanceof BotException && $e->retryAfter !== null) {
+                $exception->retryAfter = $e->retryAfter;
+            }
+
+            throw $exception;
         }
     }
 
@@ -184,9 +190,15 @@ class ApiClient
 
         // Si no es 200, Telegram devuelve un JSON explicando el error (ej. 400 Bad Request)
         if ($statusCode !== 200) {
+            $ex = new BotException("Telegram API Error [$statusCode]: $body");
+
+            if ($statusCode === 429) {
+                $ex->retryAfter = json_decode($body, true)["parameters"]["retry_after"] ?? 0;
+            }
+
             // LOG CRÍTICO: Aquí es donde verás por qué Telegram rechaza la petición
             Events::logger('TelegramError', 'api_errors.log', "HTTP $statusCode: $body", ['method' => $this->method]);
-            throw new BotException("Telegram API Error [$statusCode]: $body");
+            throw $ex;
         }
 
         // Decodificar JSON
