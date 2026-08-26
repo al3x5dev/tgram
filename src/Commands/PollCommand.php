@@ -7,6 +7,7 @@ use Mk4U\TGram\Commands\Traits\Io;
 use Mk4U\TGram\Core\Entities\Update;
 use Mk4U\TGram\Exceptions\BotException;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\NullOutput;
@@ -43,7 +44,8 @@ final class PollCommand extends Command
         $this->prepare($input, $output);
 
         // Elimina el webhook
-        $this->getApplication()->find('hook:delete')->run($input, new NullOutput);
+        $delete = $this->getApplication()->find('hook:delete');
+        $delete->run(new ArrayInput(['command' => 'hook:delete']), new NullOutput());
 
 
         //Leer y validar el intervalo
