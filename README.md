@@ -86,12 +86,25 @@ class Start extends Commands
 }
 ```
 
-4. Register your commands and set the webhook:
+4. Register your commands:
 
 ```bash
 php vendor/bin/tgram register
-php vendor/bin/tgram hook:set https://your-domain.com/index.php
 ```
+
+5. Choose how your bot receives updates:
+
+   - **Webhook** (recommended for production — requires a public HTTPS URL):
+
+     ```bash
+     php vendor/bin/tgram hook:set https://your-domain.com/index.php
+     ```
+
+   - **Long polling** (no public URL needed — runs forever in the terminal):
+
+     ```bash
+     php vendor/bin/tgram poll
+     ```
 
 ## Documentation
 
