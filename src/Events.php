@@ -57,9 +57,11 @@ class Events
     {
         $levels = [
             'emergency',
+            'alert',
             'critical',
             'error',
             'warning',
+            'notice',
             'info',
             'debug'
         ];

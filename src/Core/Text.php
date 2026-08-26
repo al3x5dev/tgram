@@ -128,65 +128,60 @@ class Text
         return Config::get('parse_mode') == 'HTML';
     }
 
-    private static function richText(string|RichText $text): string|RichText
-    {
-        return $text instanceof RichText ? $text : $text;
-    }
-
     public static function richBold(string|RichText $text): RichTextBold
     {
-        return new RichTextBold(['type' => 'bold', 'text' => self::richText($text)]);
+        return new RichTextBold(['type' => 'bold', 'text' => $text]);
     }
 
     public static function richItalic(string|RichText $text): RichTextItalic
     {
-        return new RichTextItalic(['type' => 'italic', 'text' => self::richText($text)]);
+        return new RichTextItalic(['type' => 'italic', 'text' => $text]);
     }
 
     public static function richUnderline(string|RichText $text): RichTextUnderline
     {
-        return new RichTextUnderline(['type' => 'underline', 'text' => self::richText($text)]);
+        return new RichTextUnderline(['type' => 'underline', 'text' => $text]);
     }
 
     public static function richStrikethrough(string|RichText $text): RichTextStrikethrough
     {
-        return new RichTextStrikethrough(['type' => 'strikethrough', 'text' => self::richText($text)]);
+        return new RichTextStrikethrough(['type' => 'strikethrough', 'text' => $text]);
     }
 
     public static function richSpoiler(string|RichText $text): RichTextSpoiler
     {
-        return new RichTextSpoiler(['type' => 'spoiler', 'text' => self::richText($text)]);
+        return new RichTextSpoiler(['type' => 'spoiler', 'text' => $text]);
     }
 
     public static function richCode(string|RichText $text): RichTextCode
     {
-        return new RichTextCode(['type' => 'code', 'text' => self::richText($text)]);
+        return new RichTextCode(['type' => 'code', 'text' => $text]);
     }
 
     public static function richUrl(string|RichText $text, string $url): RichTextUrl
     {
-        return new RichTextUrl(['type' => 'url', 'text' => self::richText($text), 'url' => $url]);
+        return new RichTextUrl(['type' => 'url', 'text' => $text, 'url' => $url]);
     }
 
     public static function richEmail(string|RichText $text): RichTextEmailAddress
     {
-        return new RichTextEmailAddress(['type' => 'email_address', 'text' => self::richText($text)]);
+        return new RichTextEmailAddress(['type' => 'email_address', 'text' => $text]);
     }
 
     public static function richPhone(string|RichText $text): RichTextPhoneNumber
     {
-        return new RichTextPhoneNumber(['type' => 'phone_number', 'text' => self::richText($text)]);
+        return new RichTextPhoneNumber(['type' => 'phone_number', 'text' => $text]);
     }
 
     public static function richMention(string|RichText $text, string $username): RichTextMention
     {
-        return new RichTextMention(['type' => 'mention', 'text' => self::richText($text), 'username' => $username]);
+        return new RichTextMention(['type' => 'mention', 'text' => $text, 'username' => $username]);
     }
 
     public static function richTextMention(string|RichText $text, User|int $user): RichTextTextMention
     {
         $userData = $user instanceof User ? $user : new User(['id' => $user, 'is_bot' => false, 'first_name' => '']);
-        return new RichTextTextMention(['type' => 'text_mention', 'text' => self::richText($text), 'user' => $userData]);
+        return new RichTextTextMention(['type' => 'text_mention', 'text' => $text, 'user' => $userData]);
     }
 
     public static function richCustomEmoji(string $emoji, string $id): RichTextCustomEmoji
@@ -196,17 +191,17 @@ class Text
 
     public static function richSubscript(string|RichText $text): RichTextSubscript
     {
-        return new RichTextSubscript(['type' => 'subscript', 'text' => self::richText($text)]);
+        return new RichTextSubscript(['type' => 'subscript', 'text' => $text]);
     }
 
     public static function richSuperscript(string|RichText $text): RichTextSuperscript
     {
-        return new RichTextSuperscript(['type' => 'superscript', 'text' => self::richText($text)]);
+        return new RichTextSuperscript(['type' => 'superscript', 'text' => $text]);
     }
 
     public static function richMarked(string|RichText $text): RichTextMarked
     {
-        return new RichTextMarked(['type' => 'marked', 'text' => self::richText($text)]);
+        return new RichTextMarked(['type' => 'marked', 'text' => $text]);
     }
 
     public static function richDatetime(int $unix): RichTextDateTime
@@ -229,16 +224,16 @@ class Text
 
     public static function richAnchorLink(string|RichText $text, string $anchor): RichTextAnchorLink
     {
-        return new RichTextAnchorLink(['type' => 'anchor_link', 'text' => self::richText($text), 'anchor' => $anchor]);
+        return new RichTextAnchorLink(['type' => 'anchor_link', 'text' => $text, 'anchor' => $anchor]);
     }
 
     public static function richReference(string|RichText $text, string $reference): RichTextReference
     {
-        return new RichTextReference(['type' => 'reference', 'text' => self::richText($text), 'reference' => $reference]);
+        return new RichTextReference(['type' => 'reference', 'text' => $text, 'reference' => $reference]);
     }
 
     public static function richReferenceLink(string|RichText $text, string $reference): RichTextReferenceLink
     {
-        return new RichTextReferenceLink(['type' => 'reference_link', 'text' => self::richText($text), 'reference' => $reference]);
+        return new RichTextReferenceLink(['type' => 'reference_link', 'text' => $text, 'reference' => $reference]);
     }
 }

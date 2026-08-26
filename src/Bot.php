@@ -106,7 +106,6 @@ class Bot
                 $this->update->message->text,
                 $matches
             );
-            //$command = substr($matches[1],0,1) ?? null;
             $command = $matches[1] ?? null;
         }
 

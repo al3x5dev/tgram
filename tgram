@@ -55,11 +55,4 @@ $app->addCommand(new MiddlewareCommand());
 //polling
 $app->addCommand(new PollCommand());
 
-/*if (
-    !file_exists(InstallCommand::configFile()) &&
-    !file_exists('artisan')
-) {
-    $app->setDefaultCommand('install');
-}*/
-
 $app->run();

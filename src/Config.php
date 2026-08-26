@@ -23,7 +23,6 @@ class Config
             'token' => self::validateToken($cfg['token']),
             'secret' => $cfg['secret'] ?? null,
             'admins' => $cfg['admins'] ?? [],
-            //'async' => $cfg['async'] ?? false,
             'http_client' => $cfg['http_client'] ?? new \Mk4U\Http\Client(),
             'cache' => $cfg['cache'] ?? \Mk4U\Cache\CacheFactory::create('file', [
                 'dir' => 'storage/cache',
