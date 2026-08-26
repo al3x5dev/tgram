@@ -18,7 +18,7 @@ trait MiddlewareHandler
         $this->middlewares = require_once($filename);
     }
 
-    private function normalizeToArray($value): array
+    private function normalizeToArray(mixed $value): array
     {
         if (is_string($value)) {
             return [$value];
@@ -46,7 +46,7 @@ trait MiddlewareHandler
             );
         }
 
-        if (isset($this->middlewares['commands'][$command])) {
+        if ($command !== null && isset($this->middlewares['commands'][$command])) {
             $middlewares = array_merge(
                 $middlewares,
                 $this->normalizeToArray(
