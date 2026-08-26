@@ -15,7 +15,7 @@ trait MiddlewareHandler
             return;
         }
 
-        $this->middlewares = require_once($filename);
+        $this->middlewares = require($filename);
     }
 
     private function normalizeToArray(mixed $value): array

@@ -28,7 +28,7 @@ final class CliCommand extends Command
         $this->prepare($input, $output);
 
         $name =  !is_null($input->getArgument('name'))
-            ? $input->getArgument('url')
+            ? $input->getArgument('name')
             : $this->style->ask(
                 'What should the console command be named? [Eg. GetUpdate]',
                 null,
