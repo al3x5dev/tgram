@@ -7,14 +7,18 @@ use Mk4U\TGram\Core\Entities\InputMediaAudio;
 use Mk4U\TGram\Core\Entities\InputMediaPhoto;
 use Mk4U\TGram\Core\Entities\InputMediaVideo;
 use Mk4U\TGram\Core\Entities\InputMediaVoiceNote;
+use Mk4U\TGram\Core\Entities\InputMediaDocument;
 use Mk4U\TGram\Core\Entities\InputRichBlock;
 use Mk4U\TGram\Core\Entities\InputRichBlockAnchor;
 use Mk4U\TGram\Core\Entities\InputRichBlockAnimation;
 use Mk4U\TGram\Core\Entities\InputRichBlockAudio;
 use Mk4U\TGram\Core\Entities\InputRichBlockBlockQuotation;
+use Mk4U\TGram\Core\Entities\InputRichBlockButtons;
 use Mk4U\TGram\Core\Entities\InputRichBlockCollage;
 use Mk4U\TGram\Core\Entities\InputRichBlockDetails;
 use Mk4U\TGram\Core\Entities\InputRichBlockDivider;
+use Mk4U\TGram\Core\Entities\InputRichBlockDocument;
+use Mk4U\TGram\Core\Entities\InputRichBlockExpandableBlockQuotation;
 use Mk4U\TGram\Core\Entities\InputRichBlockFooter;
 use Mk4U\TGram\Core\Entities\InputRichBlockList;
 use Mk4U\TGram\Core\Entities\InputRichBlockListItem;
@@ -30,6 +34,7 @@ use Mk4U\TGram\Core\Entities\InputRichBlockThinking;
 use Mk4U\TGram\Core\Entities\InputRichBlockVideo;
 use Mk4U\TGram\Core\Entities\InputRichBlockVoiceNote;
 use Mk4U\TGram\Core\Entities\RichBlockCaption;
+use Mk4U\TGram\Core\Entities\RichMessageButton;
 use Mk4U\TGram\Core\Entities\RichText;
 
 class Block
@@ -365,5 +370,53 @@ class Block
             'type' => InputRichBlock::TYPE_ANCHOR,
             'name' => $name,
         ]);
+    }
+
+    public static function buttons(array $buttons, string $align = 'center'): InputRichBlockButtons
+    {
+        return new InputRichBlockButtons([
+            'type' => InputRichBlock::TYPE_BUTTONS,
+            'buttons' => $buttons,
+            'align' => $align,
+        ]);
+    }
+
+    public static function document(
+        string $media,
+        string|RichText|array|null $caption = null,
+        string|RichText|array|null $credit = null
+    ): InputRichBlockDocument {
+        $data = [
+            'type' => InputRichBlock::TYPE_DOCUMENT,
+            'document' => new InputMediaDocument([
+                'type' => 'document',
+                'media' => $media,
+            ]),
+        ];
+        if ($caption !== null || $credit !== null) {
+            $captionBlock = new RichBlockCaption([]);
+            if ($caption !== null) {
+                $captionBlock->text = $caption;
+            }
+            if ($credit !== null) {
+                $captionBlock->credit = $credit;
+            }
+            $data['caption'] = $captionBlock;
+        }
+        return new InputRichBlockDocument($data);
+    }
+
+    public static function expandableBlockQuotation(
+        string|RichText|array $text,
+        string|RichText|array|null $credit = null
+    ): InputRichBlockExpandableBlockQuotation {
+        $block = new InputRichBlockExpandableBlockQuotation([
+            'type' => InputRichBlock::TYPE_EXPANDABLE_BLOCK_QUOTATION,
+        ]);
+        $block->text = $text;
+        if ($credit !== null) {
+            $block->credit = $credit;
+        }
+        return $block;
     }
 }

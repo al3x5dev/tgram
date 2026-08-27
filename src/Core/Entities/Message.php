@@ -98,6 +98,7 @@ use Mk4U\TGram\Core\Entity;
  * @property ChecklistTasksDone $checklist_tasks_done
  * @property ChecklistTasksAdded $checklist_tasks_added
  * @property CommunityChatAdded $community_chat_added
+ * @property CommunityChatJoined $community_chat_joined
  * @property CommunityChatRemoved $community_chat_removed
  * @property DirectMessagePriceChanged $direct_message_price_changed
  * @property ForumTopicCreated $forum_topic_created
@@ -192,6 +193,7 @@ class Message extends MaybeInaccessibleMessage
             'checklist_tasks_done' => ChecklistTasksDone::class,
             'checklist_tasks_added' => ChecklistTasksAdded::class,
             'community_chat_added' => CommunityChatAdded::class,
+            'community_chat_joined' => CommunityChatJoined::class,
             'community_chat_removed' => CommunityChatRemoved::class,
             'direct_message_price_changed' => DirectMessagePriceChanged::class,
             'forum_topic_created' => ForumTopicCreated::class,

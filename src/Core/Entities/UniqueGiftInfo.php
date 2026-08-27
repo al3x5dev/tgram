@@ -8,6 +8,9 @@ use Mk4U\TGram\Core\Entity;
  * UniqueGiftInfo Entity
  * @property UniqueGift $gift
  * @property string $origin
+ * @property string $text
+ * @property MessageEntity[] $entities
+ * @property bool $is_private
  * @property string $last_resale_currency
  * @property int $last_resale_amount
  * @property string $owned_gift_id
@@ -21,6 +24,7 @@ class UniqueGiftInfo extends Entity
     {
         return [
             'gift' => UniqueGift::class,
+            'entities' => [MessageEntity::class],
         ];
     }
 }

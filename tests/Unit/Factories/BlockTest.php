@@ -7,9 +7,12 @@ use Mk4U\TGram\Core\Entities\InputRichBlockAnchor;
 use Mk4U\TGram\Core\Entities\InputRichBlockAnimation;
 use Mk4U\TGram\Core\Entities\InputRichBlockAudio;
 use Mk4U\TGram\Core\Entities\InputRichBlockBlockQuotation;
+use Mk4U\TGram\Core\Entities\InputRichBlockButtons;
 use Mk4U\TGram\Core\Entities\InputRichBlockCollage;
 use Mk4U\TGram\Core\Entities\InputRichBlockDetails;
 use Mk4U\TGram\Core\Entities\InputRichBlockDivider;
+use Mk4U\TGram\Core\Entities\InputRichBlockDocument;
+use Mk4U\TGram\Core\Entities\InputRichBlockExpandableBlockQuotation;
 use Mk4U\TGram\Core\Entities\InputRichBlockFooter;
 use Mk4U\TGram\Core\Entities\InputRichBlockList;
 use Mk4U\TGram\Core\Entities\InputRichBlockMap;
@@ -24,6 +27,7 @@ use Mk4U\TGram\Core\Entities\InputRichBlockThinking;
 use Mk4U\TGram\Core\Entities\InputRichBlockVideo;
 use Mk4U\TGram\Core\Entities\InputRichBlockVoiceNote;
 use Mk4U\TGram\Core\Factories\Rich\Block;
+use Mk4U\TGram\Core\Factories\Rich\Button;
 use PHPUnit\Framework\TestCase;
 
 class BlockTest extends TestCase
@@ -316,5 +320,65 @@ class BlockTest extends TestCase
         $photo = Block::photo('id', 'Caption only');
         $this->assertSame('Caption only', $photo->caption->text);
         $this->assertNull($photo->caption->credit);
+    }
+
+    public function testButtons(): void
+    {
+        $buttons = [
+            Button::make('Visit')->url('https://example.com')->build(),
+            Button::make('Action')->callback('do_it')->build(),
+        ];
+        $block = Block::buttons($buttons, 'left');
+
+        $this->assertInstanceOf(InputRichBlockButtons::class, $block);
+        $this->assertSame(InputRichBlock::TYPE_BUTTONS, $block->type);
+        $this->assertCount(2, $block->buttons);
+        $this->assertSame('left', $block->align);
+    }
+
+    public function testButtonsDefaultAlign(): void
+    {
+        $block = Block::buttons([]);
+
+        $this->assertSame('center', $block->align);
+    }
+
+    public function testDocument(): void
+    {
+        $block = Block::document('file_id_abc', 'Doc caption', 'Doc credit');
+
+        $this->assertInstanceOf(InputRichBlockDocument::class, $block);
+        $this->assertSame(InputRichBlock::TYPE_DOCUMENT, $block->type);
+        $this->assertNotNull($block->document);
+        $this->assertSame('file_id_abc', $block->document->media);
+        $this->assertNotNull($block->caption);
+        $this->assertSame('Doc caption', $block->caption->text);
+        $this->assertSame('Doc credit', $block->caption->credit);
+    }
+
+    public function testDocumentWithoutCaption(): void
+    {
+        $block = Block::document('file_id_xyz');
+
+        $this->assertNull($block->caption);
+        $this->assertSame('file_id_xyz', $block->document->media);
+    }
+
+    public function testExpandableBlockQuotation(): void
+    {
+        $block = Block::expandableBlockQuotation('Expandable text', 'Author');
+
+        $this->assertInstanceOf(InputRichBlockExpandableBlockQuotation::class, $block);
+        $this->assertSame(InputRichBlock::TYPE_EXPANDABLE_BLOCK_QUOTATION, $block->type);
+        $this->assertSame('Expandable text', $block->text);
+        $this->assertSame('Author', $block->credit);
+    }
+
+    public function testExpandableBlockQuotationWithoutCredit(): void
+    {
+        $block = Block::expandableBlockQuotation('Hidden content');
+
+        $this->assertSame('Hidden content', $block->text);
+        $this->assertNull($block->credit);
     }
 }

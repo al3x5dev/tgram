@@ -12,6 +12,7 @@ use Mk4U\TGram\Core\Entity;
  * @property bool $one_time_keyboard
  * @property string $input_field_placeholder
  * @property bool $selective
+ * @property bool $force_reply
  */
 class ReplyKeyboardMarkup extends Entity
 {

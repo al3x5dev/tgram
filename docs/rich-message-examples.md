@@ -1,6 +1,6 @@
 # Rich Message Examples
 
-Complete examples of rich messages using the Telegram Bot API 10.2+ format.
+Complete examples of rich messages using the Telegram Bot API 10.3+ format.
 
 All examples assume you have access to `$this->message->chat->id` from a command context.
 
@@ -11,6 +11,7 @@ All examples assume you have access to `$this->message->chat->id` from a command
 use Mk4U\TGram\Core\Text;
 use Mk4U\TGram\Core\Factories\RichMessage;
 use Mk4U\TGram\Core\Factories\Rich\Block;
+use Mk4U\TGram\Core\Factories\Rich\Button;
 ```
 
 ---
@@ -398,6 +399,89 @@ $this->sendRichMessage($this->message->chat->id, $message);
 ```php
 $message = RichMessage::make()
     ->markdown('*Rich Message* _Fallback for older clients_')
+    ->build();
+
+$this->sendRichMessage($this->message->chat->id, $message);
+```
+
+---
+
+## 20. Buttons
+
+Inline buttons with callback, URL, and custom style:
+
+```php
+$message = RichMessage::make()
+    ->block(Block::heading(Text::richBold('Choose an action')))
+    ->block(Block::paragraph('Tap a button below:'))
+    ->block(Block::buttons([
+        Button::make('Visit Website')->url('https://example.com')->build(),
+        Button::make('Confirm')->callback('confirm_action')->build(),
+        Button::make('Cancel')->callback('cancel_action')->style('primary')->build(),
+    ]))
+    ->build();
+
+$this->sendRichMessage($this->message->chat->id, $message);
+```
+
+Buttons aligned to the left:
+
+```php
+$buttons = [
+    Button::make('Option A')->callback('opt_a')->build(),
+    Button::make('Option B')->callback('opt_b')->build(),
+    Button::make('Option C')->callback('opt_c')->build(),
+];
+
+$message = RichMessage::make()
+    ->block(Block::buttons($buttons, 'left'))
+    ->build();
+
+$this->sendRichMessage($this->message->chat->id, $message);
+```
+
+---
+
+## 21. Document
+
+Attach a file with caption and credit:
+
+```php
+$message = RichMessage::make()
+    ->block(Block::heading(Text::richBold('Attached File')))
+    ->block(Block::document(
+        'BQACAg...documentFileId',
+        Text::richBold('Project specs'),
+        Text::richItalic('Engineering team')
+    ))
+    ->build();
+
+$this->sendRichMessage($this->message->chat->id, $message);
+```
+
+Document without caption:
+
+```php
+$message = RichMessage::make()
+    ->block(Block::document('BQACAg...documentFileId'))
+    ->build();
+
+$this->sendRichMessage($this->message->chat->id, $message);
+```
+
+---
+
+## 22. Expandable Block Quotation
+
+Collapsed by default, expands on tap:
+
+```php
+$message = RichMessage::make()
+    ->block(Block::heading(Text::richBold('Documentation')))
+    ->block(Block::expandableBlockQuotation(
+        'This is the collapsed content that expands when tapped by the user.',
+        Text::richBold('TGram Docs')
+    ))
     ->build();
 
 $this->sendRichMessage($this->message->chat->id, $message);

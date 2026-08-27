@@ -10,6 +10,7 @@ use Mk4U\TGram\Core\Entity;
  * @property RichBlockTableCell[] $cells
  * @property bool $is_bordered
  * @property bool $is_striped
+ * @property bool $is_compact
  * @property RichText $caption
  */
 class RichBlockTable extends RichBlock

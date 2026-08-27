@@ -7,7 +7,7 @@ use Mk4U\TGram\Core\Entity;
 /**
  * InputRichMessageMedia Entity
  * @property string $id
- * @property InputMediaAnimation|InputMediaAudio|InputMediaPhoto|InputMediaVideo|InputMediaVoiceNote $media
+ * @property InputMediaAnimation|InputMediaAudio|InputMediaDocument|InputMediaPhoto|InputMediaVideo|InputMediaVoiceNote $media
  */
 class InputRichMessageMedia extends Entity
 {

@@ -171,8 +171,7 @@ trait Methods
      * @param int|string $chat_id
      * @param int $message_thread_id
      * @param int $direct_messages_topic_id
-     * @param int $receiver_user_id
-     * @param string $callback_query_id
+     * @param EphemeralMessageParameters $ephemeral_message_parameters
      * @param string $text
      * @param string $parse_mode
      * @param MessageEntity[] $entities
@@ -186,7 +185,7 @@ trait Methods
      * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply $reply_markup
      * @return Message
      */
-    public function sendMessage(int|string $chat_id, string $text, ?string $business_connection_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?int $receiver_user_id = null, ?string $callback_query_id = null, ?string $parse_mode = null, ?array $entities = null, ?LinkPreviewOptions $link_preview_options = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
+    public function sendMessage(int|string $chat_id, string $text, ?string $business_connection_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?EphemeralMessageParameters $ephemeral_message_parameters = null, ?string $parse_mode = null, ?array $entities = null, ?LinkPreviewOptions $link_preview_options = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
     {
         $args = get_defined_vars();
         unset($args['this']);
@@ -285,8 +284,7 @@ trait Methods
      * @param int|string $chat_id
      * @param int $message_thread_id
      * @param int $direct_messages_topic_id
-     * @param int $receiver_user_id
-     * @param string $callback_query_id
+     * @param EphemeralMessageParameters $ephemeral_message_parameters
      * @param InputFile|string $photo
      * @param string $caption
      * @param string $parse_mode
@@ -302,7 +300,7 @@ trait Methods
      * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply $reply_markup
      * @return Message
      */
-    public function sendPhoto(int|string $chat_id, InputFile|string $photo, ?string $business_connection_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?int $receiver_user_id = null, ?string $callback_query_id = null, ?string $caption = null, ?string $parse_mode = null, ?array $caption_entities = null, ?bool $show_caption_above_media = null, ?bool $has_spoiler = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
+    public function sendPhoto(int|string $chat_id, InputFile|string $photo, ?string $business_connection_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?EphemeralMessageParameters $ephemeral_message_parameters = null, ?string $caption = null, ?string $parse_mode = null, ?array $caption_entities = null, ?bool $show_caption_above_media = null, ?bool $has_spoiler = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
     {
         $args = get_defined_vars();
         unset($args['this']);
@@ -315,8 +313,7 @@ trait Methods
      * @param int|string $chat_id
      * @param int $message_thread_id
      * @param int $direct_messages_topic_id
-     * @param int $receiver_user_id
-     * @param string $callback_query_id
+     * @param EphemeralMessageParameters $ephemeral_message_parameters
      * @param InputFile|string $live_photo
      * @param InputFile|string $photo
      * @param string $caption
@@ -333,7 +330,7 @@ trait Methods
      * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply $reply_markup
      * @return Message
      */
-    public function sendLivePhoto(int|string $chat_id, InputFile|string $live_photo, InputFile|string $photo, ?string $business_connection_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?int $receiver_user_id = null, ?string $callback_query_id = null, ?string $caption = null, ?string $parse_mode = null, ?array $caption_entities = null, ?bool $show_caption_above_media = null, ?bool $has_spoiler = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
+    public function sendLivePhoto(int|string $chat_id, InputFile|string $live_photo, InputFile|string $photo, ?string $business_connection_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?EphemeralMessageParameters $ephemeral_message_parameters = null, ?string $caption = null, ?string $parse_mode = null, ?array $caption_entities = null, ?bool $show_caption_above_media = null, ?bool $has_spoiler = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
     {
         $args = get_defined_vars();
         unset($args['this']);
@@ -347,8 +344,7 @@ trait Methods
      * @param int|string $chat_id
      * @param int $message_thread_id
      * @param int $direct_messages_topic_id
-     * @param int $receiver_user_id
-     * @param string $callback_query_id
+     * @param EphemeralMessageParameters $ephemeral_message_parameters
      * @param InputFile|string $audio
      * @param string $caption
      * @param string $parse_mode
@@ -366,7 +362,7 @@ trait Methods
      * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply $reply_markup
      * @return Message
      */
-    public function sendAudio(int|string $chat_id, InputFile|string $audio, ?string $business_connection_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?int $receiver_user_id = null, ?string $callback_query_id = null, ?string $caption = null, ?string $parse_mode = null, ?array $caption_entities = null, ?int $duration = null, ?string $performer = null, ?string $title = null, InputFile|string|null $thumbnail = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
+    public function sendAudio(int|string $chat_id, InputFile|string $audio, ?string $business_connection_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?EphemeralMessageParameters $ephemeral_message_parameters = null, ?string $caption = null, ?string $parse_mode = null, ?array $caption_entities = null, ?int $duration = null, ?string $performer = null, ?string $title = null, InputFile|string|null $thumbnail = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
     {
         $args = get_defined_vars();
         unset($args['this']);
@@ -379,8 +375,7 @@ trait Methods
      * @param int|string $chat_id
      * @param int $message_thread_id
      * @param int $direct_messages_topic_id
-     * @param int $receiver_user_id
-     * @param string $callback_query_id
+     * @param EphemeralMessageParameters $ephemeral_message_parameters
      * @param InputFile|string $document
      * @param InputFile|string $thumbnail
      * @param string $caption
@@ -396,7 +391,7 @@ trait Methods
      * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply $reply_markup
      * @return Message
      */
-    public function sendDocument(int|string $chat_id, InputFile|string $document, ?string $business_connection_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?int $receiver_user_id = null, ?string $callback_query_id = null, InputFile|string|null $thumbnail = null, ?string $caption = null, ?string $parse_mode = null, ?array $caption_entities = null, ?bool $disable_content_type_detection = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
+    public function sendDocument(int|string $chat_id, InputFile|string $document, ?string $business_connection_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?EphemeralMessageParameters $ephemeral_message_parameters = null, InputFile|string|null $thumbnail = null, ?string $caption = null, ?string $parse_mode = null, ?array $caption_entities = null, ?bool $disable_content_type_detection = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
     {
         $args = get_defined_vars();
         unset($args['this']);
@@ -409,8 +404,7 @@ trait Methods
      * @param int|string $chat_id
      * @param int $message_thread_id
      * @param int $direct_messages_topic_id
-     * @param int $receiver_user_id
-     * @param string $callback_query_id
+     * @param EphemeralMessageParameters $ephemeral_message_parameters
      * @param InputFile|string $video
      * @param int $duration
      * @param int $width
@@ -433,7 +427,7 @@ trait Methods
      * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply $reply_markup
      * @return Message
      */
-    public function sendVideo(int|string $chat_id, InputFile|string $video, ?string $business_connection_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?int $receiver_user_id = null, ?string $callback_query_id = null, ?int $duration = null, ?int $width = null, ?int $height = null, InputFile|string|null $thumbnail = null, InputFile|string|null $cover = null, ?int $start_timestamp = null, ?string $caption = null, ?string $parse_mode = null, ?array $caption_entities = null, ?bool $show_caption_above_media = null, ?bool $has_spoiler = null, ?bool $supports_streaming = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
+    public function sendVideo(int|string $chat_id, InputFile|string $video, ?string $business_connection_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?EphemeralMessageParameters $ephemeral_message_parameters = null, ?int $duration = null, ?int $width = null, ?int $height = null, InputFile|string|null $thumbnail = null, InputFile|string|null $cover = null, ?int $start_timestamp = null, ?string $caption = null, ?string $parse_mode = null, ?array $caption_entities = null, ?bool $show_caption_above_media = null, ?bool $has_spoiler = null, ?bool $supports_streaming = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
     {
         $args = get_defined_vars();
         unset($args['this']);
@@ -446,8 +440,7 @@ trait Methods
      * @param int|string $chat_id
      * @param int $message_thread_id
      * @param int $direct_messages_topic_id
-     * @param int $receiver_user_id
-     * @param string $callback_query_id
+     * @param EphemeralMessageParameters $ephemeral_message_parameters
      * @param InputFile|string $animation
      * @param int $duration
      * @param int $width
@@ -467,7 +460,7 @@ trait Methods
      * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply $reply_markup
      * @return Message
      */
-    public function sendAnimation(int|string $chat_id, InputFile|string $animation, ?string $business_connection_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?int $receiver_user_id = null, ?string $callback_query_id = null, ?int $duration = null, ?int $width = null, ?int $height = null, InputFile|string|null $thumbnail = null, ?string $caption = null, ?string $parse_mode = null, ?array $caption_entities = null, ?bool $show_caption_above_media = null, ?bool $has_spoiler = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
+    public function sendAnimation(int|string $chat_id, InputFile|string $animation, ?string $business_connection_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?EphemeralMessageParameters $ephemeral_message_parameters = null, ?int $duration = null, ?int $width = null, ?int $height = null, InputFile|string|null $thumbnail = null, ?string $caption = null, ?string $parse_mode = null, ?array $caption_entities = null, ?bool $show_caption_above_media = null, ?bool $has_spoiler = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
     {
         $args = get_defined_vars();
         unset($args['this']);
@@ -480,8 +473,7 @@ trait Methods
      * @param int|string $chat_id
      * @param int $message_thread_id
      * @param int $direct_messages_topic_id
-     * @param int $receiver_user_id
-     * @param string $callback_query_id
+     * @param EphemeralMessageParameters $ephemeral_message_parameters
      * @param InputFile|string $voice
      * @param string $caption
      * @param string $parse_mode
@@ -496,7 +488,7 @@ trait Methods
      * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply $reply_markup
      * @return Message
      */
-    public function sendVoice(int|string $chat_id, InputFile|string $voice, ?string $business_connection_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?int $receiver_user_id = null, ?string $callback_query_id = null, ?string $caption = null, ?string $parse_mode = null, ?array $caption_entities = null, ?int $duration = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
+    public function sendVoice(int|string $chat_id, InputFile|string $voice, ?string $business_connection_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?EphemeralMessageParameters $ephemeral_message_parameters = null, ?string $caption = null, ?string $parse_mode = null, ?array $caption_entities = null, ?int $duration = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
     {
         $args = get_defined_vars();
         unset($args['this']);
@@ -504,13 +496,12 @@ trait Methods
     }
 
     /**
-     * As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned.
+     * Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent Message is returned.
      * @param string $business_connection_id
      * @param int|string $chat_id
      * @param int $message_thread_id
      * @param int $direct_messages_topic_id
-     * @param int $receiver_user_id
-     * @param string $callback_query_id
+     * @param EphemeralMessageParameters $ephemeral_message_parameters
      * @param InputFile|string $video_note
      * @param int $duration
      * @param int $length
@@ -524,7 +515,7 @@ trait Methods
      * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply $reply_markup
      * @return Message
      */
-    public function sendVideoNote(int|string $chat_id, InputFile|string $video_note, ?string $business_connection_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?int $receiver_user_id = null, ?string $callback_query_id = null, ?int $duration = null, ?int $length = null, InputFile|string|null $thumbnail = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
+    public function sendVideoNote(int|string $chat_id, InputFile|string $video_note, ?string $business_connection_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?EphemeralMessageParameters $ephemeral_message_parameters = null, ?int $duration = null, ?int $length = null, InputFile|string|null $thumbnail = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
     {
         $args = get_defined_vars();
         unset($args['this']);
@@ -586,8 +577,7 @@ trait Methods
      * @param int|string $chat_id
      * @param int $message_thread_id
      * @param int $direct_messages_topic_id
-     * @param int $receiver_user_id
-     * @param string $callback_query_id
+     * @param EphemeralMessageParameters $ephemeral_message_parameters
      * @param float $latitude
      * @param float $longitude
      * @param float $horizontal_accuracy
@@ -603,7 +593,7 @@ trait Methods
      * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply $reply_markup
      * @return Message
      */
-    public function sendLocation(int|string $chat_id, float $latitude, float $longitude, ?string $business_connection_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?int $receiver_user_id = null, ?string $callback_query_id = null, ?float $horizontal_accuracy = null, ?int $live_period = null, ?int $heading = null, ?int $proximity_alert_radius = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
+    public function sendLocation(int|string $chat_id, float $latitude, float $longitude, ?string $business_connection_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?EphemeralMessageParameters $ephemeral_message_parameters = null, ?float $horizontal_accuracy = null, ?int $live_period = null, ?int $heading = null, ?int $proximity_alert_radius = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
     {
         $args = get_defined_vars();
         unset($args['this']);
@@ -616,8 +606,7 @@ trait Methods
      * @param int|string $chat_id
      * @param int $message_thread_id
      * @param int $direct_messages_topic_id
-     * @param int $receiver_user_id
-     * @param string $callback_query_id
+     * @param EphemeralMessageParameters $ephemeral_message_parameters
      * @param float $latitude
      * @param float $longitude
      * @param string $title
@@ -635,7 +624,7 @@ trait Methods
      * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply $reply_markup
      * @return Message
      */
-    public function sendVenue(int|string $chat_id, float $latitude, float $longitude, string $title, string $address, ?string $business_connection_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?int $receiver_user_id = null, ?string $callback_query_id = null, ?string $foursquare_id = null, ?string $foursquare_type = null, ?string $google_place_id = null, ?string $google_place_type = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
+    public function sendVenue(int|string $chat_id, float $latitude, float $longitude, string $title, string $address, ?string $business_connection_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?EphemeralMessageParameters $ephemeral_message_parameters = null, ?string $foursquare_id = null, ?string $foursquare_type = null, ?string $google_place_id = null, ?string $google_place_type = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
     {
         $args = get_defined_vars();
         unset($args['this']);
@@ -648,8 +637,7 @@ trait Methods
      * @param int|string $chat_id
      * @param int $message_thread_id
      * @param int $direct_messages_topic_id
-     * @param int $receiver_user_id
-     * @param string $callback_query_id
+     * @param EphemeralMessageParameters $ephemeral_message_parameters
      * @param string $phone_number
      * @param string $first_name
      * @param string $last_name
@@ -663,7 +651,7 @@ trait Methods
      * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply $reply_markup
      * @return Message
      */
-    public function sendContact(int|string $chat_id, string $phone_number, string $first_name, ?string $business_connection_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?int $receiver_user_id = null, ?string $callback_query_id = null, ?string $last_name = null, ?string $vcard = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
+    public function sendContact(int|string $chat_id, string $phone_number, string $first_name, ?string $business_connection_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?EphemeralMessageParameters $ephemeral_message_parameters = null, ?string $last_name = null, ?string $vcard = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
     {
         $args = get_defined_vars();
         unset($args['this']);
@@ -765,9 +753,11 @@ trait Methods
      * @param string $text
      * @param string $parse_mode
      * @param MessageEntity[] $entities
+     * @param bool $can_stop
+     * @param bool $keep_on_stop
      * @return bool
      */
-    public function sendMessageDraft(int $chat_id, int $draft_id, ?int $message_thread_id = null, ?string $text = null, ?string $parse_mode = null, ?array $entities = null): bool
+    public function sendMessageDraft(int $chat_id, int $draft_id, ?int $message_thread_id = null, ?string $text = null, ?string $parse_mode = null, ?array $entities = null, ?bool $can_stop = null, ?bool $keep_on_stop = null): bool
     {
         $args = get_defined_vars();
         unset($args['this']);
@@ -926,9 +916,10 @@ trait Methods
      * @param bool $can_manage_topics
      * @param bool $can_manage_direct_messages
      * @param bool $can_manage_tags
+     * @param bool $can_send_welcome_messages
      * @return bool
      */
-    public function promoteChatMember(int|string $chat_id, int $user_id, ?bool $is_anonymous = null, ?bool $can_manage_chat = null, ?bool $can_delete_messages = null, ?bool $can_manage_video_chats = null, ?bool $can_restrict_members = null, ?bool $can_promote_members = null, ?bool $can_change_info = null, ?bool $can_invite_users = null, ?bool $can_post_stories = null, ?bool $can_edit_stories = null, ?bool $can_delete_stories = null, ?bool $can_post_messages = null, ?bool $can_edit_messages = null, ?bool $can_pin_messages = null, ?bool $can_manage_topics = null, ?bool $can_manage_direct_messages = null, ?bool $can_manage_tags = null): bool
+    public function promoteChatMember(int|string $chat_id, int $user_id, ?bool $is_anonymous = null, ?bool $can_manage_chat = null, ?bool $can_delete_messages = null, ?bool $can_manage_video_chats = null, ?bool $can_restrict_members = null, ?bool $can_promote_members = null, ?bool $can_change_info = null, ?bool $can_invite_users = null, ?bool $can_post_stories = null, ?bool $can_edit_stories = null, ?bool $can_delete_stories = null, ?bool $can_post_messages = null, ?bool $can_edit_messages = null, ?bool $can_pin_messages = null, ?bool $can_manage_topics = null, ?bool $can_manage_direct_messages = null, ?bool $can_manage_tags = null, ?bool $can_send_welcome_messages = null): bool
     {
         $args = get_defined_vars();
         unset($args['this']);
@@ -2383,18 +2374,19 @@ trait Methods
     }
 
     /**
-     * Use this method to edit an ephemeral text message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
+     * Use this method to edit an ephemeral text or rich message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.
      * @param int|string $chat_id
      * @param int $receiver_user_id
      * @param int $ephemeral_message_id
      * @param string $text
      * @param string $parse_mode
      * @param MessageEntity[] $entities
+     * @param InputRichMessage $rich_message
      * @param LinkPreviewOptions $link_preview_options
      * @param InlineKeyboardMarkup $reply_markup
      * @return bool
      */
-    public function editEphemeralMessageText(int|string $chat_id, int $receiver_user_id, int $ephemeral_message_id, string $text, ?string $parse_mode = null, ?array $entities = null, ?LinkPreviewOptions $link_preview_options = null, ?InlineKeyboardMarkup $reply_markup = null): bool
+    public function editEphemeralMessageText(int|string $chat_id, int $receiver_user_id, int $ephemeral_message_id, ?string $text = null, ?string $parse_mode = null, ?array $entities = null, ?InputRichMessage $rich_message = null, ?LinkPreviewOptions $link_preview_options = null, ?InlineKeyboardMarkup $reply_markup = null): bool
     {
         $args = get_defined_vars();
         unset($args['this']);
@@ -2425,10 +2417,11 @@ trait Methods
      * @param string $caption
      * @param string $parse_mode
      * @param MessageEntity[] $caption_entities
+     * @param bool $show_caption_above_media
      * @param InlineKeyboardMarkup $reply_markup
      * @return bool
      */
-    public function editEphemeralMessageCaption(int|string $chat_id, int $receiver_user_id, int $ephemeral_message_id, ?string $caption = null, ?string $parse_mode = null, ?array $caption_entities = null, ?InlineKeyboardMarkup $reply_markup = null): bool
+    public function editEphemeralMessageCaption(int|string $chat_id, int $receiver_user_id, int $ephemeral_message_id, ?string $caption = null, ?string $parse_mode = null, ?array $caption_entities = null, ?bool $show_caption_above_media = null, ?InlineKeyboardMarkup $reply_markup = null): bool
     {
         $args = get_defined_vars();
         unset($args['this']);
@@ -2553,8 +2546,7 @@ trait Methods
      * @param int|string $chat_id
      * @param int $message_thread_id
      * @param int $direct_messages_topic_id
-     * @param int $receiver_user_id
-     * @param string $callback_query_id
+     * @param EphemeralMessageParameters $ephemeral_message_parameters
      * @param InputFile|string $sticker
      * @param string $emoji
      * @param bool $disable_notification
@@ -2566,7 +2558,7 @@ trait Methods
      * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply $reply_markup
      * @return Message
      */
-    public function sendSticker(int|string $chat_id, InputFile|string $sticker, ?string $business_connection_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?int $receiver_user_id = null, ?string $callback_query_id = null, ?string $emoji = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
+    public function sendSticker(int|string $chat_id, InputFile|string $sticker, ?string $business_connection_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?EphemeralMessageParameters $ephemeral_message_parameters = null, ?string $emoji = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
     {
         $args = get_defined_vars();
         unset($args['this']);
@@ -2780,6 +2772,7 @@ trait Methods
      * @param int|string $chat_id
      * @param int $message_thread_id
      * @param int $direct_messages_topic_id
+     * @param EphemeralMessageParameters $ephemeral_message_parameters
      * @param InputRichMessage $rich_message
      * @param bool $disable_notification
      * @param bool $protect_content
@@ -2790,7 +2783,7 @@ trait Methods
      * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply $reply_markup
      * @return Message
      */
-    public function sendRichMessage(int|string $chat_id, InputRichMessage $rich_message, ?string $business_connection_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
+    public function sendRichMessage(int|string $chat_id, InputRichMessage $rich_message, ?string $business_connection_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?EphemeralMessageParameters $ephemeral_message_parameters = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
     {
         $args = get_defined_vars();
         unset($args['this']);
@@ -2803,9 +2796,11 @@ trait Methods
      * @param int $message_thread_id
      * @param int $draft_id
      * @param InputRichMessage $rich_message
+     * @param bool $can_stop
+     * @param bool $keep_on_stop
      * @return bool
      */
-    public function sendRichMessageDraft(int $chat_id, int $draft_id, InputRichMessage $rich_message, ?int $message_thread_id = null): bool
+    public function sendRichMessageDraft(int $chat_id, int $draft_id, InputRichMessage $rich_message, ?int $message_thread_id = null, ?bool $can_stop = null, ?bool $keep_on_stop = null): bool
     {
         $args = get_defined_vars();
         unset($args['this']);

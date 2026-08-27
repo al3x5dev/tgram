@@ -26,6 +26,7 @@ use Mk4U\TGram\Core\Entity;
  * @property bool $can_manage_topics
  * @property bool $can_manage_direct_messages
  * @property bool $can_manage_tags
+ * @property bool $can_send_welcome_messages
  * @property string $custom_title
  */
 class ChatMemberAdministrator extends ChatMember

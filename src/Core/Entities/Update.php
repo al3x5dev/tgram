@@ -33,6 +33,7 @@ use Mk4U\TGram\Core\Entity;
  * @property ChatBoostRemoved $removed_chat_boost
  * @property ManagedBotUpdated $managed_bot
  * @property BotSubscriptionUpdated $subscription
+ * @property MessageGenerationStopped $stopped_message_generation
  */
 class Update extends Entity
 {
@@ -66,6 +67,7 @@ class Update extends Entity
             'removed_chat_boost' => ChatBoostRemoved::class,
             'managed_bot' => ManagedBotUpdated::class,
             'subscription' => BotSubscriptionUpdated::class,
+            'stopped_message_generation' => MessageGenerationStopped::class,
         ];
     }
     /**
