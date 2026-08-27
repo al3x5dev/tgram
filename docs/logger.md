@@ -30,11 +30,13 @@ Creates and writes log entries with the following parameters:
 The class supports these severity levels (in descending order of importance):
 
 1. **`emergency`**: System is unusable
-2. **`critical`**: Critical conditions
-3. **`error`**: Runtime errors
-4. **`warning`**: Exceptional occurrences
-5. **`info`**: Interesting events
-6. **`debug`**: Detailed debug information
+2. **`alert`**: Action must be taken immediately
+3. **`critical`**: Critical conditions
+4. **`error`**: Runtime errors
+5. **`warning`**: Exceptional occurrences
+6. **`notice`**: Normal but significant conditions
+7. **`info`**: Interesting events
+8. **`debug`**: Detailed debug information
 
 ## Configuration Features
 

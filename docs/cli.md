@@ -205,7 +205,7 @@ php vendor/bin/tgram middleware
 remains active, fetching updates from Telegram and sending them through the same
 channel of commands/callbacks/handlers/conversations/middleware used by the webhook mode.
 
-``bash
+```bash
 php vendor/bin/tgram poll
 ```
 
@@ -221,7 +221,7 @@ php vendor/bin/tgram poll 5
 
 | `interval`| No | `3` | Seconds between polling requests. Must be a non-negative integer. Keep it at or below `30`. |
 
-[!IMPORTANT]
+> [!IMPORTANT]
 > Upon startup, `poll` automatically calls `hook:delete`, so there's no need to manually delete
 > the webhook. This avoids the `409 Conflict` error you would get from
 > Telegram when calling `getUpdates` while a webhook is still active.
