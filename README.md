@@ -1,4 +1,4 @@
-# Tgram PHP
+# TGram PHP
 
 [![API Version](https://img.shields.io/badge/Bot%20API-10.2-32a2da?style=for-the-badge&logo=Telegram)](https://core.telegram.org/bots/api#july-14-2026)
 [![Version](https://img.shields.io/github/v/release/al3x5dev/tgram?include_prereleases-blue&style=for-the-badge&color=blue)](https://packagist.org/packages/mk4u/tgram)
