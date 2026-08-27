@@ -18,7 +18,7 @@ class Bot
 {
     public const NAME = 'TGram';
 
-    public const VERSION = '0.1.0';
+    public const VERSION = '0.2.1';
 
     public ?Update $update = null;
 
