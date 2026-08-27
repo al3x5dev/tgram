@@ -31,7 +31,8 @@
         "symfony/console": "^8.1"
     },
     "require-dev": {
-        "al3x5/xbot-devkit": "^0.5.3"
+        "mk4u/tgapikit": "^0.6.0",
+        "phpunit/phpunit": "^11.5"
     },
     "autoload": {
         "psr-4": {
@@ -41,6 +42,11 @@
         "files": [
             "src/helpers.php"
         ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
     },
     "bin": [
         "tgram"
