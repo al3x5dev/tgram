@@ -152,6 +152,15 @@ class RichMessageTest extends TestCase
         $this->assertSame('primary', $btn->style);
     }
 
+    public function testButtonDisabled(): void
+    {
+        $btn = Rich\Button::make('Disabled')
+            ->disabled()
+            ->build();
+
+        $this->assertInstanceOf(\Mk4U\TGram\Core\Entities\DisabledButton::class, $btn->disabled);
+    }
+
     public function testButtonFluentChain(): void
     {
         $btn = Rich\Button::make('Chained')

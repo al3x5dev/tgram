@@ -7,6 +7,7 @@ use Mk4U\TGram\Core\Entities\KeyboardButtonPollType;
 use Mk4U\TGram\Core\Entities\KeyboardButtonRequestChat;
 use Mk4U\TGram\Core\Entities\KeyboardButtonRequestUsers;
 use Mk4U\TGram\Core\Entities\WebAppInfo;
+use Mk4U\TGram\Exceptions\BotException;
 
 class ReplyButton implements ButtonInterface
 {
@@ -20,7 +21,7 @@ class ReplyButton implements ButtonInterface
         $this->text = $text;
     }
 
-    public static function make(string $text):self
+    public static function make(string $text): self
     {
         return new self($text);
     }
@@ -49,15 +50,21 @@ class ReplyButton implements ButtonInterface
         return $this;
     }
 
-    public function requestPoll(KeyboardButtonPollType $pollType): self
+    public function requestPoll(string $type): self
     {
-        $this->options['request_poll'] = $pollType;
+        if (empty($type)) {
+            throw new BotException('Poll type cannot be empty.');
+        }
+        $this->options['request_poll'] = new KeyboardButtonPollType(['type' => $type]);
         return $this;
     }
 
-    public function webApp(WebAppInfo $webAppInfo): self
+    public function webApp(string $url): self
     {
-        $this->options['web_app'] = $webAppInfo;
+        if (empty($url)) {
+            throw new BotException('Url cannot be empty.');
+        }
+        $this->options['web_app'] = new WebAppInfo(['url' => $url]);
         return $this;
     }
 

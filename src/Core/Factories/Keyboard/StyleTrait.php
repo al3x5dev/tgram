@@ -2,6 +2,8 @@
 
 namespace Mk4U\TGram\Core\Factories\Keyboard;
 
+use Mk4U\TGram\Core\Entities\DisabledButton;
+
 trait StyleTrait{
 
     public function emoji(?string $icon_custom = null): self
@@ -22,6 +24,12 @@ trait StyleTrait{
     public function style(?string $color = null): self
     {
         $this->options['style'] = $color;
+        return $this;
+    }
+
+    public function disabled(): self
+    {
+        $this->options['disabled'] = new DisabledButton([]);
         return $this;
     }
 }

@@ -69,12 +69,12 @@ Sets the callback data to be sent when the button is pressed.
 **Parameters:**
 - `$data` (string): The callback data to be sent.
 
-#### InlineButton::webApp(WebAppInfo $webAppInfo): self
+#### InlineButton::webApp(string $url): self
 
-Sets the web application information to be opened when the button is pressed.
+Sets the web application information for the button.
 
 **Parameters:**
-- `$webAppInfo` (WebAppInfo): A `WebAppInfo` instance that defines the web application information.
+- `$url` (string): The URL of the web application to be opened when the button is pressed.
 
 #### InlineButton::loginUrl(LoginUrl $loginUrl): self
 
@@ -104,19 +104,16 @@ Sets the inline query to be executed on the selected chat when the button is pre
 **Parameters:**
 - `$chosenChat` (SwitchInlineQueryChosenChat): A `SwitchInlineQueryChosenChat` instance that defines the inline query.
 
-#### InlineButton::copyText(CopyTextButton $copyText): self
+#### InlineButton::copyText(string $text): self
 
 Sets the text to be copied when the button is pressed.
 
 **Parameters:**
-- `$copyText` (CopyTextButton): A `CopyTextButton` instance that defines the text to be copied.
+- `$text` (string): The text to be copied when the button is pressed.
 
-#### InlineButton::callbackGame(CallbackGame $callbackGame): self
+#### InlineButton::callbackGame(): self
 
 Sets the callback game that will open when the button is pressed.
-
-**Parameters:**
-- `$callbackGame` (CallbackGame): A `CallbackGame` instance that defines the callback game.
 
 #### InlineButton::pay(bool $value = true): self
 
@@ -138,6 +135,10 @@ Sets the button style.
 
 **Parameters:**
 - `$style` (string): Style options - `danger` (red), `success` (green), `primary` (blue).
+
+#### InlineButton::disabled(): self
+
+Disables the button. A disabled button cannot be pressed by the user.
 
 #### InlineButton::build(): InlineKeyboardButton
 
@@ -242,19 +243,19 @@ Sets whether the button should request the user's location.
 **Parameters:**
 - `$value` (bool): If `true`, the button will request the user's location. Defaults to `true`.
 
-#### ReplyButton::requestPoll(KeyboardButtonPollType $pollType): self
+#### ReplyButton::requestPoll(string $type): self
 
 Sets the poll request for the button.
 
 **Parameters:**
-- `$pollType` (KeyboardButtonPollType): A `KeyboardButtonPollType` instance that defines the poll type.
+- `$type` (string): The poll type. Must be one of "quiz" or "regular".
 
-#### ReplyButton::webApp(WebAppInfo $webAppInfo): self
+#### ReplyButton::webApp(string $url): self
 
 Sets the web application information for the button.
 
 **Parameters:**
-- `$webAppInfo` (WebAppInfo): A `WebAppInfo` instance that defines the web application information.
+- `$url` (string): The URL of the web application to be opened when the button is pressed.
 
 
 ## `Keyboard::remove(): ReplyKeyboardRemove`

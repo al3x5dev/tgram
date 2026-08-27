@@ -418,6 +418,7 @@ $message = RichMessage::make()
         Button::make('Visit Website')->url('https://example.com')->build(),
         Button::make('Confirm')->callback('confirm_action')->build(),
         Button::make('Cancel')->callback('cancel_action')->style('primary')->build(),
+        Button::make('Coming Soon')->disabled()->build(),
     ]))
     ->build();
 

@@ -8,6 +8,7 @@ use Mk4U\TGram\Core\Entities\InlineKeyboardButton;
 use Mk4U\TGram\Core\Entities\LoginUrl;
 use Mk4U\TGram\Core\Entities\SwitchInlineQueryChosenChat;
 use Mk4U\TGram\Core\Entities\WebAppInfo;
+use Mk4U\TGram\Exceptions\BotException;
 
 class InlineButton implements ButtonInterface
 {
@@ -38,9 +39,12 @@ class InlineButton implements ButtonInterface
         return $this;
     }
 
-    public function webApp(WebAppInfo $webAppInfo): self
+    public function webApp(string $url): self
     {
-        $this->options['web_app'] = $webAppInfo;
+        if (empty($url)) {
+            throw new BotException('Url cannot be empty.');
+        }
+        $this->options['web_app'] = new WebAppInfo(['url' => $url]);
         return $this;
     }
 
@@ -68,15 +72,18 @@ class InlineButton implements ButtonInterface
         return $this;
     }
 
-    public function copyText(CopyTextButton $copyText): self
+    public function copyText(string $text): self
     {
-        $this->options['copy_text'] = $copyText;
+        if (empty($text)) {
+            throw new BotException('Copy text cannot be empty.');
+        }
+        $this->options['copy_text'] = new CopyTextButton(['text' => $text]);
         return $this;
     }
 
-    public function callbackGame(CallbackGame $callbackGame): self
+    public function callbackGame(): self
     {
-        $this->options['callback_game'] = $callbackGame;
+        $this->options['callback_game'] = new CallbackGame([]);
         return $this;
     }
 

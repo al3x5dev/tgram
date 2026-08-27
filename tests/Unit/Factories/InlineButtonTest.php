@@ -45,6 +45,15 @@ class InlineButtonTest extends TestCase
         $this->assertTrue($button->pay);
     }
 
+    public function testDisabled(): void
+    {
+        $button = InlineButton::make('Disabled')
+            ->disabled()
+            ->build();
+
+        $this->assertInstanceOf(\Mk4U\TGram\Core\Entities\DisabledButton::class, $button->disabled);
+    }
+
     public function testBuildMinimal(): void
     {
         $button = InlineButton::make('Simple')

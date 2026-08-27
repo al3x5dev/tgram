@@ -3,10 +3,12 @@
 namespace Mk4U\TGram\Core\Factories\Rich;
 
 use Mk4U\TGram\Core\Entities\CopyTextButton;
+use Mk4U\TGram\Core\Entities\DisabledButton;
 use Mk4U\TGram\Core\Entities\LoginUrl;
 use Mk4U\TGram\Core\Entities\RichMessageButton;
 use Mk4U\TGram\Core\Entities\SwitchInlineQueryChosenChat;
 use Mk4U\TGram\Core\Entities\WebAppInfo;
+use Mk4U\TGram\Exceptions\BotException;
 
 class Button
 {
@@ -29,6 +31,12 @@ class Button
         return $this;
     }
 
+    public function disabled(): self
+    {
+        $this->options['disabled'] = new DisabledButton([]);
+        return $this;
+    }
+
     public function url(string $url): self
     {
         $this->options['url'] = $url;
@@ -41,9 +49,12 @@ class Button
         return $this;
     }
 
-    public function webApp(WebAppInfo $webAppInfo): self
+    public function webApp(string $url): self
     {
-        $this->options['web_app'] = $webAppInfo;
+        if (empty($url)) {
+            throw new BotException('Url cannot be empty.');
+        }
+        $this->options['web_app'] = new WebAppInfo(['url' => $url]);
         return $this;
     }
 
@@ -71,9 +82,12 @@ class Button
         return $this;
     }
 
-    public function copyText(CopyTextButton $copyText): self
+    public function copyText(string $text): self
     {
-        $this->options['copy_text'] = $copyText;
+        if (empty($text)) {
+            throw new BotException('Copy text cannot be empty.');
+        }
+        $this->options['copy_text'] = new CopyTextButton(['text' => $text]);
         return $this;
     }
 
