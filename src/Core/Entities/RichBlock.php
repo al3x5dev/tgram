@@ -9,7 +9,6 @@ use Mk4U\TGram\Core\Entity;
  */
 class RichBlock extends Entity
 {
-    
     public const TYPE_PARAGRAPH = 'paragraph';
     public const TYPE_HEADING = 'heading';
     public const TYPE_PREFORMATTED = 'pre';
@@ -19,12 +18,12 @@ class RichBlock extends Entity
     public const TYPE_ANCHOR = 'anchor';
     public const TYPE_LIST = 'list';
     public const TYPE_BLOCK_QUOTATION = 'blockquote';
+    public const TYPE_EXPANDABLE_BLOCK_QUOTATION = 'expandable_blockquote';
     public const TYPE_PULL_QUOTATION = 'pullquote';
     public const TYPE_COLLAGE = 'collage';
     public const TYPE_SLIDESHOW = 'slideshow';
     public const TYPE_TABLE = 'table';
     public const TYPE_DETAILS = 'details';
-    public const TYPE_EXPANDABLE_BLOCK_QUOTATION = 'expandable_blockquote';
     public const TYPE_MAP = 'map';
     public const TYPE_BUTTONS = 'buttons';
     public const TYPE_ANIMATION = 'animation';
@@ -51,12 +50,12 @@ class RichBlock extends Entity
             'anchor' => new RichBlockAnchor($this->properties),
             'list' => new RichBlockList($this->properties),
             'blockquote' => new RichBlockBlockQuotation($this->properties),
+            'expandable_blockquote' => new RichBlockExpandableBlockQuotation($this->properties),
             'pullquote' => new RichBlockPullQuotation($this->properties),
             'collage' => new RichBlockCollage($this->properties),
             'slideshow' => new RichBlockSlideshow($this->properties),
             'table' => new RichBlockTable($this->properties),
             'details' => new RichBlockDetails($this->properties),
-            'expandable_blockquote' => new RichBlockExpandableBlockQuotation($this->properties),
             'map' => new RichBlockMap($this->properties),
             'buttons' => new RichBlockButtons($this->properties),
             'animation' => new RichBlockAnimation($this->properties),
@@ -89,12 +88,12 @@ class RichBlock extends Entity
             self::TYPE_ANCHOR => new RichBlockAnchor($data),
             self::TYPE_LIST => new RichBlockList($data),
             self::TYPE_BLOCK_QUOTATION => new RichBlockBlockQuotation($data),
+            self::TYPE_EXPANDABLE_BLOCK_QUOTATION => new RichBlockExpandableBlockQuotation($data),
             self::TYPE_PULL_QUOTATION => new RichBlockPullQuotation($data),
             self::TYPE_COLLAGE => new RichBlockCollage($data),
             self::TYPE_SLIDESHOW => new RichBlockSlideshow($data),
             self::TYPE_TABLE => new RichBlockTable($data),
             self::TYPE_DETAILS => new RichBlockDetails($data),
-            self::TYPE_EXPANDABLE_BLOCK_QUOTATION => new RichBlockExpandableBlockQuotation($data),
             self::TYPE_MAP => new RichBlockMap($data),
             self::TYPE_BUTTONS => new RichBlockButtons($data),
             self::TYPE_ANIMATION => new RichBlockAnimation($data),

@@ -9,7 +9,6 @@ use Mk4U\TGram\Core\Entity;
  */
 class RevenueWithdrawalState extends Entity
 {
-    
     public const TYPE_PENDING = 'pending';
     public const TYPE_SUCCEEDED = 'succeeded';
     public const TYPE_FAILED = 'failed';

@@ -7,7 +7,7 @@ use Mk4U\TGram\Core\Entity;
 /**
  * RichBlockExpandableBlockQuotation Entity
  * @property string $type
- * @property RichText $text
+ * @property RichBlock[] $blocks
  * @property RichText $credit
  */
 class RichBlockExpandableBlockQuotation extends RichBlock
@@ -16,7 +16,7 @@ class RichBlockExpandableBlockQuotation extends RichBlock
     protected function setEntities(): array
     {
         return [
-            'text' => RichText::class,
+            'blocks' => [RichBlock::class],
             'credit' => RichText::class,
         ];
     }

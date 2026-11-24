@@ -13,6 +13,7 @@ use Mk4U\TGram\Core\Entity;
  * @property string $quote
  * @property string $quote_parse_mode
  * @property MessageEntity[] $quote_entities
+ * @property RichText[] $quote_rich_texts
  * @property int $quote_position
  * @property int $checklist_task_id
  * @property string $poll_option_id
@@ -24,6 +25,7 @@ class ReplyParameters extends Entity
     {
         return [
             'quote_entities' => [MessageEntity::class],
+            'quote_rich_texts' => [RichText::class],
         ];
     }
 }

@@ -9,7 +9,6 @@ use Mk4U\TGram\Core\Entity;
  */
 class ChatMember extends Entity
 {
-    
     public const STATUS_CREATOR = 'creator';
     public const STATUS_ADMINISTRATOR = 'administrator';
     public const STATUS_MEMBER = 'member';

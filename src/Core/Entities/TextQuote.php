@@ -8,6 +8,7 @@ use Mk4U\TGram\Core\Entity;
  * TextQuote Entity
  * @property string $text
  * @property MessageEntity[] $entities
+ * @property RichText[] $rich_texts
  * @property int $position
  * @property bool $is_manual
  */
@@ -18,6 +19,7 @@ class TextQuote extends Entity
     {
         return [
             'entities' => [MessageEntity::class],
+            'rich_texts' => [RichText::class],
         ];
     }
 }

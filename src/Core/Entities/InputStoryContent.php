@@ -9,7 +9,6 @@ use Mk4U\TGram\Core\Entity;
  */
 class InputStoryContent extends Entity
 {
-    
     public const TYPE_PHOTO = 'photo';
     public const TYPE_VIDEO = 'video';
 

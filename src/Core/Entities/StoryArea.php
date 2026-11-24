@@ -6,7 +6,7 @@ use Mk4U\TGram\Core\Entity;
 
 /**
  * StoryArea Entity
- * @property StoryAreaPosition $position
+ * @property AreaPosition $position
  * @property StoryAreaType $type
  */
 class StoryArea extends Entity
@@ -15,7 +15,7 @@ class StoryArea extends Entity
     protected function setEntities(): array
     {
         return [
-            'position' => StoryAreaPosition::class,
+            'position' => AreaPosition::class,
             'type' => StoryAreaType::class,
         ];
     }

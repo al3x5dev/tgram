@@ -9,7 +9,6 @@ use Mk4U\TGram\Core\Entity;
  */
 class ChatBoostSource extends Entity
 {
-    
     public const SOURCE_PREMIUM = 'premium';
     public const SOURCE_GIFT_CODE = 'gift_code';
     public const SOURCE_GIVEAWAY = 'giveaway';

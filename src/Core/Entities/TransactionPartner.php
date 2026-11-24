@@ -9,7 +9,6 @@ use Mk4U\TGram\Core\Entity;
  */
 class TransactionPartner extends Entity
 {
-    
     public const TYPE_USER = 'user';
     public const TYPE_CHAT = 'chat';
     public const TYPE_AFFILIATE_PROGRAM = 'affiliate_program';

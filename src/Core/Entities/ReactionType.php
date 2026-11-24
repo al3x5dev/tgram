@@ -9,7 +9,6 @@ use Mk4U\TGram\Core\Entity;
  */
 class ReactionType extends Entity
 {
-    
     public const TYPE_EMOJI = 'emoji';
     public const TYPE_CUSTOM_EMOJI = 'custom_emoji';
     public const TYPE_PAID = 'paid';

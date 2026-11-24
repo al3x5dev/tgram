@@ -9,7 +9,6 @@ use Mk4U\TGram\Core\Entity;
  */
 class StoryAreaType extends Entity
 {
-    
     public const TYPE_LOCATION = 'location';
     public const TYPE_SUGGESTED_REACTION = 'suggested_reaction';
     public const TYPE_LINK = 'link';

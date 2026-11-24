@@ -21,6 +21,8 @@ use Mk4U\TGram\Core\Entity;
  * @property InlineQuery $inline_query
  * @property ChosenInlineResult $chosen_inline_result
  * @property CallbackQuery $callback_query
+ * @property WidgetQuery $widget_query
+ * @property SharedWidgetQuery $shared_widget_query
  * @property ShippingQuery $shipping_query
  * @property PreCheckoutQuery $pre_checkout_query
  * @property PaidMediaPurchased $purchased_paid_media
@@ -55,6 +57,8 @@ class Update extends Entity
             'inline_query' => InlineQuery::class,
             'chosen_inline_result' => ChosenInlineResult::class,
             'callback_query' => CallbackQuery::class,
+            'widget_query' => WidgetQuery::class,
+            'shared_widget_query' => SharedWidgetQuery::class,
             'shipping_query' => ShippingQuery::class,
             'pre_checkout_query' => PreCheckoutQuery::class,
             'purchased_paid_media' => PaidMediaPurchased::class,

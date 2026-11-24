@@ -9,7 +9,6 @@ use Mk4U\TGram\Core\Entity;
  */
 class InputPollOptionMedia extends Entity
 {
-    
     public const TYPE_ANIMATION = 'animation';
     public const TYPE_LINK = 'link';
     public const TYPE_LIVE_PHOTO = 'live_photo';
@@ -43,17 +42,6 @@ class InputPollOptionMedia extends Entity
      *
      * @param array $data Must contain 'type' key
      * @return Entity
-     *
-     * | type= | Creates |
-     * |-------|----------|
-     * | animation | InputMediaAnimation |
-     * | link | InputMediaLink |
-     * | live_photo | InputMediaLivePhoto |
-     * | location | InputMediaLocation |
-     * | photo | InputMediaPhoto |
-     * | sticker | InputMediaSticker |
-     * | venue | InputMediaVenue |
-     * | video | InputMediaVideo |
      * @throws \InvalidArgumentException
      */
     public static function create(array $data): Entity

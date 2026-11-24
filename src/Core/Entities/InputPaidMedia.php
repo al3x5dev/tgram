@@ -9,7 +9,7 @@ use Mk4U\TGram\Core\Entity;
  */
 class InputPaidMedia extends Entity
 {
-    
+    public const TYPE_LIVE_PHOTO = 'live_photo';
     public const TYPE_PHOTO = 'photo';
     public const TYPE_VIDEO = 'video';
 
@@ -20,6 +20,7 @@ class InputPaidMedia extends Entity
     public function resolve(): Entity
     {
         return match($this->type) {
+            'live_photo' => new InputPaidMediaLivePhoto($this->properties),
             'photo' => new InputPaidMediaPhoto($this->properties),
             'video' => new InputPaidMediaVideo($this->properties),
             default => throw new \InvalidArgumentException('Unknown InputPaidMedia type: ' . $this->type),
@@ -36,6 +37,7 @@ class InputPaidMedia extends Entity
     public static function create(array $data): Entity
     {
         return match($data['type'] ?? null) {
+            self::TYPE_LIVE_PHOTO => new InputPaidMediaLivePhoto($data),
             self::TYPE_PHOTO => new InputPaidMediaPhoto($data),
             self::TYPE_VIDEO => new InputPaidMediaVideo($data),
             default => throw new \InvalidArgumentException('Unknown InputPaidMedia type: ' . ($data['type'] ?? 'null')),

@@ -9,7 +9,6 @@ use Mk4U\TGram\Core\Entity;
  */
 class MessageOrigin extends Entity
 {
-    
     public const TYPE_USER = 'user';
     public const TYPE_HIDDEN_USER = 'hidden_user';
     public const TYPE_CHAT = 'chat';

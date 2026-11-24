@@ -48,6 +48,11 @@ use Mk4U\TGram\Core\Entities\File;
 use Mk4U\TGram\Core\Entities\ChatInviteLink;
 use Mk4U\TGram\Core\Entities\ChatFullInfo;
 use Mk4U\TGram\Core\Entities\ChatMember;
+use Mk4U\TGram\Core\Entities\ChatShareThemeBackdrops;
+use Mk4U\TGram\Core\Entities\EphemeralMessageParameters;
+use Mk4U\TGram\Core\Entities\Gifts;
+use Mk4U\TGram\Core\Entities\OwnedGifts;
+use Mk4U\TGram\Core\Entities\UniqueGift;
 use Mk4U\TGram\Core\Entities\ForumTopic;
 use Mk4U\TGram\Core\Entities\UserChatBoosts;
 use Mk4U\TGram\Core\Entities\BusinessConnection;
@@ -66,6 +71,7 @@ use Mk4U\TGram\Core\Entities\SentGuestMessage;
 use Mk4U\TGram\Core\Entities\UserProfileAudios;
 use Mk4U\TGram\Core\Entities\SentWebAppMessage;
 use Mk4U\TGram\Core\Entities\StarTransactions;
+use Mk4U\TGram\Core\Entities\BotFullInfo;
 
 trait Methods
 {
@@ -133,10 +139,10 @@ trait Methods
     }
 
     /**
-     * A simple method for testing your bot's authentication token. Requires no parameters. Returns basic information about the bot in form of a User object.
-     * @return User
+     * A simple method for testing your bot's authentication token. Requires no parameters. Returns information about the bot in form of a BotFullInfo object.
+     * @return BotFullInfo
      */
-    public function getMe(): User
+    public function getMe(): BotFullInfo
     {
         $args = get_defined_vars();
         unset($args['this']);
@@ -185,7 +191,7 @@ trait Methods
      * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply $reply_markup
      * @return Message
      */
-    public function sendMessage(int|string $chat_id, string $text, ?string $business_connection_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?EphemeralMessageParameters $ephemeral_message_parameters = null, ?string $parse_mode = null, ?array $entities = null, ?LinkPreviewOptions $link_preview_options = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
+    public function sendMessage(string $text, ?string $business_connection_id = null, int|string|null $chat_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?EphemeralMessageParameters $ephemeral_message_parameters = null, ?string $parse_mode = null, ?array $entities = null, ?LinkPreviewOptions $link_preview_options = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
     {
         $args = get_defined_vars();
         unset($args['this']);
@@ -232,7 +238,7 @@ trait Methods
     }
 
     /**
-     * Use this method to copy messages of any kind. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied. A quiz poll can be copied only if the value of the field correct_option_ids is known to the bot. The method is analogous to the method forwardMessage, but the copied message doesn't have a link to the original message. Returns the MessageId of the sent message on success.
+     * Use this method to copy messages of any kind. Service messages, paid media messages, giveaway messages, giveaway winners messages, invoice messages, and widget messages can't be copied. A quiz poll can be copied only if the value of the field correct_option_ids is known to the bot. The method is analogous to the method forwardMessage, but the copied message doesn't have a link to the original message. Returns the MessageId of the sent message on success.
      * @param int|string $chat_id
      * @param int $message_thread_id
      * @param int $direct_messages_topic_id
@@ -260,7 +266,7 @@ trait Methods
     }
 
     /**
-     * Use this method to copy messages of any kind. If some of the specified messages can't be found or copied, they are skipped. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied. A quiz poll can be copied only if the value of the field correct_option_ids is known to the bot. The method is analogous to the method forwardMessages, but the copied messages don't have a link to the original message. Album grouping is kept for copied messages. On success, an Array of MessageId of the sent messages is returned.
+     * Use this method to copy messages of any kind. If some of the specified messages can't be found or copied, they are skipped. Service messages, paid media messages, giveaway messages, giveaway winners messages, invoice messages, and widget messages can't be copied. A quiz poll can be copied only if the value of the field correct_option_ids is known to the bot. The method is analogous to the method forwardMessages, but the copied messages don't have a link to the original message. Album grouping is kept for copied messages. On success, an Array of MessageId of the sent messages is returned.
      * @param int|string $chat_id
      * @param int $message_thread_id
      * @param int $direct_messages_topic_id
@@ -300,7 +306,7 @@ trait Methods
      * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply $reply_markup
      * @return Message
      */
-    public function sendPhoto(int|string $chat_id, InputFile|string $photo, ?string $business_connection_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?EphemeralMessageParameters $ephemeral_message_parameters = null, ?string $caption = null, ?string $parse_mode = null, ?array $caption_entities = null, ?bool $show_caption_above_media = null, ?bool $has_spoiler = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
+    public function sendPhoto(InputFile|string $photo, ?string $business_connection_id = null, int|string|null $chat_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?EphemeralMessageParameters $ephemeral_message_parameters = null, ?string $caption = null, ?string $parse_mode = null, ?array $caption_entities = null, ?bool $show_caption_above_media = null, ?bool $has_spoiler = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
     {
         $args = get_defined_vars();
         unset($args['this']);
@@ -330,7 +336,7 @@ trait Methods
      * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply $reply_markup
      * @return Message
      */
-    public function sendLivePhoto(int|string $chat_id, InputFile|string $live_photo, InputFile|string $photo, ?string $business_connection_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?EphemeralMessageParameters $ephemeral_message_parameters = null, ?string $caption = null, ?string $parse_mode = null, ?array $caption_entities = null, ?bool $show_caption_above_media = null, ?bool $has_spoiler = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
+    public function sendLivePhoto(InputFile|string $live_photo, InputFile|string $photo, ?string $business_connection_id = null, int|string|null $chat_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?EphemeralMessageParameters $ephemeral_message_parameters = null, ?string $caption = null, ?string $parse_mode = null, ?array $caption_entities = null, ?bool $show_caption_above_media = null, ?bool $has_spoiler = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
     {
         $args = get_defined_vars();
         unset($args['this']);
@@ -362,7 +368,7 @@ trait Methods
      * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply $reply_markup
      * @return Message
      */
-    public function sendAudio(int|string $chat_id, InputFile|string $audio, ?string $business_connection_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?EphemeralMessageParameters $ephemeral_message_parameters = null, ?string $caption = null, ?string $parse_mode = null, ?array $caption_entities = null, ?int $duration = null, ?string $performer = null, ?string $title = null, InputFile|string|null $thumbnail = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
+    public function sendAudio(InputFile|string $audio, ?string $business_connection_id = null, int|string|null $chat_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?EphemeralMessageParameters $ephemeral_message_parameters = null, ?string $caption = null, ?string $parse_mode = null, ?array $caption_entities = null, ?int $duration = null, ?string $performer = null, ?string $title = null, InputFile|string|null $thumbnail = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
     {
         $args = get_defined_vars();
         unset($args['this']);
@@ -391,7 +397,7 @@ trait Methods
      * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply $reply_markup
      * @return Message
      */
-    public function sendDocument(int|string $chat_id, InputFile|string $document, ?string $business_connection_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?EphemeralMessageParameters $ephemeral_message_parameters = null, InputFile|string|null $thumbnail = null, ?string $caption = null, ?string $parse_mode = null, ?array $caption_entities = null, ?bool $disable_content_type_detection = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
+    public function sendDocument(InputFile|string $document, ?string $business_connection_id = null, int|string|null $chat_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?EphemeralMessageParameters $ephemeral_message_parameters = null, InputFile|string|null $thumbnail = null, ?string $caption = null, ?string $parse_mode = null, ?array $caption_entities = null, ?bool $disable_content_type_detection = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
     {
         $args = get_defined_vars();
         unset($args['this']);
@@ -427,7 +433,7 @@ trait Methods
      * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply $reply_markup
      * @return Message
      */
-    public function sendVideo(int|string $chat_id, InputFile|string $video, ?string $business_connection_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?EphemeralMessageParameters $ephemeral_message_parameters = null, ?int $duration = null, ?int $width = null, ?int $height = null, InputFile|string|null $thumbnail = null, InputFile|string|null $cover = null, ?int $start_timestamp = null, ?string $caption = null, ?string $parse_mode = null, ?array $caption_entities = null, ?bool $show_caption_above_media = null, ?bool $has_spoiler = null, ?bool $supports_streaming = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
+    public function sendVideo(InputFile|string $video, ?string $business_connection_id = null, int|string|null $chat_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?EphemeralMessageParameters $ephemeral_message_parameters = null, ?int $duration = null, ?int $width = null, ?int $height = null, InputFile|string|null $thumbnail = null, InputFile|string|null $cover = null, ?int $start_timestamp = null, ?string $caption = null, ?string $parse_mode = null, ?array $caption_entities = null, ?bool $show_caption_above_media = null, ?bool $has_spoiler = null, ?bool $supports_streaming = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
     {
         $args = get_defined_vars();
         unset($args['this']);
@@ -460,7 +466,7 @@ trait Methods
      * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply $reply_markup
      * @return Message
      */
-    public function sendAnimation(int|string $chat_id, InputFile|string $animation, ?string $business_connection_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?EphemeralMessageParameters $ephemeral_message_parameters = null, ?int $duration = null, ?int $width = null, ?int $height = null, InputFile|string|null $thumbnail = null, ?string $caption = null, ?string $parse_mode = null, ?array $caption_entities = null, ?bool $show_caption_above_media = null, ?bool $has_spoiler = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
+    public function sendAnimation(InputFile|string $animation, ?string $business_connection_id = null, int|string|null $chat_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?EphemeralMessageParameters $ephemeral_message_parameters = null, ?int $duration = null, ?int $width = null, ?int $height = null, InputFile|string|null $thumbnail = null, ?string $caption = null, ?string $parse_mode = null, ?array $caption_entities = null, ?bool $show_caption_above_media = null, ?bool $has_spoiler = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
     {
         $args = get_defined_vars();
         unset($args['this']);
@@ -488,7 +494,7 @@ trait Methods
      * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply $reply_markup
      * @return Message
      */
-    public function sendVoice(int|string $chat_id, InputFile|string $voice, ?string $business_connection_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?EphemeralMessageParameters $ephemeral_message_parameters = null, ?string $caption = null, ?string $parse_mode = null, ?array $caption_entities = null, ?int $duration = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
+    public function sendVoice(InputFile|string $voice, ?string $business_connection_id = null, int|string|null $chat_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?EphemeralMessageParameters $ephemeral_message_parameters = null, ?string $caption = null, ?string $parse_mode = null, ?array $caption_entities = null, ?int $duration = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
     {
         $args = get_defined_vars();
         unset($args['this']);
@@ -515,7 +521,62 @@ trait Methods
      * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply $reply_markup
      * @return Message
      */
-    public function sendVideoNote(int|string $chat_id, InputFile|string $video_note, ?string $business_connection_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?EphemeralMessageParameters $ephemeral_message_parameters = null, ?int $duration = null, ?int $length = null, InputFile|string|null $thumbnail = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
+    public function sendVideoNote(InputFile|string $video_note, ?string $business_connection_id = null, int|string|null $chat_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?EphemeralMessageParameters $ephemeral_message_parameters = null, ?int $duration = null, ?int $length = null, InputFile|string|null $thumbnail = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
+    {
+        $args = get_defined_vars();
+        unset($args['this']);
+        return $this->sender(__FUNCTION__, $args);
+    }
+
+    /**
+     * Use this method to send a message with an HTML widget. Currently, in the production environment, widgets can be sent only to private chats, and sent widgets automatically have protected content and therefore can't be forwarded. On success, the sent Message is returned.
+     * @param int|string $chat_id
+     * @param int $message_thread_id
+     * @param string $html
+     * @param int $width
+     * @param int $height
+     * @param string $public_data
+     * @param string $chat_data
+     * @param string $caption
+     * @param string $parse_mode
+     * @param MessageEntity[] $caption_entities
+     * @param bool $show_caption_above_media
+     * @param bool $allow_queries
+     * @param bool $is_shared
+     * @param bool $disable_notification
+     * @param bool $protect_content
+     * @param bool $allow_paid_broadcast
+     * @param string $message_effect_id
+     * @param ReplyParameters $reply_parameters
+     * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply $reply_markup
+     * @return Message
+     */
+    public function sendWidget(int|string $chat_id, string $html, ?int $message_thread_id = null, ?int $width = null, ?int $height = null, ?string $public_data = null, ?string $chat_data = null, ?string $caption = null, ?string $parse_mode = null, ?array $caption_entities = null, ?bool $show_caption_above_media = null, ?bool $allow_queries = null, ?bool $is_shared = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
+    {
+        $args = get_defined_vars();
+        unset($args['this']);
+        return $this->sender(__FUNCTION__, $args);
+    }
+
+    /**
+     * Use this method to send again a shared widget created by the bot. Currently, in the production environment, widgets can be sent only to private chats, and sent widgets automatically have protected content and therefore can't be forwarded. On success, the sent Message is returned.
+     * @param int|string $chat_id
+     * @param int $message_thread_id
+     * @param string $widget_id
+     * @param string $chat_data
+     * @param string $caption
+     * @param string $parse_mode
+     * @param MessageEntity[] $caption_entities
+     * @param bool $show_caption_above_media
+     * @param bool $disable_notification
+     * @param bool $protect_content
+     * @param bool $allow_paid_broadcast
+     * @param string $message_effect_id
+     * @param ReplyParameters $reply_parameters
+     * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply $reply_markup
+     * @return Message
+     */
+    public function sendSharedWidget(int|string $chat_id, string $widget_id, ?int $message_thread_id = null, ?string $chat_data = null, ?string $caption = null, ?string $parse_mode = null, ?array $caption_entities = null, ?bool $show_caption_above_media = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
     {
         $args = get_defined_vars();
         unset($args['this']);
@@ -593,7 +654,7 @@ trait Methods
      * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply $reply_markup
      * @return Message
      */
-    public function sendLocation(int|string $chat_id, float $latitude, float $longitude, ?string $business_connection_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?EphemeralMessageParameters $ephemeral_message_parameters = null, ?float $horizontal_accuracy = null, ?int $live_period = null, ?int $heading = null, ?int $proximity_alert_radius = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
+    public function sendLocation(float $latitude, float $longitude, ?string $business_connection_id = null, int|string|null $chat_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?EphemeralMessageParameters $ephemeral_message_parameters = null, ?float $horizontal_accuracy = null, ?int $live_period = null, ?int $heading = null, ?int $proximity_alert_radius = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
     {
         $args = get_defined_vars();
         unset($args['this']);
@@ -624,7 +685,7 @@ trait Methods
      * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply $reply_markup
      * @return Message
      */
-    public function sendVenue(int|string $chat_id, float $latitude, float $longitude, string $title, string $address, ?string $business_connection_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?EphemeralMessageParameters $ephemeral_message_parameters = null, ?string $foursquare_id = null, ?string $foursquare_type = null, ?string $google_place_id = null, ?string $google_place_type = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
+    public function sendVenue(float $latitude, float $longitude, string $title, string $address, ?string $business_connection_id = null, int|string|null $chat_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?EphemeralMessageParameters $ephemeral_message_parameters = null, ?string $foursquare_id = null, ?string $foursquare_type = null, ?string $google_place_id = null, ?string $google_place_type = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
     {
         $args = get_defined_vars();
         unset($args['this']);
@@ -651,7 +712,7 @@ trait Methods
      * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply $reply_markup
      * @return Message
      */
-    public function sendContact(int|string $chat_id, string $phone_number, string $first_name, ?string $business_connection_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?EphemeralMessageParameters $ephemeral_message_parameters = null, ?string $last_name = null, ?string $vcard = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
+    public function sendContact(string $phone_number, string $first_name, ?string $business_connection_id = null, int|string|null $chat_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?EphemeralMessageParameters $ephemeral_message_parameters = null, ?string $last_name = null, ?string $vcard = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
     {
         $args = get_defined_vars();
         unset($args['this']);
@@ -1288,6 +1349,17 @@ trait Methods
     }
 
     /**
+     * Use this method to get the list of backdrops, which can be used as the background of a theme of the screen for sharing a link to a user or a chat. Requires no parameters. Returns a ChatShareThemeBackdrops object.
+     * @return ChatShareThemeBackdrops
+     */
+    public function getChatShareThemeBackdrops(): ChatShareThemeBackdrops
+    {
+        $args = get_defined_vars();
+        unset($args['this']);
+        return $this->sender(__FUNCTION__, $args);
+    }
+
+    /**
      * Use this method to get the last messages from the personal chat (i.e., the chat currently added to their profile) of a given user. On success, an Array of Message objects is returned.
      * @param int $user_id
      * @param int $limit
@@ -1337,7 +1409,7 @@ trait Methods
     }
 
     /**
-     * Use this method to create a topic in a forum supergroup chat or a private chat with a user. In the case of a supergroup chat the bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator right. Returns information about the created topic as a ForumTopic object.
+     * Use this method to create a topic in a forum supergroup chat or a private chat with a user. In the case of a supergroup chat the bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator right. In the case of a private chat, a link to the topic can be created in the format https://t.me/<bot_username>/<message_thread_id>; the link opens the topic only for the user. Returns information about the created topic as a ForumTopic object.
      * @param int|string $chat_id
      * @param string $name
      * @param int $icon_color
@@ -1492,7 +1564,7 @@ trait Methods
     }
 
     /**
-     * Use this method to send answers to callback queries sent from inline keyboards. The answer will be displayed to the user as a notification at the top of the chat screen or as an alert. On success, True is returned.
+     * Use this method to send answers to callback queries sent from inline keyboards or rich messages. The answer will be displayed to the user as a notification at the top of the chat screen or as an alert. On success, True is returned.
      * @param string $callback_query_id
      * @param string $text
      * @param bool $show_alert
@@ -1501,6 +1573,19 @@ trait Methods
      * @return bool
      */
     public function answerCallbackQuery(string $callback_query_id, ?string $text = null, ?bool $show_alert = null, ?string $url = null, ?int $cache_time = null): bool
+    {
+        $args = get_defined_vars();
+        unset($args['this']);
+        return $this->sender(__FUNCTION__, $args);
+    }
+
+    /**
+     * Use this method to send an answer to a query from a widget. The query must be answered within 15 seconds. The answer is received only by the widget that sent the query and doesn't change data of the widget; use editMessageWidgetData or editSharedWidgetData to change it. On success, True is returned.
+     * @param string $widget_query_id
+     * @param string $data
+     * @return bool
+     */
+    public function answerWidgetQuery(string $widget_query_id, ?string $data = null): bool
     {
         $args = get_defined_vars();
         unset($args['this']);
@@ -1589,6 +1674,32 @@ trait Methods
      * @return bool
      */
     public function setManagedBotAccessSettings(int $user_id, bool $is_access_restricted, ?array $added_user_ids = null): bool
+    {
+        $args = get_defined_vars();
+        unset($args['this']);
+        return $this->sender(__FUNCTION__, $args);
+    }
+
+    /**
+     * Use this method to change settings of the bot. Settings that aren't specified remain unchanged. Returns True on success.
+     * @param bool $supports_inline_queries
+     * @param string $inline_query_placeholder
+     * @param bool $needs_inline_query_location
+     * @param int $inline_feedback_share_denominator
+     * @param bool $can_join_groups
+     * @param bool $can_read_all_group_messages
+     * @param bool $can_connect_to_business
+     * @param bool $can_manage_bots
+     * @param bool $supports_guest_queries
+     * @param bool $supports_join_request_queries
+     * @param bool $has_topics_enabled
+     * @param bool $allows_users_to_create_topics
+     * @param bool $has_topic_sidebar
+     * @param bool $can_communicate_with_bots
+     * @param string $callback_query_mode
+     * @return bool
+     */
+    public function setMySettings(?bool $supports_inline_queries = null, ?string $inline_query_placeholder = null, ?bool $needs_inline_query_location = null, ?int $inline_feedback_share_denominator = null, ?bool $can_join_groups = null, ?bool $can_read_all_group_messages = null, ?bool $can_connect_to_business = null, ?bool $can_manage_bots = null, ?bool $supports_guest_queries = null, ?bool $supports_join_request_queries = null, ?bool $has_topics_enabled = null, ?bool $allows_users_to_create_topics = null, ?bool $has_topic_sidebar = null, ?bool $can_communicate_with_bots = null, ?string $callback_query_mode = null): bool
     {
         $args = get_defined_vars();
         unset($args['this']);
@@ -1785,9 +1896,9 @@ trait Methods
 
     /**
      * Returns the list of gifts that can be sent by the bot to users and channel chats. Requires no parameters. Returns a Gifts object.
-     * @return 
+     * @return Gifts
      */
-    public function getAvailableGifts(): mixed
+    public function getAvailableGifts(): Gifts
     {
         $args = get_defined_vars();
         unset($args['this']);
@@ -1833,9 +1944,11 @@ trait Methods
      * Verifies a user on behalf of the organization which is represented by the bot. Returns True on success.
      * @param int $user_id
      * @param string $custom_description
+     * @param string $custom_description_parse_mode
+     * @param MessageEntity[] $custom_description_entities
      * @return bool
      */
-    public function verifyUser(int $user_id, ?string $custom_description = null): bool
+    public function verifyUser(int $user_id, ?string $custom_description = null, ?string $custom_description_parse_mode = null, ?array $custom_description_entities = null): bool
     {
         $args = get_defined_vars();
         unset($args['this']);
@@ -1846,9 +1959,11 @@ trait Methods
      * Verifies a chat on behalf of the organization which is represented by the bot. Returns True on success.
      * @param int|string $chat_id
      * @param string $custom_description
+     * @param string $custom_description_parse_mode
+     * @param MessageEntity[] $custom_description_entities
      * @return bool
      */
-    public function verifyChat(int|string $chat_id, ?string $custom_description = null): bool
+    public function verifyChat(int|string $chat_id, ?string $custom_description = null, ?string $custom_description_parse_mode = null, ?array $custom_description_entities = null): bool
     {
         $args = get_defined_vars();
         unset($args['this']);
@@ -2025,9 +2140,9 @@ trait Methods
      * @param bool $sort_by_price
      * @param string $offset
      * @param int $limit
-     * @return 
+     * @return OwnedGifts
      */
-    public function getBusinessAccountGifts(string $business_connection_id, ?bool $exclude_unsaved = null, ?bool $exclude_saved = null, ?bool $exclude_unlimited = null, ?bool $exclude_limited_upgradable = null, ?bool $exclude_limited_non_upgradable = null, ?bool $exclude_unique = null, ?bool $exclude_from_blockchain = null, ?bool $sort_by_price = null, ?string $offset = null, ?int $limit = null): mixed
+    public function getBusinessAccountGifts(string $business_connection_id, ?bool $exclude_unsaved = null, ?bool $exclude_saved = null, ?bool $exclude_unlimited = null, ?bool $exclude_limited_upgradable = null, ?bool $exclude_limited_non_upgradable = null, ?bool $exclude_unique = null, ?bool $exclude_from_blockchain = null, ?bool $sort_by_price = null, ?string $offset = null, ?int $limit = null): OwnedGifts
     {
         $args = get_defined_vars();
         unset($args['this']);
@@ -2045,9 +2160,9 @@ trait Methods
      * @param bool $sort_by_price
      * @param string $offset
      * @param int $limit
-     * @return 
+     * @return OwnedGifts
      */
-    public function getUserGifts(int $user_id, ?bool $exclude_unlimited = null, ?bool $exclude_limited_upgradable = null, ?bool $exclude_limited_non_upgradable = null, ?bool $exclude_from_blockchain = null, ?bool $exclude_unique = null, ?bool $sort_by_price = null, ?string $offset = null, ?int $limit = null): mixed
+    public function getUserGifts(int $user_id, ?bool $exclude_unlimited = null, ?bool $exclude_limited_upgradable = null, ?bool $exclude_limited_non_upgradable = null, ?bool $exclude_from_blockchain = null, ?bool $exclude_unique = null, ?bool $sort_by_price = null, ?string $offset = null, ?int $limit = null): OwnedGifts
     {
         $args = get_defined_vars();
         unset($args['this']);
@@ -2067,9 +2182,21 @@ trait Methods
      * @param bool $sort_by_price
      * @param string $offset
      * @param int $limit
-     * @return 
+     * @return OwnedGifts
      */
-    public function getChatGifts(int|string $chat_id, ?bool $exclude_unsaved = null, ?bool $exclude_saved = null, ?bool $exclude_unlimited = null, ?bool $exclude_limited_upgradable = null, ?bool $exclude_limited_non_upgradable = null, ?bool $exclude_from_blockchain = null, ?bool $exclude_unique = null, ?bool $sort_by_price = null, ?string $offset = null, ?int $limit = null): mixed
+    public function getChatGifts(int|string $chat_id, ?bool $exclude_unsaved = null, ?bool $exclude_saved = null, ?bool $exclude_unlimited = null, ?bool $exclude_limited_upgradable = null, ?bool $exclude_limited_non_upgradable = null, ?bool $exclude_from_blockchain = null, ?bool $exclude_unique = null, ?bool $sort_by_price = null, ?string $offset = null, ?int $limit = null): OwnedGifts
+    {
+        $args = get_defined_vars();
+        unset($args['this']);
+        return $this->sender(__FUNCTION__, $args);
+    }
+
+    /**
+     * Use this method to get information about a unique gift by its name. Returns a UniqueGift object on success.
+     * @param string $name
+     * @return UniqueGift
+     */
+    public function getUniqueGift(string $name): UniqueGift
     {
         $args = get_defined_vars();
         unset($args['this']);
@@ -2113,6 +2240,19 @@ trait Methods
      * @return bool
      */
     public function transferGift(string $business_connection_id, string $owned_gift_id, int $new_owner_chat_id, ?int $star_count = null): bool
+    {
+        $args = get_defined_vars();
+        unset($args['this']);
+        return $this->sender(__FUNCTION__, $args);
+    }
+
+    /**
+     * Deletes a regular gift owned by a managed business account without receiving Telegram Stars for it. Requires the can_convert_gifts_to_stars business bot right. The gift can be deleted only if it isn't limited (the field total_count of the Gift is omitted) and wasn't refunded. Returns True on success.
+     * @param string $business_connection_id
+     * @param string $owned_gift_id
+     * @return bool
+     */
+    public function deleteBusinessAccountGift(string $business_connection_id, string $owned_gift_id): bool
     {
         $args = get_defined_vars();
         unset($args['this']);
@@ -2343,6 +2483,36 @@ trait Methods
     }
 
     /**
+     * Use this method to edit data of a widget in a message sent by the bot or via the bot (for inline bots). Public data of a shared widget can be changed at most once per second. On success, True is returned.
+     * @param int|string $chat_id
+     * @param int $message_id
+     * @param string $inline_message_id
+     * @param string $public_data
+     * @param string $chat_data
+     * @return bool
+     */
+    public function editMessageWidgetData(int|string|null $chat_id = null, ?int $message_id = null, ?string $inline_message_id = null, ?string $public_data = null, ?string $chat_data = null): bool
+    {
+        $args = get_defined_vars();
+        unset($args['this']);
+        return $this->sender(__FUNCTION__, $args);
+    }
+
+    /**
+     * Use this method to edit public data of a shared widget created by the bot. A shared widget can be edited at most once per second. On success, True is returned.
+     * @param string $widget_id
+     * @param string $public_data
+     * @param int $cache_time
+     * @return bool
+     */
+    public function editSharedWidgetData(string $widget_id, string $public_data, ?int $cache_time = null): bool
+    {
+        $args = get_defined_vars();
+        unset($args['this']);
+        return $this->sender(__FUNCTION__, $args);
+    }
+
+    /**
      * Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param string $business_connection_id
      * @param int|string $chat_id
@@ -2558,7 +2728,7 @@ trait Methods
      * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply $reply_markup
      * @return Message
      */
-    public function sendSticker(int|string $chat_id, InputFile|string $sticker, ?string $business_connection_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?EphemeralMessageParameters $ephemeral_message_parameters = null, ?string $emoji = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
+    public function sendSticker(InputFile|string $sticker, ?string $business_connection_id = null, int|string|null $chat_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?EphemeralMessageParameters $ephemeral_message_parameters = null, ?string $emoji = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
     {
         $args = get_defined_vars();
         unset($args['this']);
@@ -2783,7 +2953,7 @@ trait Methods
      * @param InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply $reply_markup
      * @return Message
      */
-    public function sendRichMessage(int|string $chat_id, InputRichMessage $rich_message, ?string $business_connection_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?EphemeralMessageParameters $ephemeral_message_parameters = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
+    public function sendRichMessage(InputRichMessage $rich_message, ?string $business_connection_id = null, int|string|null $chat_id = null, ?int $message_thread_id = null, ?int $direct_messages_topic_id = null, ?EphemeralMessageParameters $ephemeral_message_parameters = null, ?bool $disable_notification = null, ?bool $protect_content = null, ?bool $allow_paid_broadcast = null, ?string $message_effect_id = null, ?SuggestedPostParameters $suggested_post_parameters = null, ?ReplyParameters $reply_parameters = null, InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $reply_markup = null): Message
     {
         $args = get_defined_vars();
         unset($args['this']);

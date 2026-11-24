@@ -9,7 +9,6 @@ use Mk4U\TGram\Core\Entity;
  */
 class BotCommandScope extends Entity
 {
-    
     public const TYPE_DEFAULT = 'default';
     public const TYPE_ALL_PRIVATE_CHATS = 'all_private_chats';
     public const TYPE_ALL_GROUP_CHATS = 'all_group_chats';

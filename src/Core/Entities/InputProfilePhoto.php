@@ -9,7 +9,6 @@ use Mk4U\TGram\Core\Entity;
  */
 class InputProfilePhoto extends Entity
 {
-    
     public const TYPE_STATIC = 'static';
     public const TYPE_ANIMATED = 'animated';
 

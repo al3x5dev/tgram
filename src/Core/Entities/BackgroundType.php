@@ -9,7 +9,6 @@ use Mk4U\TGram\Core\Entity;
  */
 class BackgroundType extends Entity
 {
-    
     public const TYPE_FILL = 'fill';
     public const TYPE_WALLPAPER = 'wallpaper';
     public const TYPE_PATTERN = 'pattern';

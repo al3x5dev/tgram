@@ -59,6 +59,8 @@ use Mk4U\TGram\Core\Entity;
  * @property int $paid_message_star_count
  * @property User $guard_bot
  * @property Community $community
+ * @property TonWalletCard $ton_wallet_card
+ * @property ChatShareTheme $share_theme
  */
 class ChatFullInfo extends Entity
 {
@@ -83,6 +85,8 @@ class ChatFullInfo extends Entity
             'unique_gift_colors' => UniqueGiftColors::class,
             'guard_bot' => User::class,
             'community' => Community::class,
+            'ton_wallet_card' => TonWalletCard::class,
+            'share_theme' => ChatShareTheme::class,
         ];
     }
 }

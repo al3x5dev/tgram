@@ -9,7 +9,6 @@ use Mk4U\TGram\Core\Entity;
  */
 class MenuButton extends Entity
 {
-    
     public const TYPE_COMMANDS = 'commands';
     public const TYPE_WEB_APP = 'web_app';
     public const TYPE_DEFAULT = 'default';

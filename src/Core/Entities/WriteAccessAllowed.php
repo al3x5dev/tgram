@@ -9,12 +9,15 @@ use Mk4U\TGram\Core\Entity;
  * @property bool $from_request
  * @property string $web_app_name
  * @property bool $from_attachment_menu
+ * @property User $inviter
  */
 class WriteAccessAllowed extends Entity
 {
     
     protected function setEntities(): array
     {
-        return [];
+        return [
+            'inviter' => User::class,
+        ];
     }
 }

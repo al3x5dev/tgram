@@ -9,7 +9,6 @@ use Mk4U\TGram\Core\Entity;
  */
 class RichText extends Entity
 {
-    
     public const TYPE_BOLD = 'bold';
     public const TYPE_ITALIC = 'italic';
     public const TYPE_UNDERLINE = 'underline';
@@ -27,10 +26,12 @@ class RichText extends Entity
     public const TYPE_EMAIL_ADDRESS = 'email_address';
     public const TYPE_PHONE_NUMBER = 'phone_number';
     public const TYPE_BANK_CARD_NUMBER = 'bank_card_number';
+    public const TYPE_TON_ADDRESS = 'ton_address';
     public const TYPE_MENTION = 'mention';
     public const TYPE_HASHTAG = 'hashtag';
     public const TYPE_CASHTAG = 'cashtag';
     public const TYPE_BOT_COMMAND = 'bot_command';
+    public const TYPE_BUTTON = 'button';
     public const TYPE_ANCHOR = 'anchor';
     public const TYPE_ANCHOR_LINK = 'anchor_link';
     public const TYPE_REFERENCE = 'reference';
@@ -60,10 +61,12 @@ class RichText extends Entity
             'email_address' => new RichTextEmailAddress($this->properties),
             'phone_number' => new RichTextPhoneNumber($this->properties),
             'bank_card_number' => new RichTextBankCardNumber($this->properties),
+            'ton_address' => new RichTextTonAddress($this->properties),
             'mention' => new RichTextMention($this->properties),
             'hashtag' => new RichTextHashtag($this->properties),
             'cashtag' => new RichTextCashtag($this->properties),
             'bot_command' => new RichTextBotCommand($this->properties),
+            'button' => new RichTextButton($this->properties),
             'anchor' => new RichTextAnchor($this->properties),
             'anchor_link' => new RichTextAnchorLink($this->properties),
             'reference' => new RichTextReference($this->properties),
@@ -99,10 +102,12 @@ class RichText extends Entity
             self::TYPE_EMAIL_ADDRESS => new RichTextEmailAddress($data),
             self::TYPE_PHONE_NUMBER => new RichTextPhoneNumber($data),
             self::TYPE_BANK_CARD_NUMBER => new RichTextBankCardNumber($data),
+            self::TYPE_TON_ADDRESS => new RichTextTonAddress($data),
             self::TYPE_MENTION => new RichTextMention($data),
             self::TYPE_HASHTAG => new RichTextHashtag($data),
             self::TYPE_CASHTAG => new RichTextCashtag($data),
             self::TYPE_BOT_COMMAND => new RichTextBotCommand($data),
+            self::TYPE_BUTTON => new RichTextButton($data),
             self::TYPE_ANCHOR => new RichTextAnchor($data),
             self::TYPE_ANCHOR_LINK => new RichTextAnchorLink($data),
             self::TYPE_REFERENCE => new RichTextReference($data),

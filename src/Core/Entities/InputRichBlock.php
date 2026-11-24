@@ -9,7 +9,6 @@ use Mk4U\TGram\Core\Entity;
  */
 class InputRichBlock extends Entity
 {
-    
     public const TYPE_PARAGRAPH = 'paragraph';
     public const TYPE_HEADING = 'heading';
     public const TYPE_PREFORMATTED = 'pre';
@@ -19,12 +18,12 @@ class InputRichBlock extends Entity
     public const TYPE_ANCHOR = 'anchor';
     public const TYPE_LIST = 'list';
     public const TYPE_BLOCK_QUOTATION = 'blockquote';
+    public const TYPE_EXPANDABLE_BLOCK_QUOTATION = 'expandable_blockquote';
     public const TYPE_PULL_QUOTATION = 'pullquote';
     public const TYPE_COLLAGE = 'collage';
     public const TYPE_SLIDESHOW = 'slideshow';
     public const TYPE_TABLE = 'table';
     public const TYPE_DETAILS = 'details';
-    public const TYPE_EXPANDABLE_BLOCK_QUOTATION = 'expandable_blockquote';
     public const TYPE_MAP = 'map';
     public const TYPE_BUTTONS = 'buttons';
     public const TYPE_ANIMATION = 'animation';
@@ -51,12 +50,12 @@ class InputRichBlock extends Entity
             'anchor' => new InputRichBlockAnchor($this->properties),
             'list' => new InputRichBlockList($this->properties),
             'blockquote' => new InputRichBlockBlockQuotation($this->properties),
+            'expandable_blockquote' => new InputRichBlockExpandableBlockQuotation($this->properties),
             'pullquote' => new InputRichBlockPullQuotation($this->properties),
             'collage' => new InputRichBlockCollage($this->properties),
             'slideshow' => new InputRichBlockSlideshow($this->properties),
             'table' => new InputRichBlockTable($this->properties),
             'details' => new InputRichBlockDetails($this->properties),
-            'expandable_blockquote' => new InputRichBlockExpandableBlockQuotation($this->properties),
             'map' => new InputRichBlockMap($this->properties),
             'buttons' => new InputRichBlockButtons($this->properties),
             'animation' => new InputRichBlockAnimation($this->properties),
@@ -89,12 +88,12 @@ class InputRichBlock extends Entity
             self::TYPE_ANCHOR => new InputRichBlockAnchor($data),
             self::TYPE_LIST => new InputRichBlockList($data),
             self::TYPE_BLOCK_QUOTATION => new InputRichBlockBlockQuotation($data),
+            self::TYPE_EXPANDABLE_BLOCK_QUOTATION => new InputRichBlockExpandableBlockQuotation($data),
             self::TYPE_PULL_QUOTATION => new InputRichBlockPullQuotation($data),
             self::TYPE_COLLAGE => new InputRichBlockCollage($data),
             self::TYPE_SLIDESHOW => new InputRichBlockSlideshow($data),
             self::TYPE_TABLE => new InputRichBlockTable($data),
             self::TYPE_DETAILS => new InputRichBlockDetails($data),
-            self::TYPE_EXPANDABLE_BLOCK_QUOTATION => new InputRichBlockExpandableBlockQuotation($data),
             self::TYPE_MAP => new InputRichBlockMap($data),
             self::TYPE_BUTTONS => new InputRichBlockButtons($data),
             self::TYPE_ANIMATION => new InputRichBlockAnimation($data),

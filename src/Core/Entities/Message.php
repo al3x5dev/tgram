@@ -56,6 +56,7 @@ use Mk4U\TGram\Core\Entity;
  * @property Video $video
  * @property VideoNote $video_note
  * @property Voice $voice
+ * @property Widget $widget
  * @property string $caption
  * @property MessageEntity[] $caption_entities
  * @property bool $show_caption_above_media
@@ -113,6 +114,7 @@ use Mk4U\TGram\Core\Entity;
  * @property GiveawayCompleted $giveaway_completed
  * @property ManagedBotCreated $managed_bot_created
  * @property PaidMessagePriceChanged $paid_message_price_changed
+ * @property PaidMessagesWaived $paid_messages_waived
  * @property PollOptionAdded $poll_option_added
  * @property PollOptionDeleted $poll_option_deleted
  * @property SuggestedPostApproved $suggested_post_approved
@@ -120,6 +122,7 @@ use Mk4U\TGram\Core\Entity;
  * @property SuggestedPostDeclined $suggested_post_declined
  * @property SuggestedPostPaid $suggested_post_paid
  * @property SuggestedPostRefunded $suggested_post_refunded
+ * @property TonWalletTransfer $ton_wallet_transfer
  * @property VideoChatScheduled $video_chat_scheduled
  * @property VideoChatStarted $video_chat_started
  * @property VideoChatEnded $video_chat_ended
@@ -162,6 +165,7 @@ class Message extends MaybeInaccessibleMessage
             'video' => Video::class,
             'video_note' => VideoNote::class,
             'voice' => Voice::class,
+            'widget' => Widget::class,
             'caption_entities' => [MessageEntity::class],
             'checklist' => Checklist::class,
             'contact' => Contact::class,
@@ -208,6 +212,7 @@ class Message extends MaybeInaccessibleMessage
             'giveaway_completed' => GiveawayCompleted::class,
             'managed_bot_created' => ManagedBotCreated::class,
             'paid_message_price_changed' => PaidMessagePriceChanged::class,
+            'paid_messages_waived' => PaidMessagesWaived::class,
             'poll_option_added' => PollOptionAdded::class,
             'poll_option_deleted' => PollOptionDeleted::class,
             'suggested_post_approved' => SuggestedPostApproved::class,
@@ -215,6 +220,7 @@ class Message extends MaybeInaccessibleMessage
             'suggested_post_declined' => SuggestedPostDeclined::class,
             'suggested_post_paid' => SuggestedPostPaid::class,
             'suggested_post_refunded' => SuggestedPostRefunded::class,
+            'ton_wallet_transfer' => TonWalletTransfer::class,
             'video_chat_scheduled' => VideoChatScheduled::class,
             'video_chat_started' => VideoChatStarted::class,
             'video_chat_ended' => VideoChatEnded::class,

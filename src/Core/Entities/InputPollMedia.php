@@ -9,7 +9,6 @@ use Mk4U\TGram\Core\Entity;
  */
 class InputPollMedia extends Entity
 {
-    
     public const TYPE_ANIMATION = 'animation';
     public const TYPE_AUDIO = 'audio';
     public const TYPE_DOCUMENT = 'document';
@@ -43,17 +42,6 @@ class InputPollMedia extends Entity
      *
      * @param array $data Must contain 'type' key
      * @return Entity
-     *
-     * | type= | Creates |
-     * |-------|----------|
-     * | animation | InputMediaAnimation |
-     * | audio | InputMediaAudio |
-     * | document | InputMediaDocument |
-     * | live_photo | InputMediaLivePhoto |
-     * | location | InputMediaLocation |
-     * | photo | InputMediaPhoto |
-     * | venue | InputMediaVenue |
-     * | video | InputMediaVideo |
      * @throws \InvalidArgumentException
      */
     public static function create(array $data): Entity

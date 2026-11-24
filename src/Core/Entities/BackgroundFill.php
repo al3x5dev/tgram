@@ -9,7 +9,6 @@ use Mk4U\TGram\Core\Entity;
  */
 class BackgroundFill extends Entity
 {
-    
     public const TYPE_SOLID = 'solid';
     public const TYPE_GRADIENT = 'gradient';
     public const TYPE_FREEFORM_GRADIENT = 'freeform_gradient';

@@ -9,7 +9,6 @@ use Mk4U\TGram\Core\Entity;
  */
 class PassportElementError extends Entity
 {
-    
     public const SOURCE_DATA = 'data';
     public const SOURCE_FRONT_SIDE = 'front_side';
     public const SOURCE_REVERSE_SIDE = 'reverse_side';
@@ -36,7 +35,7 @@ class PassportElementError extends Entity
             'translation_file' => new PassportElementErrorTranslationFile($this->properties),
             'translation_files' => new PassportElementErrorTranslationFiles($this->properties),
             'unspecified' => new PassportElementErrorUnspecified($this->properties),
-            default => throw new \InvalidArgumentException('Unknown PassportElementError type: ' . $this->source),
+            default => throw new \InvalidArgumentException('Unknown PassportElementError source: ' . $this->source),
         };
     }
 

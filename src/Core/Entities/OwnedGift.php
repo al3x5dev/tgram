@@ -9,7 +9,6 @@ use Mk4U\TGram\Core\Entity;
  */
 class OwnedGift extends Entity
 {
-    
     public const TYPE_REGULAR = 'regular';
     public const TYPE_UNIQUE = 'unique';
 
@@ -19,7 +18,7 @@ class OwnedGift extends Entity
     }
     public function resolve(): Entity
     {
-        return match($this->type){
+        return match($this->type) {
             'regular' => new OwnedGiftRegular($this->properties),
             'unique' => new OwnedGiftUnique($this->properties),
             default => throw new \InvalidArgumentException('Unknown OwnedGift type: ' . $this->type),

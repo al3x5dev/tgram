@@ -21,6 +21,7 @@ use Mk4U\TGram\Core\Entity;
  * @property Video $video
  * @property VideoNote $video_note
  * @property Voice $voice
+ * @property Widget $widget
  * @property bool $has_media_spoiler
  * @property Checklist $checklist
  * @property Contact $contact
@@ -53,6 +54,7 @@ class ExternalReplyInfo extends Entity
             'video' => Video::class,
             'video_note' => VideoNote::class,
             'voice' => Voice::class,
+            'widget' => Widget::class,
             'checklist' => Checklist::class,
             'contact' => Contact::class,
             'dice' => Dice::class,

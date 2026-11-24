@@ -9,7 +9,6 @@ use Mk4U\TGram\Core\Entity;
  */
 class MaybeInaccessibleMessage extends Entity
 {
-    
     public const TYPE_MESSAGE = 'message';
     public const TYPE_INACCESSIBLE_MESSAGE = 'inaccessible_message';
 
@@ -19,7 +18,7 @@ class MaybeInaccessibleMessage extends Entity
     }
     public function resolve(): Entity
     {
-        return $this->hasProperty('from') 
+        return $this->hasProperty('from')
             ? new Message($this->properties)
             : new InaccessibleMessage($this->properties);
     }
@@ -32,7 +31,7 @@ class MaybeInaccessibleMessage extends Entity
      */
     public static function create(array $data): Entity
     {
-        return isset($data['from']) 
+        return isset($data['from'])
             ? new Message($data)
             : new InaccessibleMessage($data);
     }

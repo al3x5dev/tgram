@@ -9,9 +9,9 @@ use Mk4U\TGram\Core\Entity;
  */
 class PaidMedia extends Entity
 {
-    
-    public const TYPE_PREVIEW = 'preview';
+    public const TYPE_LIVE_PHOTO = 'live_photo';
     public const TYPE_PHOTO = 'photo';
+    public const TYPE_PREVIEW = 'preview';
     public const TYPE_VIDEO = 'video';
 
     protected function setEntities(): array
@@ -20,9 +20,10 @@ class PaidMedia extends Entity
     }
     public function resolve(): Entity
     {
-        return match($this->type){
-            'preview' => new PaidMediaPreview($this->properties),
+        return match($this->type) {
+            'live_photo' => new PaidMediaLivePhoto($this->properties),
             'photo' => new PaidMediaPhoto($this->properties),
+            'preview' => new PaidMediaPreview($this->properties),
             'video' => new PaidMediaVideo($this->properties),
             default => throw new \InvalidArgumentException('Unknown PaidMedia type: ' . $this->type),
         };
@@ -38,8 +39,9 @@ class PaidMedia extends Entity
     public static function create(array $data): Entity
     {
         return match($data['type'] ?? null) {
-            self::TYPE_PREVIEW => new PaidMediaPreview($data),
+            self::TYPE_LIVE_PHOTO => new PaidMediaLivePhoto($data),
             self::TYPE_PHOTO => new PaidMediaPhoto($data),
+            self::TYPE_PREVIEW => new PaidMediaPreview($data),
             self::TYPE_VIDEO => new PaidMediaVideo($data),
             default => throw new \InvalidArgumentException('Unknown PaidMedia type: ' . ($data['type'] ?? 'null')),
         };
