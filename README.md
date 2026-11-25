@@ -1,6 +1,6 @@
 # TGram PHP
 
-[![API Version](https://img.shields.io/badge/Bot%20API-10.3-32a2da?style=for-the-badge&logo=Telegram)](https://core.telegram.org/bots/api#august-24-2026)
+[![API Version](https://img.shields.io/badge/Bot%20API-10.5-32a2da?style=for-the-badge&logo=Telegram)]([https://core.telegram.org/bots/api#august-24-2026](https://core.telegram.org/bots/api#november-22-2026))
 [![Version](https://img.shields.io/github/v/release/al3x5dev/tgram?include_prereleases-blue&style=for-the-badge&color=blue)](https://packagist.org/packages/mk4u/tgram)
 [![License](https://img.shields.io/github/license/al3x5dev/tgram?style=for-the-badge)](https://github.com/al3x5dev/tgram/blob/main/LICENSE)
 [![PHP](https://img.shields.io/badge/php-8.5+-green?style=for-the-badge&logo=php&color=blue)](https://php.net/)
