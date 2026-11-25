@@ -154,4 +154,36 @@ class ConfigTest extends TestCase
 
         $this->assertFalse(Config::get('debug'));
     }
+
+    public function testSecretTokenReturnsMd5Hash(): void
+    {
+        Config::init([
+            'token' => '1234567890:ABCdefGHIjklMNOpqrsTUVwxyz',
+            'secret' => 'MiSecreto123',
+            'abs_path' => '/tmp',
+        ]);
+
+        $this->assertSame(md5('MiSecreto123'), Config::secretToken());
+    }
+
+    public function testSecretTokenReturnsNullWhenNotConfigured(): void
+    {
+        Config::init([
+            'token' => '1234567890:ABCdefGHIjklMNOpqrsTUVwxyz',
+            'abs_path' => '/tmp',
+        ]);
+
+        $this->assertNull(Config::secretToken());
+    }
+
+    public function testSecretTokenReturnsNullForEmptySecret(): void
+    {
+        Config::init([
+            'token' => '1234567890:ABCdefGHIjklMNOpqrsTUVwxyz',
+            'secret' => '',
+            'abs_path' => '/tmp',
+        ]);
+
+        $this->assertNull(Config::secretToken());
+    }
 }
