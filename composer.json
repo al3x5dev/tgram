@@ -36,8 +36,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Mk4U\\TGram\\": "src/",
-            "Bot\\": "bot/"
+            "Mk4U\\TGram\\": "src/"
         },
         "files": [
             "src/helpers.php"

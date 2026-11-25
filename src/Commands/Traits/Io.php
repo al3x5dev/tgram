@@ -37,10 +37,25 @@ trait Io
      * 
      * Este metodo es muy util con los datos devueltos por hook:info y hook:about
      */
-    protected function displayInfo(array $data): int
+    protected function displayInfo(array $data, int $level = 0): int
     {
+        $indent = str_repeat('  ', $level);
+
         foreach ($data as $key => $value) {
-            $this->output->writeln("<info>$key</info>: " . ($value));
+            // Listas como active_usernames se muestran elemento por elemento
+            if (is_array($value)) {
+                $this->output->writeln($indent . "<info>$key</info>:" . (empty($value) ? ' []' : ''));
+                $this->displayInfo($value, $level + 1);
+                continue;
+            }
+
+            if (is_bool($value)) {
+                $value = $value ? 'true' : 'false';
+            } elseif (is_null($value)) {
+                $value = 'null';
+            }
+
+            $this->output->writeln($indent . "<info>$key</info>: " . $value);
         }
 
         return Command::SUCCESS;
