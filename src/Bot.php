@@ -47,7 +47,7 @@ class Bot
         if (!empty(Config::get('secret'))) {
             $header = $request->getHeaderLine('X-Telegram-Bot-Api-Secret-Token') ?? '';
 
-            if (!hash_equals(Config::get('secret', ''), $header)) {
+            if (!hash_equals(Config::secretToken() ?? '', $header)) {
                 echo Response::json(
                     ['message' => 'unauthorized resource'],
                     Status::Forbidden

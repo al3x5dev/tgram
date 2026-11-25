@@ -62,7 +62,7 @@ final class HookSetCommand extends Command
         $data = $this->setWebhook(
             $url,
             drop_pending_updates:true,
-            secret_token:Config::get('secret')
+            secret_token:Config::secretToken()
             );
         try {
             if (!$data) {

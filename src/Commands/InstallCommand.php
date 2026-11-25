@@ -166,8 +166,7 @@ final class InstallCommand extends Command
      */
     private function generateConfigData(?string $token, ?string $secret, ?string $admins, string $debug): void
     {
-        $secretHash = !empty($secret) ? md5($secret) : null;
-        $newSecret = !empty($secret) ? "\n    'secret' => '$secretHash'," : '';
+        $newSecret = !empty($secret) ? "\n    'secret' => '$secret'," : '';
         $file = <<<PHP
             <?php
 

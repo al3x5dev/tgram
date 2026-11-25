@@ -73,6 +73,16 @@ class Config
     }
 
     /**
+     * Devuelve el token secreto tal como se envia a Telegram.
+     * En config.php se guarda en texto plano; al enviarlo se hashea con MD5.
+     */
+    public static function secretToken(): ?string
+    {
+        $secret = self::get('secret');
+        return empty($secret) ? null : md5($secret);
+    }
+
+    /**
      * Valida el token del bot
      */
     private static function validateToken(string $token): string
