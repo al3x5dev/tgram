@@ -44,8 +44,8 @@ The installation process will prompt you for:
 
 1. **Bot Token** - Your Telegram bot token from @BotFather
 2. **Secret Token** - Optional (recommended) - A secure token for webhook verification
-   - This adds an extra layer of security to prevent unauthorized webhook calls
-   - Telegram will send this token in the `X-Telegram-Bot-Api-Secret-Token` header
+   - Stored in `config.php` as plain text; TGram sends its MD5 hash to Telegram
+   - Telegram echoes that hash in the `X-Telegram-Bot-Api-Secret-Token` header
 3. **Admin IDs** - Comma-separated list of Telegram user IDs with admin privileges
 4. **Debug Mode** - Whether to enable development mode
 
@@ -79,6 +79,9 @@ php vendor/bin/tgram register
 php vendor/bin/tgram hook:about
 ```
 
+> [!NOTE]
+> The output includes `active_usernames`, the list of your bot's currently active usernames as returned by Telegram's `getMe`. It is not a list of chat users.
+
 
 #### 3.2. `hook:info`
 
@@ -107,7 +110,7 @@ php vendor/bin/tgram hook:set
 > The URL of your webhook must be accessible from the Internet and use `HTTPS`.
 
 > [!IMPORTANT]
-> When setting the webhook, TGram automatically includes your `secret` token (if configured in `config.php`) in the `secret_token` parameter. Telegram will then send this token with every request in the `X-Telegram-Bot-Api-Secret-Token` header, and TGram will validate it automatically.
+> When setting the webhook, TGram sends `md5(secret)` in the `secret_token` parameter (if `secret` is configured in `config.php`). Telegram echoes that hash in the `X-Telegram-Bot-Api-Secret-Token` header with every request, and TGram validates it against the same hash. After changing `secret`, run `hook:set` again so Telegram stores the new hash.
 
 
 #### 3.4. `hook:delete`

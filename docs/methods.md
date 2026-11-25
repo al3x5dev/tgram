@@ -133,12 +133,14 @@ $response = $bot->forwardMessage($chatId, $fromChatId, $messageId);
 
 ### Send a Photo
 
-See `sendPhoto` [docs](https://core.telegram.org/bots/api#sendphoto) for a list of supported parameters and other info.
+See `sendPhoto` [docs](https://core.telegram.org/bots/api#sendphoto) for a list of supported parameters and other info. Local files must be wrapped in `InputFile` — see [Sending Files](#sending-files).
 
 ```php
+use Mk4U\TGram\Core\Entities\InputFile;
+
 $response = $bot->sendPhoto(
-    $chatId,
-    'path/to/photo.jpg',
+    new InputFile(['file' => 'path/to/photo.jpg']),
+    chat_id: $chatId,
     caption: 'Some caption'
 );
 ```
@@ -149,4 +151,136 @@ See `sendChatAction` [docs](https://core.telegram.org/bots/api#sendchataction) f
 
 ```php
 $bot->sendChatAction($chatId, 'upload_photo');
+```
+
+
+## Sending Files
+
+Telegram accepts three kinds of file parameters: an **InputFile** (uploaded from your server), a `file_id` of a file already stored by Telegram, and — in some methods — a public URL. TGram switches the request to `multipart/form-data` automatically when it finds an `InputFile`.
+
+> [!IMPORTANT]
+> A plain string is **not** a local path. Use `InputFile` for files on disk; a bare string is passed to Telegram as a `file_id` or URL.
+
+### InputFile
+
+`Mk4U\TGram\Core\Entities\InputFile` has a `file` property. It accepts:
+
+- a path to an existing file (the HTTP client converts it into a `CURLFile`),
+- a `\CURLFile` instance,
+- a stream/resource backed by a real file.
+
+```php
+use Mk4U\TGram\Core\Entities\InputFile;
+
+$photo = new InputFile(['file' => base('storage/images/cat.jpg')]);
+
+// With an explicit MIME type and filename:
+$photo = new InputFile([
+    'file' => new \CURLFile(
+        base('storage/images/cat.jpg'),
+        'image/jpeg',
+        'cat.jpg'
+    ),
+]);
+```
+
+`base()` resolves paths using `abs_path` from `config.php`.
+
+> [!NOTE]
+> In file methods the file is the **first argument** and `chat_id` is a named argument, e.g. `sendPhoto(InputFile|string $photo, ..., int|string|null $chat_id = null, ...)`. `sendMediaGroup`, `sendPaidMedia` and `setChatPhoto` are exceptions: they take `chat_id` first.
+
+### Photos, documents, audio, video, voice and stickers
+
+```php
+use Mk4U\TGram\Core\Entities\InputFile;
+
+// Photo
+$bot->sendPhoto(
+    new InputFile(['file' => base('storage/cat.jpg')]),
+    chat_id: $chatId,
+    caption: '<b>A cat</b>'
+);
+
+// Document (with a thumbnail)
+$bot->sendDocument(
+    new InputFile(['file' => base('storage/report.pdf')]),
+    chat_id: $chatId,
+    thumbnail: new InputFile(['file' => base('storage/thumb.png')]),
+    caption: 'Monthly report'
+);
+
+// Audio
+$bot->sendAudio(
+    new InputFile(['file' => base('storage/song.mp3')]),
+    chat_id: $chatId,
+    performer: 'Artist',
+    title: 'Song',
+    duration: 210
+);
+
+// Video
+$bot->sendVideo(
+    new InputFile(['file' => base('storage/demo.mp4')]),
+    chat_id: $chatId,
+    caption: 'Demo',
+    supports_streaming: true
+);
+
+// Voice note
+$bot->sendVoice(
+    new InputFile(['file' => base('storage/voice.ogg')]),
+    chat_id: $chatId,
+    duration: 12
+);
+
+// Sticker
+$bot->sendSticker(
+    new InputFile(['file' => base('storage/sticker.webp')]),
+    chat_id: $chatId,
+    emoji: '👍'
+);
+```
+
+Inside an action class (command, callback, handler, conversation or middleware) the same methods are available through `$this`; get the chat id from the current update:
+
+```php
+$chatId = $this->getActiveEntity()->chat->id; // message updates
+
+$this->sendDocument(
+    new InputFile(['file' => base('storage/report.pdf')]),
+    chat_id: $chatId,
+    caption: 'Your report'
+);
+```
+
+> [!TIP]
+> Reuse a `file_id` instead of uploading the same file again: `$bot->sendPhoto($fileId, chat_id: $chatId);`. You can read it from any media message with `$message->photo[0]->file_id`.
+
+### Media groups
+
+Use `InputMedia*` entities with `file_id` or public URLs. Nested `InputFile` objects inside a `media` array are not converted to multipart automatically, so upload each file individually when needed.
+
+```php
+use Mk4U\TGram\Core\Entities\InputMediaPhoto;
+
+$bot->sendMediaGroup($chatId, [
+    new InputMediaPhoto(['type' => 'photo', 'media' => $fileId1, 'caption' => 'First']),
+    new InputMediaPhoto(['type' => 'photo', 'media' => $fileId2]),
+]);
+```
+
+### Downloading files received by the bot
+
+`getFile` returns a `File` entity with `file_path`. Bots can download files of up to 20 MB and the link stays valid for at least 1 hour.
+
+```php
+use Mk4U\TGram\Config;
+
+$file = $bot->getFile($message->document->file_id);
+$url = 'https://api.telegram.org/file/bot' . Config::get('token') . '/' . $file->file_path;
+
+file_put_contents(
+    base('storage/downloads/' . basename($file->file_path)),
+    file_get_contents($url)
+);
 ```

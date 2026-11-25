@@ -28,8 +28,8 @@ return [
     // your bot token (required)
     'token' => '110201543:AAHdqTcvCH1vGWJxfSeofSAs0K5PALDsaw',
     // webhook secret token (optional but recommended)
-    // This adds an extra layer of security to your webhook
-    // Telegram will send this token in the X-Telegram-Bot-Api-Secret-Token header
+    // Store it here in plain text: TGram sends its MD5 hash to Telegram
+    // and validates the X-Telegram-Bot-Api-Secret-Token header with that hash
     'secret' => 'your_secret_token_here',
     // list of bot admin id's
     'admins' => [123456789, 985632147],
@@ -45,6 +45,9 @@ return [
     'abs_path' => __DIR__,
 ];
 ```
+
+> [!NOTE]
+> `secret` is stored as plain text in `config.php`. When `hook:set` registers the webhook, TGram sends `md5(secret)` as `secret_token`; Telegram echoes that hash in the `X-Telegram-Bot-Api-Secret-Token` header and TGram validates it against the same hash.
 
 > [!IMPORTANT]
 > Use this method only to modify or add some necessary configuration parameters.
@@ -64,6 +67,9 @@ This command will guide you through the installation and initial configuration p
 
 > [!NOTE]
 > If `config.php` does not exist, running any `hook:*` command automatically triggers the `install` command before performing its own task.
+
+> [!NOTE]
+> The secret you enter is saved to `config.php` exactly as typed. TGram only hashes it (`md5`) when the webhook is registered.
 
 
 ### Obtain the API Key
@@ -86,13 +92,16 @@ php vendor/bin/tgram hook:set https://your-domain.com/webhook
 If you don't pass a URL, the command will prompt you to enter one. Make sure that this URL is accessible from the Internet and that it points to your server where the bot is hosted.
 
 > [!IMPORTANT]
-> When you set the webhook, TGram automatically includes your secret token if configured. Telegram will use this token in the `X-Telegram-Bot-Api-Secret-Token` header with every request.
+> When you set the webhook, TGram sends the **MD5 hash** of your `secret` as `secret_token`. Telegram echoes that hash in the `X-Telegram-Bot-Api-Secret-Token` header with every request.
 
 #### Webhook Security
 
-TGram validates the `X-Telegram-Bot-Api-Secret-Token` header on every incoming request. If you configured a `secret` in your `config.php`, the bot will reject any request that doesn't include the correct token.
+TGram compares the `X-Telegram-Bot-Api-Secret-Token` header with `md5(secret)` on every incoming request. If you configured a `secret` in `config.php`, the bot rejects any request that doesn't include the correct hash.
 
-To disable webhook security, simply remove or set to `null` the `secret` key in your configuration file.
+> [!IMPORTANT]
+> MD5 is a one-way hash, **not encryption**. The hash itself acts as the credential: anyone who learns it can send valid webhook requests. Keep it private, use HTTPS and choose a long random secret.
+
+To disable webhook security, remove the `secret` key (or set it to `null`). After changing the secret, run `hook:set` again so Telegram stores the new hash.
 
 > [!NOTE]
 > The webhook URL must use HTTPS. Telegram requires a valid SSL certificate.

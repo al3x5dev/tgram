@@ -52,6 +52,8 @@ return [
 ];
 ```
 
+> `secret` is stored in plain text. TGram sends `md5(secret)` to Telegram when you run `hook:set` and validates the webhook header with the same hash. See [webhook security](docs/install.md#webhook-security).
+
 2. Create your entry point (`index.php`):
 
 ```php
@@ -111,6 +113,7 @@ php vendor/bin/tgram register
 - [Installation and configuration](docs/install.md)
 - [Command line interface](docs/cli.md)
 - [Available methods](docs/methods.md)
+- [Sending files](docs/methods.md#sending-files)
 - [Command system](docs/commands.md)
 - [Callbacks](docs/callbacks.md)
 - [Handler system](docs/handler.md)
